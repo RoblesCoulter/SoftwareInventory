@@ -1,0 +1,17 @@
+<%= form_for(@software_serial) do |f| %>
+  <% if @software_serial.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@software_serial.errors.count, "error") %> prohibited this software_serial from being saved:</h2>
+
+      <ul>
+      <% @software_serial.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
