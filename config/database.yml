@@ -11,7 +11,6 @@ default: &default
   username: postgres
   password: Password1
 
-
 development:
   <<: *default
   database: SoftwareInventoryDB
