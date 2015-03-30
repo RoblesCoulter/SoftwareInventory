@@ -24,4 +24,6 @@ test:
 
 production:
   <<: *default
-  database: SoftwareInventoryDB
+  database: dcfgan3152fdog
+  username: xmygbjhcthehud
+  password: 0wYQ-hUJ1AUfB99NtujQxE8wS-
