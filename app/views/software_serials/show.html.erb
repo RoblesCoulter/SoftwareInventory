@@ -1,4 +1,24 @@
 <p id="notice"><%= notice %></p>
+<p>
+	<strong>Serial Number:</strong>
+	<%= @software_serial.serial_number %>
+</p>
+<p>
+	<strong>Name:</strong>
+	<%= @software_serial.software.name %>
+</p>
+<p>
+	<strong>Operative System:</strong>
+	<%= @software_serial.operative_system %>
+</p>
+<p>
+	<strong>Price:</strong>
+	<%= @software_serial.price %>
+</p>
+<p>
+	<strong>Software Availability:</strong>
+	<%= @software_serial.software_availability %>
+</p>
 
 <%= link_to 'Edit', edit_software_serial_path(@software_serial) %> |
 <%= link_to 'Back', software_serials_path %>

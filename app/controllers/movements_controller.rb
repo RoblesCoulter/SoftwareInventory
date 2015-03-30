@@ -69,6 +69,6 @@ class MovementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movement_params
-      params[:movement]
+      params.require(:movement).permit(:shipping_date, :arrival_date, :origin, :destination, :delivery_method)
     end
 end

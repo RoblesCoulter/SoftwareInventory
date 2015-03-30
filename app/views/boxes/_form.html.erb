@@ -10,7 +10,45 @@
       </ul>
     </div>
   <% end %>
+  <div>
+    <p>
+      <%= f.label :barcode %>
+      <%= f.text_field :barcode %>
+    </p>
+    <p>
+      <%= f.label :weight %>
+      <%= f.text_field :weight %>
+    </p>
+    <p>
+      <%= f.label :height %>
+      <%= f.text_field :height %>
 
+    </p>
+    <p>
+      <%= f.label :width %>
+      <%= f.text_field :width %>
+    </p>
+    <p>
+      <%= f.label :depth %>
+      <%= f.text_field :depth %>
+    </p>
+    <p>
+      <%= f.label :box_number %>
+      <%= f.text_field :box_number %>
+    </p>
+    <p>
+      <%= f.label :photo %>
+      <%= f.text_field :photo %>
+    </p>
+    <p>
+      <%= f.label :condition %>
+      <%= f.text_field :condition %>
+    </p>
+    <p>
+      <%= f.label :notes %>
+      <%= f.text_area :notes %>
+    </p>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

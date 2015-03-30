@@ -69,6 +69,6 @@ class SoftwareSerialsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def software_serial_params
-      params[:software_serial]
+      params.require(:software_serial).permit(:serial_number, :software, :operative_system, :price, :software_availability)
     end
 end

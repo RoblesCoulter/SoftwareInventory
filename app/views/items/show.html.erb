@@ -1,4 +1,52 @@
 <p id="notice"><%= notice %></p>
+<p>
+	<strong>Product name:</strong>
+	<%= @item.product.name %>
+</p>
+<p>
+	<strong>Barcode:</strong>
+	<%= @item.barcode %>
+</p>
+<p>
+	<strong>Serial Number:</strong>
+	<%= @item.serial_number%>
+</p>
+<p>
+	<strong>Model Number:</strong>
+	<%= @item.model_number %>
+</p>
+<p>
+	<strong>Price:</strong>
+	<%= @item.price %>
+</p>
+<p>
+	<strong>Location:</strong>
+	<%= @item.location %>
+</p>
+<p>
+	<strong>Condition:</strong>
+	<%= @item.condition %>
+</p>
+<p>
+	<strong>Firmware:</strong>
+	<%= @item.firmware%>
+</p>
+<p>
+	<strong>Photo:</strong>
+	<%= @item.photo %>
+</p>
+<p>
+	<strong>Brand:</strong>
+	<%= @item.brand %>
+</p>
+<p>
+	<strong>Responsable:</strong>
+	<%= @item.responsable %>
+</p>
+<p>
+	<strong>Box:</strong>
+	<%= @item.box.barcode %>
+</p>
 
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

@@ -10,7 +10,16 @@
       </ul>
     </div>
   <% end %>
-
+  <div>
+    <p>
+      <%= f.label :barcode %>
+      <%= f.text_field :barcode %>
+    </p>
+    <p>
+      <%= f.label :product %>
+      <%= collection_select(:item, :product_id, Product.all, :id, :name, prompt: true) %>
+    </p>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

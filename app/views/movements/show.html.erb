@@ -1,4 +1,23 @@
 <p id="notice"><%= notice %></p>
-
+<p>
+	<strong>Destination:</strong>
+	<%= @movement.destination %>
+</p>
+<p>
+	<strong>Origin:</strong>
+	<%= @movement.origin %>
+</p>
+<p>
+	<strong>Shipping Date:</strong>
+	<%= @movement.shipping_date %>
+</p>
+<p>
+	<strong>Arrival Date:</strong>
+	<%= @movement.arrival_date %>
+</p>
+<p>
+	<strong>Delivery Method:</strong>
+	<%= @movement.delivery_method %>
+</p>
 <%= link_to 'Edit', edit_movement_path(@movement) %> |
 <%= link_to 'Back', movements_path %>
