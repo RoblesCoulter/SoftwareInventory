@@ -1,2 +1,12 @@
-<h1>Laureate Live</h1>
+<h1 style="margin: 0 auto; max-width: 400px;">Laureate Live</h1>
+<div class="well" style="max-width: 400px; margin: 0 auto 10px;">
 <h2>Inventory System</h2>
+              
+	<%= button_to "New Box", new_box_path , :class => "btn btn-large btn-block", :method => :get %>
+	<%= button_to "New Category", new_category_path , :class => "btn btn-large btn-block", :method => :get %>
+	<%= button_to "New Item", new_item_path , :class => "btn btn-large btn-block", :method => :get %>
+	<%= button_to "New Movement", new_movement_path , :class => "btn btn-large btn-block", :method => :get %>
+	<%= button_to "New Product", new_product_path , :class => "btn btn-large btn-block", :method => :get %>
+	<%= button_to "New Software Serial", new_software_serial_path , :class => "btn btn-large btn-block", :method => :get %>
+	<%= button_to "New Software", new_software_path , :class => "btn btn-large btn-block", :method => :get %>
+</div>
