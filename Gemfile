@@ -40,3 +40,5 @@ gem 'thin'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem "twitter-bootstrap-rails"
+
+gem "rails_12factor"
