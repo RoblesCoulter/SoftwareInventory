@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+.laureatelogo img {
+  height: 40px;
+  width: auto;
+}
+
+.laureatelogo {
+  padding: 5px 15px 5px 15px;
+}
