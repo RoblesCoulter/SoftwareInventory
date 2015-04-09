@@ -9,7 +9,7 @@ default: &default
   pool: 5
   timeout: 5000
   username: postgres
-  password: admin
+  password: Password1
 
 development:
   <<: *default
