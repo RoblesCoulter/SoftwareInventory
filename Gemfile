@@ -42,3 +42,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem "twitter-bootstrap-rails"
 
 gem "rails_12factor"
+
+gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations", branch: "4-2-stable"
