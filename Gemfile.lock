@@ -35,14 +35,14 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1)
+    coffee-script-source (1.8.0)
     daemons (1.2.2)
     erubis (2.7.0)
     eventmachine (1.0.7)
     execjs (2.5.2)
     hike (1.2.3)
     i18n (0.7.0)
-    jbuilder (2.2.12)
+    jbuilder (2.2.13)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.2)
@@ -52,7 +52,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
-    minitest (5.5.1)
+    minitest (5.6.0)
     multi_json (1.11.0)
     pg (0.18.1)
     pg (0.18.1-x86-mingw32)
@@ -128,6 +128,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
+  coffee-script-source (= 1.8.0)
   jbuilder (~> 2.0)
   jquery-rails
   pg

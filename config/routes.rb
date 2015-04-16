@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  # get 'users/new'
+
+  # get 'user/new'
+
+  get 'signup' => 'users#new'
+
   resources :software_serials
 
   resources :softwares
