@@ -1,4 +1,4 @@
-<%= form_for(@box) do |f| %>
+<%= form_for @box, validate: :box_validators do |f| %>
   <% if @box.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@box.errors.count, "error") %> prohibited this box from being saved:</h2>
@@ -38,7 +38,7 @@
     </p>
     <p>
       <%= f.label :photo %>
-      <%= f.text_field :photo %>
+      <%= f.file_upload :photo %>
     </p>
     <p>
       <%= f.label :condition %>
