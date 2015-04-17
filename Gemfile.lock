@@ -136,11 +136,8 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-<<<<<<< HEAD
   bcrypt
-=======
   client_side_validations!
->>>>>>> c0383ba2c69d8bd615f7bda449a46413830c1672
   coffee-rails (~> 4.0.0)
   coffee-script-source (= 1.8.0)
   jbuilder (~> 2.0)

@@ -43,10 +43,8 @@ gem "twitter-bootstrap-rails"
 
 gem "rails_12factor"
 
-<<<<<<< HEAD
 gem 'coffee-script-source', '1.8.0'
 
 gem 'bcrypt'
-=======
+
 gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations", branch: "4-2-stable"
->>>>>>> c0383ba2c69d8bd615f7bda449a46413830c1672
