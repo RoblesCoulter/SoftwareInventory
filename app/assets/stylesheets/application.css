@@ -22,3 +22,8 @@
 .laureatelogo {
   padding: 5px 15px 5px 15px;
 }
+
+.center-div {
+  max-width: 400px;
+  margin: 0 auto 10px;
+}
