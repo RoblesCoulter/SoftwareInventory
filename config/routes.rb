@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  ## get 'users/new'
+
+  # get 'user/new'
+
+  get 'signup' => 'users#new'
+
   resources :software_serials
 
   resources :softwares
@@ -12,6 +18,8 @@ Rails.application.routes.draw do
   resources :items
 
   resources :boxes
+
+  resources :users
 
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
