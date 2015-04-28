@@ -48,3 +48,7 @@ gem 'coffee-script-source', '1.8.0'
 gem 'bcrypt'
 
 gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations", branch: "4-2-stable"
+
+group :production do
+	gem 'puma'
+end
