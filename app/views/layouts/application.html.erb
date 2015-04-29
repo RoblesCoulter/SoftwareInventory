@@ -36,6 +36,7 @@
               <li><%= link_to "Products", products_path , :class => "", :method => :get %></li>
               <li><%= link_to "Software Serials", software_serials_path , :class => "", :method => :get %></li>
               <li><%= link_to "Softwares", softwares_path , :class => "", :method => :get %></li>
+              <li><%= link_to "Users", users_path, :class => "", :method => :get %></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -46,7 +47,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><%= link_to "Profile", current_user %></li>
-                  <li><%= link_to "Settings", '#' %></li>
+                  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
                   <li class="divider"></li>
                   <li>
                     <%= link_to "Log out", logout_path, method: "delete" %>
