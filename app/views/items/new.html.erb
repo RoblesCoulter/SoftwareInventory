@@ -1,5 +1,6 @@
-<h1>New item</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', items_path %>
+<div class="center-div">
+	<%= link_to 'Back', items_path, class: "btn btn-warning" %>
+	<h1 class="text-center">New Item</h1>
+	<%= render 'form' %>
+	<%= yield(:item_validators) %>
+</div>

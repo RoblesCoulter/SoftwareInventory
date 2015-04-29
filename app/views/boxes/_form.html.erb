@@ -1,54 +1,43 @@
-<%= form_for @box, :html => {:class => "form-horizontal"}, validate: :box_validators do |f| %>
-  <% if @box.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@box.errors.count, "error") %> prohibited this box from being saved:</h2>
-
-      <ul>
-      <% @box.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for @box, html: { class: "form-horizontal"}, validate: :box_validators do |f| %>
 
     <div class="form-group">
-      <%= f.label :barcode %>
-      <%= f.text_field :barcode %>
+      <label class="control-label">Barcode</label>
+      <%= f.text_field :barcode, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :weight %>
-      <%= f.text_field :weight %>
+      <label class="control-label">Box #</label>
+      <%= f.text_field :box_number, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :height %>
-      <%= f.text_field :height %>
+      <label class="control-label">Weight (lb)</label>
+      <%= f.text_field :weight, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Height (in)</label>
+      <%= f.text_field :height, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Width (in)</label>
+      <%= f.text_field :width, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Depth (in)</label>
+      <%= f.text_field :depth, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Picture</label>
+      <%= f.file_field :photo, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Condition</label>
+      <%= f.text_field :condition, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Additional notes</label>
+      <%= f.text_area :notes, class: 'form-control' %>
+    </div>
 
-    </div>
-    <div class="form-group">
-      <%= f.label :width %>
-      <%= f.text_field :width %>
-    </div>
-    <div class="form-group">
-      <%= f.label :depth %>
-      <%= f.text_field :depth %>
-    </div>
-    <div class="form-group">
-      <%= f.label :box_number %>
-      <%= f.text_field :box_number %>
-    </div>
-    <div class="form-group">
-      <%= f.label :photo %>
-      <%= f.file_field :photo %>
-    </div>
-    <div class="form-group">
-      <%= f.label :condition %>
-      <%= f.text_field :condition %>
-    </div>
-    <div class="form-group">
-      <%= f.label :notes %>
-      <%= f.text_area :notes %>
-    </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.submit class: "btn btn-success" %>
+    <%= link_to 'Back', boxes_path, class: "btn btn-warning fullwidthbutton" %>
+
 <% end %>

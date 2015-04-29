@@ -1,6 +1,6 @@
 <div class="center-div">
-  <h1>New box</h1>
+  <%= link_to 'Back', boxes_path, class: "btn btn-warning" %>
+  <h1 class="text-center">New Box</h1>
   <%= render 'form' %>
-  <%= link_to 'Back', boxes_path %>
   <%= yield(:box_validators) %>
 </div>
