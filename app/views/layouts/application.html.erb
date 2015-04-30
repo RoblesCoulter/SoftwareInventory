@@ -36,7 +36,9 @@
               <li><%= link_to "Products", products_path , :class => "", :method => :get %></li>
               <li><%= link_to "Software Serials", software_serials_path , :class => "", :method => :get %></li>
               <li><%= link_to "Softwares", softwares_path , :class => "", :method => :get %></li>
-              <li><%= link_to "Users", users_path, :class => "", :method => :get %></li>
+              <% if current_user.admin? %>
+                <li><%= link_to "Users", users_path, :class => "", :method => :get %></li>
+              <% end %>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
