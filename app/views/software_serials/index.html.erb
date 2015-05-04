@@ -1,23 +1,33 @@
-<h1>Listing software_serials</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @software_serials.each do |software_serial| %>
+<h1 class="text-center">Software Serials</h1>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= link_to 'Show', software_serial %></td>
-        <td><%= link_to 'Edit', edit_software_serial_path(software_serial) %></td>
-        <td><%= link_to 'Destroy', software_serial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Software</th>
+        <th>Serial Number</th>
+        <th>Operative System</th>
+        <th>Software Availability</th>
+        <th>Price</th>
+        <th>Options</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Software serial', new_software_serial_path %>
+    <tbody>
+      <% @software_serials.each do |software_serial| %>
+        <tr>
+          <td><% unless software_serial.software.nil? %>
+            <%= software_serial.software.name %>
+          <% end%></td>
+          <td><%= software_serial.serial_number %></td>
+          <td><%= software_serial.operative_system %></td>
+          <td><%= software_serial.software_availability %></td>
+          <td><%= software_serial.price %></td>
+          <td><%= link_to 'Show', software_serial %> |
+          <td><%= link_to 'Edit', edit_software_serial_path(software_serial) %> |
+          <td><%= link_to 'Destroy', software_serial, method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= link_to 'New Software serial', new_software_serial_path, class: "btn btn-success" %>

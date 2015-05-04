@@ -1,38 +1,39 @@
 <h1 class="text-center">Boxes</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Barcode</th>
-      <th>Box #</th>
-      <th>Weight</th>
-      <th>Height</th>
-      <th>Width</th>
-      <th>Depth</th>
-      <th>Condition</th>
-      <th>Options</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @boxes.each do |box| %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= box.barcode %></td>
-        <td><%= box.box_number %></td>
-        <td><%= box.weight %></td>
-        <td><%= box.height %></td>
-        <td><%= box.width %></td>
-        <td><%= box.depth %></td>
-        <td><%= box.condition %></td>
-
-        <td><%= link_to 'Show', box %> |
-        <%= link_to 'Edit', edit_box_path(box) %> |
-        <%= link_to 'Delete', box, method: :delete %>
-        </td>
+        <th>Barcode</th>
+        <th>Box #</th>
+        <th>Weight</th>
+        <th>Height</th>
+        <th>Width</th>
+        <th>Depth</th>
+        <th>Condition</th>
+        <th>Options</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @boxes.each do |box| %>
+        <tr>
+          <td><%= box.barcode %></td>
+          <td><%= box.box_number %></td>
+          <td><%= box.weight %></td>
+          <td><%= box.height %></td>
+          <td><%= box.width %></td>
+          <td><%= box.depth %></td>
+          <td><%= box.condition %></td>
+
+          <td><%= link_to 'Show', box %> |
+          <%= link_to 'Edit', edit_box_path(box) %> |
+          <%= link_to 'Delete', box, method: :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <br>
 
 <%= link_to "Add Box", new_box_path ,class: "btn btn-success" %>

@@ -1,11 +1,12 @@
-<p id="notice"><%= notice %></p>
 <p>
 	<strong>Serial Number:</strong>
 	<%= @software_serial.serial_number %>
 </p>
 <p>
 	<strong>Name:</strong>
-	<%= @software_serial.software.name %>
+	<% unless @software_serial.software.nil? %>    
+		<%= @software_serial.software.name %>
+    <% end%>
 </p>
 <p>
 	<strong>Operative System:</strong>
