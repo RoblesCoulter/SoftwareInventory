@@ -10,7 +10,7 @@
   <tbody>
     <% @boxes.each do |box| %>
       <tr>
-        
+
         <td><%= link_to 'Show', box %></td>
         <td><%= link_to 'Edit', edit_box_path(box) %></td>
         <td><%= link_to 'Destroy', box, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -21,4 +21,4 @@
 
 <br>
 
-<%= link_to 'New Box', new_box_path %>
+<%= link_to "Add Box", new_box_path ,class: "btn btn-success" %>

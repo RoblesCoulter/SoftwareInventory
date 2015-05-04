@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317214711) do
+ActiveRecord::Schema.define(version: 20150429215426) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "boxes", force: true do |t|
     t.string   "barcode"
@@ -27,15 +30,15 @@ ActiveRecord::Schema.define(version: 20150317214711) do
     t.datetime "updated_at"
   end
 
-  add_index "boxes", ["barcode"], name: "index_boxes_on_barcode", unique: true
+  add_index "boxes", ["barcode"], name: "index_boxes_on_barcode", unique: true, using: :btree
 
   create_table "boxes_movements", id: false, force: true do |t|
     t.integer "box_id"
     t.integer "movement_id"
   end
 
-  add_index "boxes_movements", ["box_id"], name: "index_boxes_movements_on_box_id"
-  add_index "boxes_movements", ["movement_id"], name: "index_boxes_movements_on_movement_id"
+  add_index "boxes_movements", ["box_id"], name: "index_boxes_movements_on_box_id", using: :btree
+  add_index "boxes_movements", ["movement_id"], name: "index_boxes_movements_on_movement_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -61,17 +64,17 @@ ActiveRecord::Schema.define(version: 20150317214711) do
     t.datetime "updated_at"
   end
 
-  add_index "items", ["barcode"], name: "index_items_on_barcode", unique: true
-  add_index "items", ["box_id"], name: "index_items_on_box_id"
-  add_index "items", ["product_id"], name: "index_items_on_product_id"
+  add_index "items", ["barcode"], name: "index_items_on_barcode", unique: true, using: :btree
+  add_index "items", ["box_id"], name: "index_items_on_box_id", using: :btree
+  add_index "items", ["product_id"], name: "index_items_on_product_id", using: :btree
 
   create_table "items_software_serials", id: false, force: true do |t|
     t.integer "item_id"
     t.integer "software_serial_id"
   end
 
-  add_index "items_software_serials", ["item_id"], name: "index_items_software_serials_on_item_id"
-  add_index "items_software_serials", ["software_serial_id"], name: "index_items_software_serials_on_software_serial_id"
+  add_index "items_software_serials", ["item_id"], name: "index_items_software_serials_on_item_id", using: :btree
+  add_index "items_software_serials", ["software_serial_id"], name: "index_items_software_serials_on_software_serial_id", using: :btree
 
   create_table "movements", force: true do |t|
     t.date     "shipping_date"
@@ -90,7 +93,7 @@ ActiveRecord::Schema.define(version: 20150317214711) do
     t.string   "name"
   end
 
-  add_index "products", ["category_id"], name: "index_products_on_category_id"
+  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
   create_table "software_serials", force: true do |t|
     t.string   "serial_number"
@@ -102,8 +105,8 @@ ActiveRecord::Schema.define(version: 20150317214711) do
     t.datetime "updated_at"
   end
 
-  add_index "software_serials", ["serial_number"], name: "index_software_serials_on_serial_number", unique: true
-  add_index "software_serials", ["software_id"], name: "index_software_serials_on_software_id"
+  add_index "software_serials", ["serial_number"], name: "index_software_serials_on_serial_number", unique: true, using: :btree
+  add_index "software_serials", ["software_id"], name: "index_software_serials_on_software_id", using: :btree
 
   create_table "softwares", force: true do |t|
     t.string   "name"
@@ -111,5 +114,17 @@ ActiveRecord::Schema.define(version: 20150317214711) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "password_digest"
+    t.string   "remember_digest"
+    t.boolean  "admin",           default: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
