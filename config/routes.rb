@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   # get 'user/new'
   #get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
@@ -13,6 +17,9 @@ Rails.application.routes.draw do
   resources :items
   resources :boxes
   resources :users
+
+  resources :password_resets, only: [:new, :create, :edit, :update]
+
   root 'welcome#index'
 
   # Example of regular route:
