@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 <p>
 	<strong>Product name:</strong>
 	<%= @item.product.name %>
@@ -36,16 +36,15 @@
 	<%= @item.photo %>
 </p>
 <p>
-	<strong>Brand:</strong>
-	<%= @item.brand %>
-</p>
-<p>
 	<strong>Responsable:</strong>
 	<%= @item.responsable %>
 </p>
 <p>
 	<strong>Box:</strong>
-	<%= @item.box.barcode %>
+	<% unless @item.box.nil? %>
+			<%= @item.box.barcode %>
+		<% end %>
+	
 </p>
 
 <%= link_to 'Edit', edit_item_path(@item) %> |

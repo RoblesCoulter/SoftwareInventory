@@ -4,8 +4,14 @@
 	<%= @product.name %>
 </p>
 <p>
+	<strong>Product Brand:</strong>
+	<%= @product.brand %>
+</p>
+<p>
 	<strong>Product Category:</strong>
-	<%= @product.category.name %>
+	<% unless @product.category.nil? %>
+			<%= @product.category.name %>
+	<% end %>
 </p>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

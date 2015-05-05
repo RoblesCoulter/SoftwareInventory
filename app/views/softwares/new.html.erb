@@ -1,5 +1,6 @@
-<h1>New software</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', softwares_path %>
+<div class="center-div">
+	<%= link_to 'Back', softwares_path, class: "btn btn-warning" %>
+	<h1 class="text-center">New Software</h1>
+	<%= render 'form' %>
+	<%= yield(:software_validators) %>
+</div>

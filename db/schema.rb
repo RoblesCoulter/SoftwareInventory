@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 20150504184438) do
     t.string   "condition"
     t.string   "firmware"
     t.string   "photo"
-    t.string   "brand"
     t.integer  "responsable"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -91,6 +90,7 @@ ActiveRecord::Schema.define(version: 20150504184438) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "brand"
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree

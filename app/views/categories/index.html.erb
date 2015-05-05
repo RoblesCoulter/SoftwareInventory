@@ -1,27 +1,27 @@
 <h1 class="text-center">Categories</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Options</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @categories.each do |category| %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= category.name %></td>
-        <td><%= category.description %></td>
-        <td><%= link_to 'Show', category %> |
-        <%= link_to 'Edit', edit_category_path(category) %> |
-        <%= link_to 'Delete', category, method: :delete %>
-        </td>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Options</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <td><%= category.name %></td>
+          <td><%= category.description %></td>
+          <td><%= link_to 'Show', category %> |
+          <%= link_to 'Edit', edit_category_path(category) %> |
+          <%= link_to 'Delete', category, method: :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= link_to 'Add Category', new_category_path, class: "btn btn-success"%>

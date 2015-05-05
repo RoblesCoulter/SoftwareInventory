@@ -1,23 +1,42 @@
-<h1>Listing items</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @items.each do |item| %>
+<h1 class="text-center">Items</h1>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Barcode</th>
+        <th>Product</th>
+        <th>Box</th>
+        <th>Serial Number</th> 
+        <th>Model Number</th>
+        <th>Price ($)</th>
+        <th>Location</th>
+        <th>Condition</th>
+        <th>Firmware</th>
+        <th>Options</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.barcode %></td>
+          <td><%= item.product.name %></td>
+          <td><% unless item.box.nil? %>
+            <%= item.box.box_number %>
+          <% end %></td>
+          <td><%= item.serial_number %></td>
+          <td><%= item.model_number %></td>
+          <td><%= item.price %></td>
+          <td><%= item.location %></td>
+          <td><%= item.condition %></td>
+          <td><%= item.firmware %></td>
+          <td><%= link_to 'Show', item %> |
+          <%= link_to 'Edit', edit_item_path(item) %> |
+          <%= link_to 'Delete', item, method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<%= link_to 'New Item', new_item_path %>
+<%= link_to 'Add Item', new_item_path, class: "btn btn-success" %>

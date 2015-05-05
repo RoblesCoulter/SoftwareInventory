@@ -1,17 +1,8 @@
-<%= form_for(@movement) do |f| %>
-  <% if @movement.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@movement.errors.count, "error") %> prohibited this movement from being saved:</h2>
-
-      <ul>
-      <% @movement.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
+<%= form_for @movement, html: { class: "form-horizontal"}, validate: :product_validators do |f| %>
+  <div class="form-group">
+    <label class="control-label">Barcode</label>
+    <%= f.text_field :barcode, class: 'form-control' %>
   </div>
+
+  
 <% end %>
