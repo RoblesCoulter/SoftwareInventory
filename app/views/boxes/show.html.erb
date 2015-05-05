@@ -1,39 +1,41 @@
-<p id="notice"><%= notice %></p>
-<p>
-	<strong>Barcode:</strong>
-	<%= @box.barcode %>
-</p>
-<p>
-	<strong>Weight:</strong>
-	<%= @box.weight %>
-</p>
-<p>
-	<strong>Height:</strong>
-	<%= @box.height %>
-</p>
-<p>
-	<strong>Width:</strong>
-	<%= @box.width %>
-</p>
-<p>
-	<strong>Depth:</strong>
-	<%= @box.depth %>
-</p>
-<p>
-	<strong>Box #:</strong>
-	<%= @box.box_number %>
-</p>
-<p>
-	<strong>Photo:</strong>
-	<%= @box.photo %>
-</p>
-<p>
-	<strong>Condition:</strong>
-	<%= @box.condition %>
-</p>
-<p>
-	<strong>Notes:</strong>
-	<%= @box.notes %>
-</p>
-<%= link_to 'Edit', edit_box_path(@box) %> |
-<%= link_to 'Back', boxes_path %>
+<div class="center-div">
+	<div>
+		<strong>Barcode:</strong>
+		<%= @box.barcode %>
+	</div>
+	<div>
+		<strong>Weight:</strong>
+		<%= @box.weight %>
+	</div>
+	<div>
+		<strong>Height:</strong>
+		<%= @box.height %>
+	</div>
+	<div>
+		<strong>Width:</strong>
+		<%= @box.width %>
+	</div>
+	<div>
+		<strong>Depth:</strong>
+		<%= @box.depth %>
+	</div>
+	<div>
+		<strong>Box #:</strong>
+		<%= @box.box_number %>
+	</div>
+	<div>
+		<strong>Photo:</strong>
+		<%= @box.photo %>
+	</div>
+	<div>
+		<strong>Condition:</strong>
+		<%= @box.condition %>
+	</div>
+	<div>
+		<strong>Notes:</strong>
+		<%= @box.notes %>
+	</div>
+	<%= link_to 'Edit', edit_box_path(@box) %> |
+	<%= link_to 'Back', boxes_path %>
+
+</div>

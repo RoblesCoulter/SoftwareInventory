@@ -1,6 +1,6 @@
-<h1>Editing box</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @box %> |
-<%= link_to 'Back', boxes_path %>
+<div class="center-div">
+	<%= link_to 'Back', boxes_path, class: "btn btn-warning" %>
+	<h1 class="text-center">Editing Box</h1>
+	<%= render 'form' %>
+	<%= yield(:box_validators) %>
+</div>

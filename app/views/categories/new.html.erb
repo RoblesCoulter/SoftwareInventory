@@ -1,5 +1,6 @@
-<h1>New category</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', categories_path %>
+<div class="center-div">
+	<%= link_to 'Back', categories_path, class: "btn btn-warning" %>
+	<h1 class="text-center">New Category</h1>
+	<%= render 'form' %>
+	<%= yield(:category_validators) %>
+</div>

@@ -13,3 +13,37 @@
  *= require_tree .
  *= require_self
  */
+
+.laureatelogo img {
+  height: 40px;
+  width: auto;
+}
+
+.laureatelogo {
+  padding: 5px 15px 5px 15px;
+}
+
+.center-div {
+  max-width: 400px;
+  margin: 0 auto 10px;
+}
+
+.fielderrors > input {
+  border-color: #a94442;
+  margin-bottom: 0px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+}
+
+.has-error input {
+  margin-bottom: 0px;
+}
+
+.has-error > label {
+  color: #a94442
+}
+
+.fullwidthbutton {
+  width: 100%;
+  margin-top: 10px;
+}

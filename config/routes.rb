@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
+  #get 'signup' => 'users#new'
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+
   resources :software_serials
 
   resources :softwares
@@ -12,6 +22,10 @@ Rails.application.routes.draw do
   resources :items
 
   resources :boxes
+
+  resources :users
+
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

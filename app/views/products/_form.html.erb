@@ -12,7 +12,12 @@
   <% end %>
   <div>
     <p>
-      
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :category %>
+      <%= collection_select(:product, :category_id, Category.all, :id, :name, prompt: true) %>
     </p>
   </div>
   <div class="actions">
