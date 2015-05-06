@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20150504184438) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "boxes", force: true do |t|
+  create_table "boxes", force: :cascade do |t|
     t.string   "barcode"
     t.float    "weight"
     t.float    "height"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20150504184438) do
 
   add_index "boxes", ["barcode"], name: "index_boxes_on_barcode", unique: true, using: :btree
 
-  create_table "boxes_movements", id: false, force: true do |t|
+  create_table "boxes_movements", id: false, force: :cascade do |t|
     t.integer "box_id"
     t.integer "movement_id"
   end
@@ -40,14 +40,14 @@ ActiveRecord::Schema.define(version: 20150504184438) do
   add_index "boxes_movements", ["box_id"], name: "index_boxes_movements_on_box_id", using: :btree
   add_index "boxes_movements", ["movement_id"], name: "index_boxes_movements_on_movement_id", using: :btree
 
-  create_table "categories", force: true do |t|
+  create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "items", force: true do |t|
+  create_table "items", force: :cascade do |t|
     t.string   "barcode"
     t.integer  "box_id"
     t.integer  "product_id"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20150504184438) do
   add_index "items", ["box_id"], name: "index_items_on_box_id", using: :btree
   add_index "items", ["product_id"], name: "index_items_on_product_id", using: :btree
 
-  create_table "items_software_serials", id: false, force: true do |t|
+  create_table "items_software_serials", id: false, force: :cascade do |t|
     t.integer "item_id"
     t.integer "software_serial_id"
   end
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20150504184438) do
   add_index "items_software_serials", ["item_id"], name: "index_items_software_serials_on_item_id", using: :btree
   add_index "items_software_serials", ["software_serial_id"], name: "index_items_software_serials_on_software_serial_id", using: :btree
 
-  create_table "movements", force: true do |t|
+  create_table "movements", force: :cascade do |t|
     t.date     "shipping_date"
     t.date     "arrival_date"
     t.string   "origin"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20150504184438) do
     t.datetime "updated_at"
   end
 
-  create_table "products", force: true do |t|
+  create_table "products", force: :cascade do |t|
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20150504184438) do
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
-  create_table "software_serials", force: true do |t|
+  create_table "software_serials", force: :cascade do |t|
     t.string   "serial_number"
     t.integer  "software_id"
     t.string   "operative_system"
@@ -108,14 +108,14 @@ ActiveRecord::Schema.define(version: 20150504184438) do
   add_index "software_serials", ["serial_number"], name: "index_software_serials_on_serial_number", unique: true, using: :btree
   add_index "software_serials", ["software_id"], name: "index_software_serials_on_software_id", using: :btree
 
-  create_table "softwares", force: true do |t|
+  create_table "softwares", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.datetime "created_at"
