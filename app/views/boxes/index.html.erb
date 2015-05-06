@@ -3,13 +3,13 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Barcode</th>
-        <th>Box #</th>
-        <th>Weight</th>
-        <th>Height</th>
-        <th>Width</th>
-        <th>Depth</th>
-        <th>Condition</th>
+        <th><%= sortable "barcode" %></th>
+        <th><%= sortable "box_number", "Box #" %></th>
+        <th><%= sortable "weight" %></th>
+        <th><%= sortable "height" %></th>
+        <th><%= sortable "width" %></th>
+        <th><%= sortable "depth" %></th>
+        <th><%= sortable "condition" %></th>
         <th>Options</th>
       </tr>
     </thead>
