@@ -19,12 +19,17 @@
             <%= product.category.name %>
           <% end %></td>
           <td><%= link_to 'Show', product %> |
-          <%= link_to 'Edit', edit_product_path(product) %> |
-          <%= link_to 'Delete', product, method: :delete %></td>
+          <% if current_user.admin? %>
+            <%= link_to 'Edit', edit_product_path(product) %> |
+            <%= link_to 'Delete', product, method: :delete %>
+          <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
   
-<%= link_to 'Add Product', new_product_path, class: "btn btn-success" %>
+<% if current_user.admin? %>
+  <%= link_to 'Add Product', new_product_path, class: "btn btn-success" %>
+<% end %>

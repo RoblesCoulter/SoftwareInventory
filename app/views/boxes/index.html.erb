@@ -26,8 +26,10 @@
           <td><%= box.condition %></td>
 
           <td><%= link_to 'Show', box %> |
-          <%= link_to 'Edit', edit_box_path(box) %> |
-          <%= link_to 'Delete', box, method: :delete %>
+          <% if current_user.admin? %>
+            <%= link_to 'Edit', edit_box_path(box) %> |
+            <%= link_to 'Delete', box, method: :delete %>
+          <% end %>
           </td>
         </tr>
       <% end %>
@@ -36,4 +38,6 @@
 </div>
 <br>
 
-<%= link_to "Add Box", new_box_path ,class: "btn btn-success" %>
+<% if current_user.admin? %>
+  <%= link_to "Add Box", new_box_path ,class: "btn btn-success" %>
+<% end %>

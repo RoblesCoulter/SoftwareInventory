@@ -13,5 +13,8 @@
 			<%= @product.category.name %>
 	<% end %>
 </p>
-<%= link_to 'Edit', edit_product_path(@product) %> |
+
+<% if current_user.admin? %>
+	<%= link_to 'Edit', edit_product_path(@product) %> |
+<% end %>
 <%= link_to 'Back', products_path %>

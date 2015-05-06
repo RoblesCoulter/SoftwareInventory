@@ -15,8 +15,10 @@
           <td><%= category.name %></td>
           <td><%= category.description %></td>
           <td><%= link_to 'Show', category %> |
-          <%= link_to 'Edit', edit_category_path(category) %> |
-          <%= link_to 'Delete', category, method: :delete %>
+          <% if current_user.admin? %>
+            <%= link_to 'Edit', edit_category_path(category) %> |
+            <%= link_to 'Delete', category, method: :delete %>
+          <% end %>
           </td>
         </tr>
       <% end %>
@@ -24,4 +26,6 @@
   </table>
 </div>
 
-<%= link_to 'Add Category', new_category_path, class: "btn btn-success"%>
+<% if current_user.admin? %>
+  <%= link_to 'Add Category', new_category_path, class: "btn btn-success"%>
+<% end %>
