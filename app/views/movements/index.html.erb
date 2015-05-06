@@ -11,8 +11,11 @@
     <% @movements.each do |movement| %>
       <tr>
         <td><%= link_to 'Show', movement %></td>
-        <td><%= link_to 'Edit', edit_movement_path(movement) %></td>
-        <td><%= link_to 'Destroy', movement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Edit', edit_movement_path(movement) %></td>
+          <td><%= link_to 'Destroy', movement, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -20,4 +23,6 @@
 
 <br>
 
-<%= link_to 'New Movement', new_movement_path %>
+<% if current_user.admin? %>
+  <%= link_to 'New Movement', new_movement_path %>
+<% end %>

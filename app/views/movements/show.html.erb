@@ -19,5 +19,8 @@
 	<strong>Delivery Method:</strong>
 	<%= @movement.delivery_method %>
 </p>
-<%= link_to 'Edit', edit_movement_path(@movement) %> |
+
+<% if current_user.admin? %>
+	<%= link_to 'Edit', edit_movement_path(@movement) %> |
+<% end %>
 <%= link_to 'Back', movements_path %>

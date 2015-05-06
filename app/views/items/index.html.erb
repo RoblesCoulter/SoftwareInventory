@@ -31,12 +31,17 @@
           <td><%= item.condition %></td>
           <td><%= item.firmware %></td>
           <td><%= link_to 'Show', item %> |
-          <%= link_to 'Edit', edit_item_path(item) %> |
-          <%= link_to 'Delete', item, method: :delete %></td>
+          <% if current_user.admin? %>
+            <%= link_to 'Edit', edit_item_path(item) %> |
+            <%= link_to 'Delete', item, method: :delete %>
+          <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 
-<%= link_to 'Add Item', new_item_path, class: "btn btn-success" %>
+<% if current_user.admin? %>
+  <%= link_to 'Add Item', new_item_path, class: "btn btn-success" %>
+<% end %>

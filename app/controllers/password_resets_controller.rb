@@ -20,6 +20,10 @@ class PasswordResetsController < ApplicationController
 	end
 
 	def edit
+		if logged_in?
+			flash.now[:danger] = "Please logout to use the reset password function"
+			redirect_to root_url
+		end
 	end
 
 	def update

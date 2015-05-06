@@ -1,4 +1,6 @@
 class MovementsController < ApplicationController
+  before_action :logged_in_user
+  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_movement, only: [:show, :edit, :update, :destroy]
 
   # GET /movements
@@ -70,5 +72,17 @@ class MovementsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def movement_params
       params.require(:movement).permit(:shipping_date, :arrival_date, :origin, :destination, :delivery_method)
+    end
+
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+
+    def admin_user
+      redirect_to(movements_url) unless current_user.admin?
     end
 end

@@ -15,11 +15,17 @@
           <td><%= software.name %></td>
           <td><%= software.description %></td>
           <td><%= link_to 'Show', software %> |
-          <%= link_to 'Edit', edit_software_path(software) %> |
-          <%= link_to 'Delete', software, method: :delete %></td>
+          <% if current_user.admin? %>
+            <%= link_to 'Edit', edit_software_path(software) %> |
+            <%= link_to 'Delete', software, method: :delete %>
+          <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-<%= link_to 'Add Software', new_software_path, class: "btn btn-success" %>
+
+<% if current_user.admin? %>
+  <%= link_to 'Add Software', new_software_path, class: "btn btn-success" %>
+<% end %>

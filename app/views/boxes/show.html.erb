@@ -35,7 +35,9 @@
 		<strong>Notes:</strong>
 		<%= @box.notes %>
 	</div>
-	<%= link_to 'Edit', edit_box_path(@box) %> |
+	<% if current_user.admin? %>
+		<%= link_to 'Edit', edit_box_path(@box) %> |
+	<% end %>
 	<%= link_to 'Back', boxes_path %>
 
 </div>
