@@ -1,10 +1,10 @@
 class BoxesController < ApplicationController
   before_action :set_box, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column, :sort_direction
   # GET /boxes
   # GET /boxes.json
   def index
-    @boxes = Box.all
+    @boxes = Box.order(sort_column + " "+ sort_direction)
   end
 
   # GET /boxes/1
@@ -67,6 +67,13 @@ class BoxesController < ApplicationController
       @box = Box.find(params[:id])
     end
 
+    def sort_column
+       Box.column_names.include?(params[:sort]) ? params[:sort] : "barcode"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def box_params
       params.require(:box).permit(:barcode, :weight, :height, :width, :depth, :box_number, :photo, :condition, :notes)

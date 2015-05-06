@@ -21,10 +21,10 @@
           <td><%= software_serial.serial_number %></td>
           <td><%= software_serial.operative_system %></td>
           <td><%= software_serial.software_availability %></td>
-          <td><%= software_serial.price %></td>
+          <td><%= number_to_currency(software_serial.price) %></td>
           <td><%= link_to 'Show', software_serial %> |
-          <td><%= link_to 'Edit', edit_software_serial_path(software_serial) %> |
-          <td><%= link_to 'Destroy', software_serial, method: :delete %></td>
+          <%= link_to 'Edit', edit_software_serial_path(software_serial) %> |
+          <%= link_to 'Destroy', software_serial, method: :delete %></td>
         </tr>
       <% end %>
     </tbody>
