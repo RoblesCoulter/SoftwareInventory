@@ -49,6 +49,8 @@ gem 'bcrypt'
 
 gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations", branch: "4-2-stable"
 
+gem 'rest-client'
+
 group :production do
 	gem 'puma'
 end
