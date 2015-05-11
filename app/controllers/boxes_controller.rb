@@ -2,12 +2,12 @@ class BoxesController < ApplicationController
   before_action :logged_in_user
   before_action :set_box, only: [:show, :edit, :update, :destroy]
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column
 
   # GET /boxes
   # GET /boxes.json
   def index
-    @boxes = Box.order(sort_column + " "+ sort_direction)
+    @boxes = Box.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /boxes/1

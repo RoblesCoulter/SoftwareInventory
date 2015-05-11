@@ -47,6 +47,8 @@ gem 'coffee-script-source', '1.8.0'
 
 gem 'bcrypt'
 
+gem 'will_paginate-bootstrap'
+
 gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations", branch: "4-2-stable"
 
 gem 'rest-client'
