@@ -28,6 +28,13 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
 
+    if @item.valid?
+      client = kaltura_setup
+      entry_id = kaltura_upload(item_params[:barcode], item_params[:photo], client)
+
+      @item.photo = entry_id
+    end
+
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
@@ -84,5 +91,50 @@ class ItemsController < ApplicationController
 
     def admin_user
       redirect_to(items_url) unless current_user.admin?
+    end
+
+    def kaltura_setup
+      config_file = YAML.load_file("#{Rails.root}/config/kaltura.yml")
+        
+      partner_id = config_file["default"]["partner_id"]
+      service_url = config_file["default"]["service_url"]
+      administrator_secret = config_file["default"]["administrator_secret"]
+      timeout = config_file["default"]["timeout"]
+      
+      config = Kaltura::KalturaConfiguration.new(partner_id, service_url)
+      # config.logger = Logger.new(STDOUT)
+      config.timeout = timeout
+      
+      client = Kaltura::KalturaClient.new( config )
+      session = client.session_service.start( administrator_secret, '', Kaltura::KalturaSessionType::ADMIN )
+      client.ks = session
+
+      return client
+    end
+
+    def kaltura_upload(entry_name, photo_object, client)
+      # temporal upload
+      new_path = Rails.root.join('public', 'images', photo_object.original_filename)
+      File.open(new_path, 'wb') do |file|
+        file.write(photo_object.read)
+      end
+
+      # kaltura upload process
+      media_entry = Kaltura::KalturaMediaEntry.new
+      media_entry.name = entry_name
+      media_entry.media_type = Kaltura::KalturaMediaType::IMAGE
+      video_file = File.open(new_path)
+      
+      video_token = client.media_service.upload(video_file)
+      created_entry2 = client.media_service.add_from_uploaded_file(media_entry, video_token)
+
+      # delete temporary file
+      File.delete(new_path) if File.exist?(new_path)
+
+      return created_entry2.id
+    end
+
+    def delete_entry(entry_id, client)
+      client.media_service.delete(entry_id)
     end
 end

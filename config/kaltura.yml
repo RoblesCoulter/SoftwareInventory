@@ -1,7 +1,7 @@
-deafult:
+default:
     user_name: "Laureate Live"
-    partner_id: 1320581
-    administrator_secret: 681ffeac0709ab35380f12e549d20030
-    secret: 58517ef30aef4c01d9c6c6d4610f7493
-    service_url: http://www.kaltura.com
+    partner_id: '1320581'
+    administrator_secret: '681ffeac0709ab35380f12e549d20030'
+    secret: '58517ef30aef4c01d9c6c6d4610f7493'
+    service_url: 'http://www.kaltura.com'
     timeout: 120
