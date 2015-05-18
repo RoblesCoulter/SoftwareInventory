@@ -28,6 +28,10 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    Rails.logger = Logger.new(STDOUT)
+    logger.info "-------------------------------------------"
+    logger.info @item
+    logger.info "-------------------------------------------"
   end
 
   # POST /items
