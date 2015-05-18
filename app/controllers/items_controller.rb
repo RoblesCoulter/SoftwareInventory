@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
 
-    if @item.valid?
+    if @item.valid? && @item.photo?
       client = kaltura_setup
       entry_id = kaltura_upload(item_params[:barcode], item_params[:photo], client)
 
