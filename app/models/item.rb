@@ -5,4 +5,8 @@ class Item < ActiveRecord::Base
 	validates_uniqueness_of :barcode
 	validates :price, numericality: { allow_blank: true }
 	validates :barcode, :product_id, presence: true
+
+	def self.search(search)
+		search ? where("UPPER(barcode) LIKE UPPER(?)", "%#{search}%") : all
+	end
 end

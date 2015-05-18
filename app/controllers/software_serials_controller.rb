@@ -2,11 +2,16 @@ class SoftwareSerialsController < ApplicationController
   before_action :logged_in_user
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_software_serial, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column
   # GET /software_serials
   # GET /software_serials.json
   def index
-    @software_serials = SoftwareSerial.all
+    sc = sort_column
+    if sc.eql? "software_id"
+      @software_serials = SoftwareSerial.includes(:software).search(params[:search]).order("softwares.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+    else
+      @software_serials = SoftwareSerial.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+    end
   end
 
   # GET /software_serials/1
@@ -69,6 +74,13 @@ class SoftwareSerialsController < ApplicationController
       @software_serial = SoftwareSerial.find(params[:id])
     end
 
+    def sort_column
+      SoftwareSerial.column_names.include?(params[:sort]) ? params[:sort] : "serial_number"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def software_serial_params
       params.require(:software_serial).permit(:serial_number, :software_id , :software, :operative_system, :price, :software_availability)

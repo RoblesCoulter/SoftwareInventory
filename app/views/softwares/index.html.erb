@@ -1,31 +1,5 @@
 <h1 class="text-center">Softwares</h1>
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description (Optional)</th>
-        <th>Options</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @softwares.each do |software| %>
-        <tr>
-          <td><%= software.name %></td>
-          <td><%= software.description %></td>
-          <td><%= link_to 'Show', software %> |
-          <% if current_user.admin? %>
-            <%= link_to 'Edit', edit_software_path(software) %> |
-            <%= link_to 'Delete', software, method: :delete %>
-          <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
+<%= render 'softwares' %>
 <% if current_user.admin? %>
   <%= link_to 'Add Software', new_software_path, class: "btn btn-success" %>
 <% end %>

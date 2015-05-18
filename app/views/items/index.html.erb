@@ -1,47 +1,14 @@
 <h1 class="text-center">Items</h1>
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Barcode</th>
-        <th>Product</th>
-        <th>Box</th>
-        <th>Serial Number</th>
-        <th>Model Number</th>
-        <th>Price</th>
-        <th>Location</th>
-        <th>Condition</th>
-        <th>Firmware</th>
-        <th>Options</th>
-      </tr>
-    </thead>
+<%= form_tag items_path, method: 'get', class: "form-inline form-main-search", id: "ajax_search" do %>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search], class: "form-control" %>
+      <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+    </div>
+ 
+  <div id="ajax_objects" ><%= render 'items' %></div>
+<% end %>
 
-    <tbody>
-      <% @items.each do |item| %>
-        <tr>
-          <td><%= item.barcode %></td>
-          <td><%= item.product.name %></td>
-          <td><% unless item.box.nil? %>
-            <%= item.box.box_number %>
-          <% end %></td>
-          <td><%= item.serial_number %></td>
-          <td><%= item.model_number %></td>
-          <td><%= number_to_currency(item.price) %></td>
-          <td><%= item.location %></td>
-          <td><%= item.condition %></td>
-          <td><%= item.firmware %></td>
-          <td><%= link_to 'Show', item %> |
-          <% if current_user.admin? %>
-            <%= link_to 'Edit', edit_item_path(item) %> |
-            <%= link_to 'Delete', item, method: :delete %>
-          <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
+<br>
 <% if current_user.admin? %>
   <%= link_to 'Add Item', new_item_path, class: "btn btn-success" %>
 <% end %>

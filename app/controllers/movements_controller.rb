@@ -2,11 +2,11 @@ class MovementsController < ApplicationController
   before_action :logged_in_user
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_movement, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column
   # GET /movements
   # GET /movements.json
   def index
-    @movements = Movement.all
+    @movements = Movement.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /movements/1
@@ -67,6 +67,14 @@ class MovementsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_movement
       @movement = Movement.find(params[:id])
+    end
+
+    def sort_column
+       Movement.column_names.include?(params[:sort]) ? params[:sort] : "shipping_date"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

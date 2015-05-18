@@ -7,6 +7,6 @@ class Box < ActiveRecord::Base
 	validates_uniqueness_of :box_number, :barcode
 
 	def self.search(search)
-		search ? where("barcode LIKE ?", "%#{search}%") : all
+		search ? where("UPPER(barcode) LIKE UPPER(?)", "%#{search}%") : all
 	end
 end

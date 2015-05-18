@@ -1,0 +1,36 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort]%>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sortable "name"%></th>
+        <th><%= sortable "brand"%></th>
+        <th><%= sortable "category_id" %></th>
+        <th><%= sortable "created_at", "Creation date" %></th>
+        <th><%= sortable "updated_at", "Last updated"%></th>
+        <th>Options</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.brand %></td>
+          <td><% unless product.category.nil? %>
+            <%= product.category.name %>
+          <% end %></td>
+          <td><%= local_time_ago(product.created_at) %></td>
+          <td><%= local_time_ago(product.updated_at) %></td>
+          <td><%= link_to 'Show', product %> |
+          <% if current_user.admin? %>
+            <%= link_to 'Edit', edit_product_path(product) %> |
+            <%= link_to 'Delete', product, method: :delete %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

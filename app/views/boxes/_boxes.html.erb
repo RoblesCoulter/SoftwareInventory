@@ -1,0 +1,42 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort]%>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sortable "barcode" %></th>
+        <th><%= sortable "box_number", "Box #" %></th>
+        <th><%= sortable "weight" %></th>
+        <th><%= sortable "height" %></th>
+        <th><%= sortable "width" %></th>
+        <th><%= sortable "depth" %></th>
+        <th><%= sortable "condition" %></th>
+        <th><%= sortable "created_at", "Creation date" %></th>
+        <th><%= sortable "updated_at", "Last updated"%></th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @boxes.each do |box| %>
+        <tr>
+          <td><%= box.barcode %></td>
+          <td><%= box.box_number %></td>
+          <td><%= box.weight %></td>
+          <td><%= box.height %></td>
+          <td><%= box.width %></td>
+          <td><%= box.depth %></td>
+          <td><%= box.condition %></td>
+          <td><%= local_time_ago(box.created_at) %></td>
+          <td><%= local_time_ago(box.updated_at) %></td>
+          <td><%= link_to 'Show', box %> 
+          <% if current_user.admin? %>
+            | <%= link_to 'Edit', edit_box_path(box) %> |
+            <%= link_to 'Delete', box, method: :delete %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @boxes, renderer: BootstrapPagination::Rails %>

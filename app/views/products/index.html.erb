@@ -1,35 +1,14 @@
 <h1 class="text-center">Products</h1>
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Brand (Optional)</th>
-        <th>Category (Optional)</th>
-        <th>Options</th>
-      </tr>
-    </thead>
+<%= form_tag products_path, method: 'get', class: "form-inline form-main-search", id: "ajax_search" do %>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search], class: "form-control" %>
+      <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+    </div>
+ 
+  <div id="ajax_objects" ><%= render 'products' %></div>
+<% end %>
 
-    <tbody>
-      <% @products.each do |product| %>
-        <tr>
-          <td><%= product.name %></td>
-          <td><%= product.brand %></td>
-          <td><% unless product.category.nil? %>
-            <%= product.category.name %>
-          <% end %></td>
-          <td><%= link_to 'Show', product %> |
-          <% if current_user.admin? %>
-            <%= link_to 'Edit', edit_product_path(product) %> |
-            <%= link_to 'Delete', product, method: :delete %>
-          <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-  
+<br>
 <% if current_user.admin? %>
   <%= link_to 'Add Product', new_product_path, class: "btn btn-success" %>
 <% end %>
