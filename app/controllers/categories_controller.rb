@@ -2,10 +2,11 @@ class CategoriesController < ApplicationController
   before_action :logged_in_user
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
+  helper_method :sort_column
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /categories/1
@@ -70,8 +71,13 @@ class CategoriesController < ApplicationController
       @category = Category.find(params[:id])
     end
 
+    def sort_column
+       Category.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
 
-
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.require(:category).permit(:name, :description)

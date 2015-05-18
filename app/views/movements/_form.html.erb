@@ -1,8 +1,25 @@
-<%= form_for @movement, html: { class: "form-horizontal"}, validate: :product_validators do |f| %>
+<%= form_for @movement, html: { class: "form-horizontal"}, validate: :movement_validators do |f| %>
   <div class="form-group">
-    <label class="control-label">Barcode</label>
-    <%= f.text_field :barcode, class: 'form-control' %>
+    <label class="control-label">Shipping Date</label>
+    <%= f.text_field :shipping_date, class: 'form-control' %>
   </div>
-
+  <div class="form-group">
+    <label class="control-label">Arrival Date</label>
+    <%= f.text_field :arrival_date, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Destination</label>
+    <%= f.text_field :destination, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Origin</label>
+    <%= f.text_field :origin, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Delivery Method</label>
+    <%= f.text_field :delivery_method, class: 'form-control' %>
+  </div>
+  <%= f.submit class: "btn btn-success" %>
+  <%= link_to 'Back', movements_path, class: "btn btn-warning fullwidthbutton" %>
   
 <% end %>

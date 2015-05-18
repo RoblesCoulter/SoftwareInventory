@@ -1,39 +1,15 @@
 <h1 class="text-center">Software Serials</h1>
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Software</th>
-        <th>Serial Number</th>
-        <th>Operative System</th>
-        <th>Software Availability</th>
-        <th>Price</th>
-        <th>Options</th>
-      </tr>
-    </thead>
+<%= form_tag software_serials_path, method: 'get', class: "form-inline form-main-search", id: "ajax_search" do %>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search], class: "form-control" %>
+      <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+    </div>
+ 
+  <div id="ajax_objects" ><%= render 'software_serials' %></div>
+<% end %>
 
-    <tbody>
-      <% @software_serials.each do |software_serial| %>
-        <tr>
-          <td><% unless software_serial.software.nil? %>
-            <%= software_serial.software.name %>
-          <% end%></td>
-          <td><%= software_serial.serial_number %></td>
-          <td><%= software_serial.operative_system %></td>
-          <td><%= software_serial.software_availability %></td>
-          <td><%= number_to_currency(software_serial.price) %></td>
-          <td><%= link_to 'Show', software_serial %> |
-          <% if current_user.admin? %>
-            <%= link_to 'Edit', edit_software_serial_path(software_serial) %> |
-          <%= link_to 'Destroy', software_serial, method: :delete %>
-          <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<br>
 
 <% if current_user.admin? %>
-  <%= link_to 'New Software serial', new_software_serial_path, class: "btn btn-success" %>
+  <%= link_to 'Add Software Serial', new_software_serial_path, class: "btn btn-success" %>
 <% end %>

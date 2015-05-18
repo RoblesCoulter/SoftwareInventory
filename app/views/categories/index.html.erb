@@ -1,30 +1,14 @@
 <h1 class="text-center">Categories</h1>
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Options</th>
-      </tr>
-    </thead>
+<%= form_tag categories_path, method: 'get', class: "form-inline form-main-search", id: "ajax_search" do %>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search], class: "form-control" %>
+      <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+    </div>
+ 
+  <div id="ajax_objects" ><%= render 'categories' %></div>
+<% end %>
 
-    <tbody>
-      <% @categories.each do |category| %>
-        <tr>
-          <td><%= category.name %></td>
-          <td><%= category.description %></td>
-          <td><%= link_to 'Show', category %> |
-          <% if current_user.admin? %>
-            <%= link_to 'Edit', edit_category_path(category) %> |
-            <%= link_to 'Delete', category, method: :delete %>
-          <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<br>
 
 <% if current_user.admin? %>
   <%= link_to 'Add Category', new_category_path, class: "btn btn-success"%>
