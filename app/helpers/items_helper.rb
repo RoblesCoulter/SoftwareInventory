@@ -1,8 +1,14 @@
 module ItemsHelper
 	def image_for(item)
-		entry_id = item.photo
-		kaltura_url = "http://cdnapisec.kaltura.com/p/#{get_partnet_id}/thumbnail/entry_id/#{entry_id}/quality/100/width/200"
-		image_tag(kaltura_url, alt: item.product.name, class: "item_photo")
+		if item.photo != nil
+			entry_id = item.photo
+			kaltura_url = "http://cdnapisec.kaltura.com/p/#{get_partnet_id}/thumbnail/entry_id/#{entry_id}/quality/100/width/200"
+			image_tag(kaltura_url, alt: item.product.name, class: "item_photo")
+		end
+	end
+
+	def entry_id_for(item)
+		item.photo if item.photo != nil
 	end
 
 	private

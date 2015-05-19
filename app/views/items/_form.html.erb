@@ -39,7 +39,7 @@
   
   <div class="form-group">
     <label class="control-label">Picture (optional)</label><br>
-    <label><%= :photo %></label>
+    <label><%= image_for @item %></label>
     <%= f.file_field :photo, class: 'form-control' %>
   </div>
   <%= f.submit class: "btn btn-success" %>

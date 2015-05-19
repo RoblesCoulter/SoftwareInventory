@@ -28,10 +28,6 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
-    Rails.logger = Logger.new(STDOUT)
-    logger.info "-------------------------------------------"
-    logger.info @item
-    logger.info "-------------------------------------------"
   end
 
   # POST /items
@@ -51,6 +47,11 @@ class ItemsController < ApplicationController
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
+        if @item.photo != nil
+          @item.photo = nil
+          @item.errors[:photo] = "Please select the image again"
+        end
+
         format.html { render :new }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
@@ -60,8 +61,36 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
+    entry_id = nil
+
+    #new image same barcode
+    if @item.valid? && (item_params[:photo] != nil) && (item_params[:barcode] == nil)
+      client = kaltura_setup
+
+      #delite old entry
+      delete_entry(@item.photo, client)
+
+      #upload new entry
+      entry_id = kaltura_upload(item_params[:barcode] != nil ? item_params[:barcode] : @item.barcode,
+                                item_params[:photo],
+                                client)
+    end
+
+    #same image new barcode
+    if @item.valid? && (item_params[:photo] == nil) && (item_params[:barcode] != nil)
+    end
+
+    #new image and new barcode
+    if @item.valid? && (item_params[:photo] != nil) && (item_params[:barcode] != nil)
+    end
+
     respond_to do |format|
       if @item.update(item_params)
+        if entry_id != nil
+          @item.photo = entry_id
+          @item.save
+        end
+
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
@@ -74,6 +103,11 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
+    if @item.photo
+      client = kaltura_setup
+      #delete_entry(@item.photo, client)
+    end
+
     @item.destroy
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
@@ -120,7 +154,6 @@ class ItemsController < ApplicationController
       timeout = config_file["default"]["timeout"]
       
       config = Kaltura::KalturaConfiguration.new(partner_id, service_url)
-      # config.logger = Logger.new(STDOUT)
       config.timeout = timeout
       
       client = Kaltura::KalturaClient.new( config )

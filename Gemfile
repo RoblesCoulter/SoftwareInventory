@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -55,6 +55,6 @@ gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations"
 
 gem 'rest-client'
 
-group :production do
-	gem 'puma'
-end
+# group :production do
+# 	gem 'puma'
+# end
