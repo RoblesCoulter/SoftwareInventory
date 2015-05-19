@@ -78,6 +78,10 @@ class ItemsController < ApplicationController
 
     #same image new barcode
     if @item.valid? && (item_params[:photo] == nil) && (item_params[:barcode] != nil)
+      client = kaltura_setup
+
+      #rename entry
+      
     end
 
     #new image and new barcode
