@@ -51,7 +51,6 @@ class ItemsController < ApplicationController
           @item.photo = nil
           @item.errors[:photo] = "Please select the image again"
         end
-
         format.html { render :new }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
