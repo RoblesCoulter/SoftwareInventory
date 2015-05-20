@@ -40,7 +40,7 @@
   <div class="form-group">
     <label class="control-label">Picture (optional)</label><br>
     <label><%= image_for @item %></label>
-    <%= f.file_field :photo, class: 'form-control' %>
+    <%= f.file_field :photo, class: 'form-control', accept: 'image/png,image/gif,image/jpeg' %>
   </div>
   <%= f.submit class: "btn btn-success" %>
   <%= link_to "Back", items_path, class: "btn btn-warning fullwidthbutton" %>

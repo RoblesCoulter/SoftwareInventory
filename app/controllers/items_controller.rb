@@ -63,8 +63,8 @@ class ItemsController < ApplicationController
   def update
     entry_id = nil
 
-    #new image same barcode
-    if @item.valid? && (item_params[:photo] != nil) && (item_params[:barcode] == nil)
+    #new image
+    if @item.valid? && (item_params[:photo] != nil)
       client = kaltura_setup
 
       #delite old entry
@@ -81,11 +81,9 @@ class ItemsController < ApplicationController
       client = kaltura_setup
 
       #rename entry
-      
-    end
-
-    #new image and new barcode
-    if @item.valid? && (item_params[:photo] != nil) && (item_params[:barcode] != nil)
+      base_entry = Kaltura::KalturaBaseEntry.new
+      base_entry.name = item_params[:barcode]
+      base_entry_updated = client.base_entry_service.update(@item.photo, base_entry)
     end
 
     respond_to do |format|
@@ -109,7 +107,7 @@ class ItemsController < ApplicationController
   def destroy
     if @item.photo
       client = kaltura_setup
-      #delete_entry(@item.photo, client)
+      delete_entry(@item.photo, client)
     end
 
     @item.destroy
