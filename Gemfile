@@ -55,6 +55,6 @@ gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations"
 
 gem 'rest-client'
 
-# group :production do
-# 	gem 'puma'
-# end
+group :production do
+	gem 'puma'
+end
