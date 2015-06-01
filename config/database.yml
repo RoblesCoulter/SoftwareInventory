@@ -24,6 +24,6 @@ test:
 
 production:
   <<: *default
-  database: dcfgan3152fdog
-  username: xmygbjhcthehud
-  password: 0wYQ-hUJ1AUfB99NtujQxE8wS-
+  database: <%= ENV["DATABASE"] %>
+  username: <%= ENV["DATABASE_USER_NAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
