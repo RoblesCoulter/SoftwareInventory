@@ -1,6 +1,6 @@
 class BoxesController < ApplicationController
   before_action :logged_in_user
-  before_action :set_box, only: [:show, :edit, :update, :destroy]
+  before_action :set_box, only: [:show, :edit, :update, :destroy, :add_item]
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   helper_method :sort_column
 
@@ -22,6 +22,10 @@ class BoxesController < ApplicationController
 
   # GET /boxes/1/edit
   def edit
+  end
+
+  # GET /boxes/1/add_item
+  def add_item
   end
 
   # POST /boxes

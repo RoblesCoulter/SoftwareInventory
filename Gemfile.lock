@@ -60,7 +60,6 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.7)
     execjs (2.5.2)
-    ffi (1.9.8)
     ffi (1.9.8-x86-mingw32)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
@@ -95,6 +94,8 @@ GEM
       mini_portile (~> 0.6.0)
     pg (0.18.1)
     pg (0.18.1-x86-mingw32)
+    puma (2.11.3)
+      rack (>= 1.1, < 2.0)
     rack (1.6.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -200,6 +201,7 @@ DEPENDENCIES
   jquery-ui-rails
   local_time
   pg
+  puma
   rails (= 4.2.1)
   rails_12factor
   rest-client
