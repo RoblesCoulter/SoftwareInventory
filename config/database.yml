@@ -25,6 +25,6 @@ test:
 production:
   <<: *default
   adapter: mysql2
-  database: <%= ENV["DATABASE"] %>
-  username: <%= ENV["DATABASE_USER_NAME"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
+  database: SoftwareInventoryDB
+  username: root
+  password: bB8w55kusgaaUBf2DLWBTB85tEyJFmNu
