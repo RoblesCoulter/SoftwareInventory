@@ -26,5 +26,3 @@ production:
   <<: *default
   adapter: mysql2
   database: SoftwareInventoryDB
-  username: root
-  password: bB8w55kusgaaUBf2DLWBTB85tEyJFmNu
