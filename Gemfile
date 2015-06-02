@@ -57,7 +57,9 @@ gem 'will_paginate-bootstrap'
 gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations", branch: "4-2-stable"
 
 gem 'rest-client'
-gem 'mysql2'
+
+gem 'mysql2', '~> 0.3.15'
+
 group :production do
 	gem 'unicorn'
 end
