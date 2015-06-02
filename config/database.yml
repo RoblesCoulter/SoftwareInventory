@@ -24,6 +24,5 @@ test:
 
 production:
   <<: *default
-  database: dcfgan3152fdog
-  username: xmygbjhcthehud
-  password: 0wYQ-hUJ1AUfB99NtujQxE8wS-
+  adapter: mysql2
+  database: SoftwareInventoryDB
