@@ -61,5 +61,5 @@ gem 'rest-client'
 gem 'mysql2', '~> 0.3.15'
 
 group :production do
-	gem 'unicorn'
+	gem 'passenger'
 end
