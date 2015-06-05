@@ -64,8 +64,10 @@ class BoxesController < ApplicationController
     if @box.valid? && (box_params[:photo] != nil)
       client = kaltura_setup
 
-      #delite old entry
-      delete_entry(@box.photo, client)
+      #delete old entry
+      if @box.photo
+        delete_entry(@box.photo, client)
+      end
 
       #upload new entry
       entry_id = kaltura_upload(box_params[:barcode] != nil ? box_params[:barcode] : @box.barcode,
@@ -78,9 +80,11 @@ class BoxesController < ApplicationController
       client = kaltura_setup
 
       #rename entry
-      base_entry = Kaltura::KalturaBaseEntry.new
-      base_entry.name = box_params[:barcode]
-      base_entry_updated = client.base_entry_service.update(@box.photo, base_entry)
+      if @box.photo
+        base_entry = Kaltura::KalturaBaseEntry.new
+        base_entry.name = box_params[:barcode]
+        base_entry_updated = client.base_entry_service.update(@box.photo, base_entry)
+      end
     end
 
     respond_to do |format|
