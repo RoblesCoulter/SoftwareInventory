@@ -26,6 +26,7 @@ class BoxesController < ApplicationController
 
   # GET /boxes/1/add_item
   def add_item
+    @items = @box.items
   end
 
   # POST /boxes

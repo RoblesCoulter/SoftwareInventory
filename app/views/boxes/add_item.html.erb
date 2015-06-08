@@ -1,1 +1,10 @@
 <h1 class="text-center">Box #<%= @box.box_number %> (<%= @box.barcode %>)</h1>
+<ul class="list-group">
+<% if @items.any? %>
+	
+	<% @items.each do |item| %>
+		<li class="list-group-item list-group-item-info"><%= item.product.name %> (<%= item.barcode %>)</li>
+	<% end %>	
+<% end %>
+	
+</ul>
