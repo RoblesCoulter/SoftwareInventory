@@ -4,9 +4,7 @@ source 'http://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use PostgreSQL as the database for Active Record
-group :development do
-	gem 'pg'
-end
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -58,8 +56,6 @@ gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations"
 
 gem 'rest-client'
 
-gem 'mysql2', '~> 0.3.15'
-
 group :production do
-	gem 'passenger'
+	gem 'unicorn'
 end
