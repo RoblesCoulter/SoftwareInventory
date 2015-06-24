@@ -58,4 +58,5 @@ gem 'rest-client'
 
 group :production do
 	gem 'unicorn'
+	gem 'mysql2'
 end
