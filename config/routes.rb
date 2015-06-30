@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   resources :boxes do
     member do
-      get 'add_item'
+      get 'box_items'
+      post 'add_scans'
     end
   end
   resources :software_serials, :softwares, :movements, :categories, :products, :items, :users

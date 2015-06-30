@@ -30,7 +30,7 @@
           <td><%= local_time_ago(box.updated_at) %></td>
           <td><%= link_to 'Show', box %> 
           <% if current_user.admin? %>
-            | <%= link_to 'Show Items', add_item_box_path(box) %>
+            | <%= link_to 'Items', box_items_box_path(box) %>
             | <%= link_to 'Edit', edit_box_path(box) %> |
             <%= link_to 'Delete', box, method: :delete %>
           <% end %>

@@ -1,6 +1,6 @@
 class BoxesController < ApplicationController
   before_action :logged_in_user
-  before_action :set_box, only: [:show, :edit, :update, :destroy, :add_item]
+  before_action :set_box, only: [:show, :edit, :update, :destroy, :box_items, :add_scans]
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   helper_method :sort_column
 
@@ -24,16 +24,30 @@ class BoxesController < ApplicationController
   def edit
   end
 
-  # GET /boxes/1/add_item
-  def add_item
+  # GET /boxes/1/box_items
+  def box_items
     @items = @box.items
+  end
+
+  def add_scans
+    @scans = params.require(:scanned_items)
+    @itemsRetreived = Item.joins(:product).where(barcode: @scans).order(:barcode)
+    @itemsNotInBoxes = @itemsRetreived.select(:barcode, :name).where(box_id: nil)
+    @itemsInBoxes = @itemsRetreived.select(:box_number, :barcode, :name).joins(:box).where.not(box_id: nil)
+    @itemsRetreived.each do |item|
+      item.box = @box
+      #item.save
+      @scans.delete(item.barcode)
+    end
+    respond_to do |format|
+        format.json { render json: [{ notfound: @scans, notinboxitems: @itemsNotInBoxes, movedfrombox: @itemsInBoxes }] }
+    end
   end
 
   # POST /boxes
   # POST /boxes.json
   def create
     @box = Box.new(box_params)
-
     if @box.valid? && @box.photo?
       client = kaltura_setup
       entry_id = kaltura_upload(box_params[:barcode], box_params[:photo], client)

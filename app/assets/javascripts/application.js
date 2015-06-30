@@ -3,7 +3,6 @@
 //= require jquery-ui/datepicker
 //= require twitter/bootstrap
 //= require turbolinks
-//= require_tree .
 //= require rails.validations
 //= require local_time
 
