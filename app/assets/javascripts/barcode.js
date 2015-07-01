@@ -53,6 +53,22 @@ $(function(){
 	    	}
 	});
 
+    $(".remove-item-box").on("click", function(){
+        var barcode = $(this).closest("li").data("barcode");
+        console.log(barcode)
+        if(barcode){
+            $.ajax({
+                type: "POST",
+                url: "7boxes/"+box_id+"/remove_item",
+                data: JSON.stringify({"barcode" : barcode}),
+                dataType: "json",
+                contentType: "application/json"
+            }).done(function(data){
+
+            });
+        }
+    });
+
     $(".add-scan-btn").on("click", function() {
         var $node = $("ul.scanned-items li");
         var scanned = [];

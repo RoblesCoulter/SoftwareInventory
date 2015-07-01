@@ -36,7 +36,7 @@ class BoxesController < ApplicationController
     @itemsInBoxes = @itemsRetreived.select(:box_number, :barcode, :name).joins(:box).where.not(box_id: nil)
     @itemsRetreived.each do |item|
       item.box = @box
-      #item.save
+      item.save
       @scans.delete(item.barcode)
     end
     respond_to do |format|
