@@ -26,7 +26,7 @@ production:
   adapter: mysql2
   database: SoftwareInventoryDB
   username: admin
-  password: 
+  password: <%= ENV['SOFTWAREINVENTOTY_DATABASE_PASSWORD'] %>
   host: 
   port: 3306
   pool: 5
