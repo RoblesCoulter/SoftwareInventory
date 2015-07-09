@@ -80,6 +80,6 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  # host = 'software-inventory.herokuapp.com'
+  host = 'laureatelive.com'
   config.action_mailer.default_url_options = { host: host }
 end
