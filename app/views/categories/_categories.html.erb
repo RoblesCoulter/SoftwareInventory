@@ -1,0 +1,32 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort]%>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sortable "name" %></th>
+        <th><%= sortable "description" %></th>
+        <th><%= sortable "created_at", "Creation date" %></th>
+        <th><%= sortable "updated_at", "Last updated"%></th>
+        <th>Options</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <td><%= category.name %></td>
+          <td><%= category.description %></td>
+          <td><%= local_time_ago(category.created_at) %></td>
+          <td><%= local_time_ago(category.updated_at) %></td>
+          <td><%= link_to 'Show', category %> |
+          <% if current_user.admin? %>
+            <%= link_to 'Edit', edit_category_path(category) %> |
+            <%= link_to 'Delete', category, method: :delete %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

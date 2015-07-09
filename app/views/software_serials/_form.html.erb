@@ -1,38 +1,24 @@
-<%= form_for(@software_serial) do |f| %>
-  <% if @software_serial.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@software_serial.errors.count, "error") %> prohibited this software_serial from being saved:</h2>
-
-      <ul>
-      <% @software_serial.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div>
-    <p>
-      <%= f.label :serial_number %>
-      <%= f.text_field :serial_number %>
-    </p>
-    <p>
-      <%= f.label :software %>
-      <%= collection_select(:software_serial, :software_id, Software.all, :id, :name, prompt: true) %>
-    </p>
-    <p>
-      <%= f.label :operative_system %>
-      <%= f.text_field :operative_system %> 
-    </p>
-    <p>
-      <%= f.label :price %>
-      <%= f.text_field :price %> 
-    </p>
-    <p>
-      <%= f.label :software_availability %>
-      <%= f.text_field :software_availability %>
-    </p>
+<%= form_for @software_serial, html: { class: "form-horizontal"}, validate: :software_serial_validators do |f| %>
+  <div class="form-group">
+    <label class="control-label">Software</label>
+    <%= collection_select(:software_serial, :software_id, Software.all, :id, :name, { prompt: "Please select a Software"},{ class: 'form-control'} ) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <label class="control-label">Serial Number</label>
+    <%= f.text_field :serial_number, class: 'form-control' %>
   </div>
+  <div class="form-group">
+    <label class="control-label">Operative System</label>
+    <%= f.text_field :operative_system, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Software Availability</label>
+    <%= f.text_field :software_availability, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Price $ (Optional)</label>
+    <%= f.text_field :price, class: 'form-control' %>
+  </div>
+  <%= f.submit class: "btn btn-success" %>
+  <%= link_to "Back", software_serials_path, class: "btn btn-warning fullwidthbutton" %>
 <% end %>

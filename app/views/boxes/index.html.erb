@@ -1,38 +1,15 @@
 <h1 class="text-center">Boxes</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Barcode</th>
-      <th>Box #</th>
-      <th>Weight</th>
-      <th>Height</th>
-      <th>Width</th>
-      <th>Depth</th>
-      <th>Condition</th>
-      <th>Options</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @boxes.each do |box| %>
-      <tr>
-        <td><%= box.barcode %></td>
-        <td><%= box.box_number %></td>
-        <td><%= box.weight %></td>
-        <td><%= box.height %></td>
-        <td><%= box.width %></td>
-        <td><%= box.depth %></td>
-        <td><%= box.condition %></td>
-
-        <td><%= link_to 'Show', box %> |
-        <%= link_to 'Edit', edit_box_path(box) %> |
-        <%= link_to 'Delete', box, method: :delete %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= form_tag boxes_path, method: 'get', class: "form-inline form-main-search", id: "ajax_search" do %>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search], class: "form-control" %>
+      <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+    </div>
+ 
+  <div id="ajax_objects" ><%= render 'boxes' %></div>
+<% end %>
 
 <br>
 
-<%= link_to "Add Box", new_box_path ,class: "btn btn-success" %>
+<% if current_user.admin? %>
+  <%= link_to "Add Box", new_box_path , class: "btn btn-success" %>
+<% end %>

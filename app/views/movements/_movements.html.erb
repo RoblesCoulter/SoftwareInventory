@@ -1,0 +1,38 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort]%>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sortable "shipping_date" %></th>
+        <th><%= sortable "arrival_date" %></th>
+        <th><%= sortable "origin" %></th>
+        <th><%= sortable "destination" %></th>
+        <th><%= sortable "delivery_method" %></th>
+        <th>Options</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @movements.each do |movement| %>
+        <tr>
+        <td><% unless movement.shipping_date.nil? %>
+            <%= movement.shipping_date.strftime("%B %e, %Y") %>
+          <% end%></td>
+          <td><% unless movement.arrival_date.nil? %>
+            <%= movement.arrival_date.strftime("%B %e, %Y") %>
+          <% end %></td>
+          <td><%= movement.origin %></td>
+          <td><%= movement.destination %></td>
+          <td><%= movement.delivery_method %></td>
+          <td><%= link_to 'Show', movement %>
+          <% if current_user.admin? %>
+            | <%= link_to 'Edit', edit_movement_path(movement) %>
+            | <%= link_to 'Delete', movement, method: :delete %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

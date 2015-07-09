@@ -1,10 +1,12 @@
 class MovementsController < ApplicationController
+  before_action :logged_in_user
+  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_movement, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column
   # GET /movements
   # GET /movements.json
   def index
-    @movements = Movement.all
+    @movements = Movement.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /movements/1
@@ -67,8 +69,28 @@ class MovementsController < ApplicationController
       @movement = Movement.find(params[:id])
     end
 
+    def sort_column
+       Movement.column_names.include?(params[:sort]) ? params[:sort] : "shipping_date"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def movement_params
       params.require(:movement).permit(:shipping_date, :arrival_date, :origin, :destination, :delivery_method)
+    end
+
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+
+    def admin_user
+      redirect_to(movements_url) unless current_user.admin?
     end
 end

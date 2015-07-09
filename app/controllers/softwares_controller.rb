@@ -1,10 +1,12 @@
 class SoftwaresController < ApplicationController
+  before_action :logged_in_user
+  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_software, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column
   # GET /softwares
   # GET /softwares.json
   def index
-    @softwares = Software.all
+    @softwares = Software.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /softwares/1
@@ -67,8 +69,28 @@ class SoftwaresController < ApplicationController
       @software = Software.find(params[:id])
     end
 
+    def sort_column
+      Software.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def software_params
       params.require(:software).permit(:name, :description)
+    end
+
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+
+    def admin_user
+      redirect_to(softwares_url) unless current_user.admin?
     end
 end

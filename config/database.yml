@@ -23,9 +23,21 @@ test:
   database: SoftwareInventoryDB
 
 production:
+<<<<<<< HEAD
   <<: *default
   adapter: mysql2
   database: SoftwareInventoryDB
   username: root
   password: <%= ENV["SOFTWARE_INVENTORY_DATABASE_PASSWORD"] %>
   host: softwareinventorydb.c9z5b4hc0nsc.us-west-2.rds.amazonaws.com
+=======
+  adapter: mysql2
+  database: SoftwareInventoryDB
+  username: admin
+  password: <%= ENV['SOFTWAREINVENTOTY_DATABASE_PASSWORD'] %>
+  host: 
+  port: 3306
+  pool: 5
+  timeout: 5000
+
+>>>>>>> b89834005476cde39c7822e6a42d103bdd201106

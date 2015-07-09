@@ -1,6 +1,6 @@
-<h1>Editing product</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+<div class="center-div">
+	<%= link_to 'Back', products_path, class: "btn btn-warning" %>
+	<h1 class="text-center">Editing Product</h1>
+	<%= render 'form' %>
+	<%= yield(:product_validators) %>
+</div>

@@ -1,41 +1,27 @@
 <div class="center-div">
-	<div>
-		<strong>Barcode:</strong>
-		<%= @box.barcode %>
-	</div>
-	<div>
-		<strong>Weight:</strong>
-		<%= @box.weight %>
-	</div>
-	<div>
-		<strong>Height:</strong>
-		<%= @box.height %>
-	</div>
-	<div>
-		<strong>Width:</strong>
-		<%= @box.width %>
-	</div>
-	<div>
-		<strong>Depth:</strong>
-		<%= @box.depth %>
-	</div>
-	<div>
-		<strong>Box #:</strong>
-		<%= @box.box_number %>
-	</div>
-	<div>
-		<strong>Photo:</strong>
-		<%= @box.photo %>
-	</div>
-	<div>
-		<strong>Condition:</strong>
-		<%= @box.condition %>
-	</div>
-	<div>
-		<strong>Notes:</strong>
-		<%= @box.notes %>
-	</div>
-	<%= link_to 'Edit', edit_box_path(@box) %> |
+	<div class="thumbnail">
+		<%= box_image_for @box %>
+        <div class="caption-full">
+	        <% unless @box.height.nil? && @box.width.nil? && @box.depth.nil? %>
+	        	<h4 class="pull-right"><%= @box.height %> x <%= @box.width %> x <%= @box.depth %></h4>
+	        <% end %>	
+	        <h4>Box #<%= @box.box_number %>
+	        </h4>
+	        <h3><%= @box.barcode %></h3>
+	        <% unless @box.weight.nil? %>
+	        	<p>Weight: <%= @box.weight %></p>
+	        <% end %>
+	        <% unless @box.condition.nil? || @box.condition.empty? %>
+	        	<p>Condition: <%= @box.condition %></p>
+	        <% end %>
+	        <% unless @box.notes.nil? || @box.notes.empty? %>
+	        	<p><%= @box.notes %></p>
+	        <% end %>
+        </div>
+        </div>
+        
+	<% if current_user.admin? %>
+		<%= link_to 'Edit', edit_box_path(@box) , class: "btn btn-warning" %> |
+	<% end %>
 	<%= link_to 'Back', boxes_path %>
-
 </div>

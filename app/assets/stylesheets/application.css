@@ -10,9 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require jquery-ui/datepicker
  *= require_tree .
  *= require_self
  */
+
 
 .laureatelogo img {
   height: 40px;
@@ -46,4 +48,29 @@
 .fullwidthbutton {
   width: 100%;
   margin-top: 10px;
+}
+th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+th .asc {
+  background-image: url(/images/up_arrow.gif);
+}
+
+th .desc {
+  background-image: url(/images/down_arrow.gif);
+}
+
+.form-main-search .form-group {
+  width: 100%;
+}
+
+.form-main-search input {
+  vertical-align: top;
+}
+
+.form-main-search .btn-primary {
+  max-width: 100px;
 }

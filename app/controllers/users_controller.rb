@@ -45,10 +45,6 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  def password_reset_expired?
-    reset_sent_at < 2.hours.ago
-  end
-
   private
   	def user_params
   		params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)

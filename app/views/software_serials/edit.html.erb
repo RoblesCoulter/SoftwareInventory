@@ -1,6 +1,6 @@
-<h1>Editing software_serial</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @software_serial %> |
-<%= link_to 'Back', software_serials_path %>
+<div class="center-div">
+	<%= link_to 'Back', software_serials_path, class: "btn btn-warning" %>
+	<h1 class="text-center">Editing Software Serials</h1>
+	<%= render 'form' %>
+	<%= yield(:software_serial_validators) %>
+</div>
