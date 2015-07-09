@@ -5,15 +5,15 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: postgresql
   pool: 5
   timeout: 5000
-  username: postgres
-  password: admin
 
 development:
   <<: *default
   database: SoftwareInventoryDB
+  username: postgres
+  password: admin
+  adapter: postgresql
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,6 +24,8 @@ test:
 
 production:
   <<: *default
-  database: dcfgan3152fdog
-  username: xmygbjhcthehud
-  password: 0wYQ-hUJ1AUfB99NtujQxE8wS-
+  adapter: mysql2
+  database: SoftwareInventoryDB
+  username: root
+  password: <%= ENV["SOFTWARE_INVENTORY_DATABASE_PASSWORD"] %>
+  host: softwareinventorydb.c9z5b4hc0nsc.us-west-2.rds.amazonaws.com

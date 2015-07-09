@@ -17,14 +17,14 @@ ActiveRecord::Schema.define(version: 20150504184438) do
   enable_extension "plpgsql"
 
   create_table "boxes", force: true do |t|
-    t.string   "barcode"
+    t.string   "barcode",    limit: nil
     t.float    "weight"
     t.float    "height"
     t.float    "width"
     t.float    "depth"
     t.integer  "box_number"
-    t.string   "photo"
-    t.string   "condition"
+    t.string   "photo",      limit: nil
+    t.string   "condition",  limit: nil
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -41,24 +41,23 @@ ActiveRecord::Schema.define(version: 20150504184438) do
   add_index "boxes_movements", ["movement_id"], name: "index_boxes_movements_on_movement_id", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string   "name"
+    t.string   "name",        limit: nil
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "items", force: true do |t|
-    t.string   "barcode"
+    t.string   "barcode",       limit: nil
     t.integer  "box_id"
     t.integer  "product_id"
-    t.string   "serial_number"
-    t.string   "model_number"
+    t.string   "serial_number", limit: nil
+    t.string   "model_number",  limit: nil
     t.float    "price"
-    t.string   "location"
-    t.string   "condition"
-    t.string   "firmware"
-    t.string   "photo"
-    t.string   "brand"
+    t.string   "location",      limit: nil
+    t.string   "condition",     limit: nil
+    t.string   "firmware",      limit: nil
+    t.string   "photo",         limit: nil
     t.integer  "responsable"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -79,9 +78,9 @@ ActiveRecord::Schema.define(version: 20150504184438) do
   create_table "movements", force: true do |t|
     t.date     "shipping_date"
     t.date     "arrival_date"
-    t.string   "origin"
-    t.string   "destination"
-    t.string   "delivery_method"
+    t.string   "origin",          limit: nil
+    t.string   "destination",     limit: nil
+    t.string   "delivery_method", limit: nil
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -90,15 +89,16 @@ ActiveRecord::Schema.define(version: 20150504184438) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string   "name",        limit: nil
+    t.string   "brand",       limit: nil
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
   create_table "software_serials", force: true do |t|
-    t.string   "serial_number"
+    t.string   "serial_number",         limit: nil
     t.integer  "software_id"
-    t.string   "operative_system"
+    t.string   "operative_system",      limit: nil
     t.float    "price"
     t.integer  "software_availability"
     t.datetime "created_at"
@@ -109,21 +109,21 @@ ActiveRecord::Schema.define(version: 20150504184438) do
   add_index "software_serials", ["software_id"], name: "index_software_serials_on_software_id", using: :btree
 
   create_table "softwares", force: true do |t|
-    t.string   "name"
+    t.string   "name",        limit: nil
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
+    t.string   "name",            limit: nil
+    t.string   "email",           limit: nil
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
-    t.string   "remember_digest"
-    t.boolean  "admin",           default: false
-    t.string   "reset_digest"
+    t.string   "password_digest", limit: nil
+    t.string   "remember_digest", limit: nil
+    t.boolean  "admin",                       default: false
+    t.string   "reset_digest",    limit: nil
     t.datetime "reset_sent_at"
   end
 
