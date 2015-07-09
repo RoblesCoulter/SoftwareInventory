@@ -62,4 +62,6 @@ group :production do
 	gem 'therubyracer',  platforms: :ruby
 
 	gem 'mysql2'
+
+	gem 'figaro'
 end
