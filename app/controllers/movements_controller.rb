@@ -1,7 +1,7 @@
 class MovementsController < ApplicationController
   before_action :logged_in_user
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_movement, only: [:show, :edit, :update, :destroy]
+  before_action :set_movement, only: [:show, :edit, :update, :destroy, :movement_boxes, :add_scans, :remove_box]
   helper_method :sort_column
   # GET /movements
   # GET /movements.json
@@ -23,6 +23,30 @@ class MovementsController < ApplicationController
   def edit
   end
 
+  def movement_boxes
+    @boxes = @movement.boxes
+  end
+
+  def add_scans
+    @scans = params.require(:scanned_boxes)
+    @boxesRetreived = Box.where(barcode: @scans).order(:barcode)
+    @boxesRetreived.each do |box|
+      @scans.delete(box.barcode)
+    end
+    @movement.boxes << @boxesRetreived
+    respond_to do |format|
+      format.json { render json: [{ notfound: @scans, boxesadded: @boxesRetreived }] }
+    end
+  end
+
+  def remove_box
+    @barcode = params.require(:barcode)
+    @box = Box.where(barcode: @barcode)
+    @movement.boxes.delete(@box)
+    respond_to do |format|
+      format.json { render json: [{ confirmation: @box }]}
+    end
+  end
   # POST /movements
   # POST /movements.json
   def create

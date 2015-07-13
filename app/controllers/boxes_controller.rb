@@ -1,6 +1,6 @@
 class BoxesController < ApplicationController
   before_action :logged_in_user
-  before_action :set_box, only: [:show, :edit, :update, :destroy, :box_items, :add_scans]
+  before_action :set_box, only: [:show, :edit, :update, :destroy, :box_items, :add_scans, :remove_item]
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   helper_method :sort_column
 
@@ -29,6 +29,7 @@ class BoxesController < ApplicationController
     @items = @box.items
   end
 
+  # POST /boxes/1/add_scans
   def add_scans
     @scans = params.require(:scanned_items)
     @itemsRetreived = Item.joins(:product).where(barcode: @scans).order(:barcode)
@@ -43,7 +44,15 @@ class BoxesController < ApplicationController
         format.json { render json: [{ notfound: @scans, notinboxitems: @itemsNotInBoxes, movedfrombox: @itemsInBoxes }] }
     end
   end
-
+  # POST /boxes/1/remove_item
+  def remove_item
+    @barcode = params.require(:barcode)
+    @item = Item.where(barcode: @barcode)
+    @box.items.delete(@item)
+    respond_to do |format|
+      format.json { render json: [{ confirmation: @item }]}
+    end
+  end
   # POST /boxes
   # POST /boxes.json
   def create

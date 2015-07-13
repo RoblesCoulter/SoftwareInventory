@@ -11,9 +11,18 @@ Rails.application.routes.draw do
     member do
       get 'box_items'
       post 'add_scans'
+      post 'remove_item'
     end
   end
-  resources :software_serials, :softwares, :movements, :categories, :products, :items, :users
+
+  resources :movements do
+    member do
+      get 'movement_boxes'
+      post 'add_scans'
+      post 'remove_box' 
+    end
+  end
+  resources :software_serials, :softwares, :categories, :products, :items, :users
   resources :password_resets, only: [:new, :create, :edit, :update]
   # get 'boxes/add_item/:id', to: 'boxes#add_item', as: 'add_item'
 end

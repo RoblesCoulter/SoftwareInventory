@@ -1,0 +1,29 @@
+<% content_for :extra_js do %>
+	<%= javascript_include_tag "barcode_boxes" %>
+<% end %>
+<h1 class="text-center">Movement from  <%= @movement.origin %> to <%= @movement.destination %> via <%= @movement.delivery_method %></h1>
+<div class="center-div movement-info" data-id="<%= @movement.id %>">
+	<h3 class="text-center info-title">Scan boxes to add to this Box</h3>
+	<ul class="list-group main-list">
+	<% if @boxes.any? %>
+		<% @boxes.each do |box| %>
+			<li class="list-group-item list-group-item-info" data-barcode="<%= box.barcode %>"> Box #<%= box.box_number %> (<%= box.barcode %>)<button type="button" class="close remove-item-box" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></li>
+		<% end %>	
+	<% end %>
+	</ul>
+
+	<h3 class="text-center hidden not-found-title">The following scans were not found:</h3>
+	<ul class="list-group not-found-list">
+		
+	</ul>
+
+	<h3 class="hidden scan-title text-center">Scanned Boxes</h2>
+	<ul class="list-group scanned-boxes">
+		
+	</ul>
+	<button class="hidden loading btn fullwidthbutton btn-info"><span class="fa fa-spinner fa-spin"></span> Loading...</button>
+	<a class="hidden add-scan-btn btn btn-primary fullwidthbutton"><span class="fa fa-plus"></span> Add Scanned Boxes</a>
+	<%= link_to boxes_path, class: "btn btn-warning fullwidthbutton" do %>
+		<span class="fa fa-mail-reply"></span> Back 
+	<% end %>
+</div>

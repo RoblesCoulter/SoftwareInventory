@@ -27,6 +27,7 @@
           <td><%= movement.delivery_method %></td>
           <td><%= link_to 'Show', movement %>
           <% if current_user.admin? %>
+            | <%= link_to "Boxes", movement_boxes_movement_path(movement) %>
             | <%= link_to 'Edit', edit_movement_path(movement) %>
             | <%= link_to 'Delete', movement, method: :delete %>
           <% end %>

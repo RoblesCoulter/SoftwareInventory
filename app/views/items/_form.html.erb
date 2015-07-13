@@ -1,7 +1,7 @@
 <%= form_for @item, html: { class: "form-horizontal"}, validate: :item_validators do |f| %>
   <div class="form-group">
     <label class="control-label">Barcode</label>
-    <%= f.text_field :barcode, class: 'form-control' %>
+    <%= f.text_field :barcode, class: 'form-control barcode-input' %>
   </div>
   <div class="form-group">
     <label class="control-label">Product</label>
