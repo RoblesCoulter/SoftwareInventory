@@ -2,7 +2,7 @@
 
     <div class="form-group">
       <label class="control-label">Barcode</label>
-      <%= f.text_field :barcode, class: 'form-control' %>
+      <%= f.text_field :barcode, class: 'form-control barcode-input' %>
     </div>
     <div class="form-group">
       <label class="control-label">Box #</label>
@@ -43,7 +43,7 @@
       <%= f.text_area :notes, class: 'form-control' %>
     </div>
 
-    <%= f.submit class: "btn btn-success" %>
+    <%= f.submit class: "btn btn-success fullwidthbutton" %>
     <%= link_to 'Back', boxes_path, class: "btn btn-warning fullwidthbutton" %>
 
 <% end %>

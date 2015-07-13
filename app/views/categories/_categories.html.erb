@@ -19,7 +19,7 @@
           <td><%= category.description %></td>
           <td><%= local_time_ago(category.created_at) %></td>
           <td><%= local_time_ago(category.updated_at) %></td>
-          <td><%= link_to 'Show', category %> |
+          <td>
           <% if current_user.admin? %>
             <%= link_to 'Edit', edit_category_path(category) %> |
             <%= link_to 'Delete', category, method: :delete %>

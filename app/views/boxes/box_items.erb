@@ -1,13 +1,13 @@
 <% content_for :extra_js do %>
-	<%= javascript_include_tag "barcode" %>
+	<%= javascript_include_tag "barcode_items" %>
 <% end %>
 <h1 class="text-center">Box #<%= @box.box_number %> (<%= @box.barcode %>)</h1>
-<div class="center-div box-info" data-id="<%= @box.id %>">
+<div class="center-div box-info" data-box-number="<%= @box.box_number %>" data-id="<%= @box.id %>">
 	<h3 class="text-center info-title">Scan items to add to this Box</h3>
 	<ul class="list-group main-list">
 	<% if @items.any? %>
 		<% @items.each do |item| %>
-			<li class="list-group-item list-group-item-info" data-barcode="<%= item.barcode %>"><h4 class='list-group-item-heading'><%= item.product.name %> (<%= item.barcode %>)<button type="button" class="close remove-item-box" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></h4></li>
+			<li class="list-group-item list-group-item-info" data-barcode="<%= item.barcode %>"><%= item.product.name %> (<%= item.barcode %>)<button type="button" class="close remove-item-box" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></li>
 		<% end %>	
 	<% end %>
 	</ul>
