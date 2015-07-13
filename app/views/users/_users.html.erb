@@ -1,0 +1,31 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort]%>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sortable "name" %></th>
+        <th><%= sortable "email" %></th>
+        <th><%= sortable "admin" %></th>
+        <th>Options</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.admin %></td>
+          <td><%= link_to 'Show', user %> |
+          <% if current_user.admin? %>
+            <%= link_to 'Edit', edit_user_path(user) %> |
+            <%= link_to 'Delete', user, method: :delete %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

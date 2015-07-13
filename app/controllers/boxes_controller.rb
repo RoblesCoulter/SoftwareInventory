@@ -1,7 +1,7 @@
 class BoxesController < ApplicationController
   before_action :logged_in_user
-  before_action :set_box, only: [:show, :edit, :update, :destroy, :box_items, :add_scans]
-  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_box, only: [:show, :edit, :update, :destroy, :box_items, :add_scans, :remove_photo]
+  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy, :remove_photo]
   helper_method :sort_column
 
   # GET /boxes
@@ -129,6 +129,20 @@ class BoxesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to boxes_url, notice: 'Box was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def remove_photo
+    if @box.photo
+      client = kaltura_setup
+      delete_entry(@box.photo, client)
+      @box.photo = nil
+      @box.save
+    end
+
+    respond_to do |format|
+      format.html { render :edit, notice: 'Photo was successfully removed.' }
+      format.json { render :edit, status: :ok, location: @box }
     end
   end
 

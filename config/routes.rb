@@ -13,6 +13,10 @@ Rails.application.routes.draw do
       post 'add_scans'
     end
   end
+
+  get 'items/:id/remove_photo', to: 'items#remove_photo', as: 'remove_photo_item'
+  get 'boxes/:id/remove_photo', to: 'boxes#remove_photo', as: 'remove_photo_box'
+
   resources :software_serials, :softwares, :movements, :categories, :products, :items, :users
   resources :password_resets, only: [:new, :create, :edit, :update]
   # get 'boxes/add_item/:id', to: 'boxes#add_item', as: 'add_item'

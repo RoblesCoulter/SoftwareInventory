@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :logged_in_user
-  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy, :remove_photo]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :remove_photo]
   helper_method :sort_column
   # GET /items
   # GET /items.json
@@ -117,6 +117,20 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def remove_photo
+    if @item.photo
+      client = kaltura_setup
+      delete_entry(@item.photo, client)
+      @item.photo = nil
+      @item.save
+    end
+
+    respond_to do |format|
+      format.html { render :edit, notice: 'Photo was successfully removed.' }
+      format.json { render :edit, status: :ok, location: @item }
     end
   end
 

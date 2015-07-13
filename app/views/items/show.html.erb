@@ -1,53 +1,73 @@
+<div class="center-div">
+	<div class="thumbnail">
+		<%= image_for @item %>
+        <div class="caption-full">
+	        <h3><%= @item.barcode %></h3>
 
-<p>
-	<strong>Product name:</strong>
-	<%= @item.product.name %>
-</p>
-<p>
-	<strong>Barcode:</strong>
-	<%= @item.barcode %>
-</p>
-<p>
-	<strong>Serial Number:</strong>
-	<%= @item.serial_number%>
-</p>
-<p>
-	<strong>Model Number:</strong>
-	<%= @item.model_number %>
-</p>
-<p>
-	<strong>Price:</strong>
-	<%= @item.price %>
-</p>
-<p>
-	<strong>Location:</strong>
-	<%= @item.location %>
-</p>
-<p>
-	<strong>Condition:</strong>
-	<%= @item.condition %>
-</p>
-<p>
-	<strong>Firmware:</strong>
-	<%= @item.firmware%>
-</p>
-<p>
-	<strong>Photo:</strong>
-	<%= image_for @item %>
-</p>
-<p>
-	<strong>Responsable:</strong>
-	<%= @item.responsable %>
-</p>
-<p>
-	<strong>Box:</strong>
-	<% unless @item.box.nil? %>
-			<%= @item.box.barcode %>
-		<% end %>
-	
-</p>
+	        <h4><% unless @item.box.nil? %>
+				Box #<%= @item.box.box_number %> (<%= @item.box.barcode %>)
+			<% end %></h4>
 
-<% if current_user.admin? %>
-	<%= link_to 'Edit', edit_item_path(@item) %> |
-<% end %>
-<%= link_to 'Back', items_path %>
+	        <% unless @item.product.name.nil? %>
+		        <p>
+					<strong>Product:</strong>
+					<%= @item.product.name %>
+				</p>
+			<% end %>
+
+			<% unless @item.serial_number.nil? || @item.serial_number.empty? %>
+				<p>
+					<strong>Serial Number:</strong>
+					<%= @item.serial_number%>
+				</p>
+			<% end %>
+
+			<% unless @item.model_number.nil? || @item.model_number.empty? %>
+				<p>
+					<strong>Model Number:</strong>
+					<%= @item.model_number %>
+				</p>
+			<% end %>
+
+			<% unless @item.price.nil? || @item.price.empty? %>
+				<p>
+					<strong>Price:</strong>
+					<%= @item.price %>
+				</p>
+			<% end %>
+
+			<% unless @item.location.nil? || @item.location.empty? %>
+				<p>
+					<strong>Location:</strong>
+					<%= @item.location %>
+				</p>
+			<% end %>
+
+			<% unless @item.condition.nil? || @item.condition.empty? %>
+				<p>
+					<strong>Condition:</strong>
+					<%= @item.condition %>
+				</p>
+			<% end %>
+
+			<% unless @item.firmware.nil? || @item.firmware.empty? %>
+				<p>
+					<strong>Firmware:</strong>
+					<%= @item.firmware%>
+				</p>
+			<% end %>
+
+			<% unless @item.responsable.nil? || @item.responsable.empty? %>
+				<p>
+					<strong>Responsable:</strong>
+					<%= @item.responsable %>
+				</p>
+			<% end %>
+        </div>
+    </div>
+
+	<% if current_user.admin? %>
+		<%= link_to 'Edit', edit_item_path(@item) , class: "btn btn-warning" %> |
+	<% end %>
+	<%= link_to 'Back', items_path %>
+</div>

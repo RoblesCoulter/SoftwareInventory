@@ -40,6 +40,11 @@
   <div class="form-group">
     <label class="control-label">Picture (optional)</label><br>
     <label><%= image_for @item %></label>
+
+    <% if current_user.admin? and @item.photo %>
+      <%= link_to 'Remove Photo', remove_photo_item_path(@item) %>
+    <% end %>
+
     <%= f.file_field :photo, class: 'form-control', accept: 'image/png,image/gif,image/jpeg' %>
   </div>
   <%= f.submit class: "btn btn-success" %>
