@@ -61,7 +61,7 @@ $(function(){
         if(barcode){
             $.ajax({
                 type: "POST",
-                url: "/moveemnts/"+movement_id+"/remove_box",
+                url: "/movements/"+movement_id+"/remove_box",
                 data: JSON.stringify({"barcode" : barcode}),
                 dataType: "json",
                 contentType: "application/json"
@@ -101,7 +101,7 @@ $(function(){
                     omaig.add($(this).data("barcode"));
                 });
                 if(AddedBoxes.length > 0){
-                    $(".info-title").text("Items have been added to Box #"+ box_id);
+                    $(".info-title").text("Boxes have been added to the movement");
                 }
                 if(notFoundBoxes.length > 0){
                     $(".not-found-title").removeClass("hidden");

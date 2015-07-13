@@ -7,7 +7,7 @@
 	<ul class="list-group main-list">
 	<% if @boxes.any? %>
 		<% @boxes.each do |box| %>
-			<li class="list-group-item list-group-item-info" data-barcode="<%= box.barcode %>"> Box #<%= box.box_number %> (<%= box.barcode %>)<button type="button" class="close remove-item-box" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></li>
+			<li class="list-group-item list-group-item-info" data-barcode="<%= box.barcode %>"> Box #<%= box.box_number %> (<%= box.barcode %>)<button type="button" class="close remove-box-movement" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></li>
 		<% end %>	
 	<% end %>
 	</ul>
