@@ -1,29 +1,5 @@
-<% provide(:title, 'Create user') %>
-<h1>Create user</h1>
-
-<div class='row'>
-	<div class='col-md-6 col-md-offset-3'>
-		<%= form_for(@user) do |f| %>
-			<%= render 'shared/error_messages' %>
-
-			<%= f.label :name %>
-			<%= f.text_field :name, class: 'form_control' %>
-
-			<%= f.label :email %>
-			<%= f.email_field :email, class: 'form_control' %>
-
-			<%= f.label :password %>
-			<%= f.password_field :password, class: 'form_control' %>
-
-			<%= f.label :password_confirmation, "Confirmation" %>
-			<%= f.password_field :password_confirmation, class: 'form_control' %>
-
-			<%= f.label :is_admin, class: "checkbox inline" do %>
-				<%= f.check_box :admin %>
-				<span>Is admin?</span>
-			<% end %>
-
-			<%= f.submit "Create account", class: "btn btn-primary" %>
-		<% end %>
-	</div>
+<div class="center-div">
+	<%= link_to 'Back', users_path, class: "btn btn-warning" %>
+	<h1 class="text-center">New User</h1>
+	<%= render 'form' %>
 </div>
