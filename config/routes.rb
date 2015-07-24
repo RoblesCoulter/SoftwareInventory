@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :movements do
     member do
       get 'movement_boxes'
+      get 'return'
       post 'add_scans'
       post 'remove_box' 
     end

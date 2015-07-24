@@ -30,6 +30,9 @@
             | <%= link_to "Boxes", movement_boxes_movement_path(movement) %>
             | <%= link_to 'Edit', edit_movement_path(movement) %>
             | <%= link_to 'Delete', movement, method: :delete %>
+            <% unless movement.is_return %>
+            | <%= link_to 'Generate Return', return_movement_path(movement) %>
+            <% end %>
           <% end %>
           </td>
         </tr>

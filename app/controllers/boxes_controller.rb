@@ -34,14 +34,18 @@ class BoxesController < ApplicationController
     @scans = params.require(:scanned_items)
     @itemsRetreived = Item.joins(:product).where(barcode: @scans).order(:barcode)
     @itemsNotInBoxes = @itemsRetreived.select(:barcode, :name).where(box_id: nil)
-    @itemsInBoxes = @itemsRetreived.select(:box_number, :barcode, :name).joins(:box).where.not(box_id: nil)
+    @itemsInBoxes = @itemsRetreived.select(:id, :box_id, :box_number, :barcode, :name).joins(:box).where.not(box_id: nil)
+    @oldItemsBoxes = {}
+    @itemsInBoxes.each do |item|
+      @oldItemsBoxes[item.id] = item.box.box_number
+    end
     @itemsRetreived.each do |item|
       item.box = @box
       item.save
       @scans.delete(item.barcode)
     end
     respond_to do |format|
-        format.json { render json: [{ notfound: @scans, notinboxitems: @itemsNotInBoxes, movedfrombox: @itemsInBoxes }] }
+        format.json { render json: [{ notfound: @scans, notinboxitems: @itemsNotInBoxes, movedfrombox: @itemsInBoxes, oldboxesid: @oldItemsBoxes }] }
     end
   end
   # POST /boxes/1/remove_item

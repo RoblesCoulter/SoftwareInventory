@@ -1,4 +1,6 @@
 <%= form_for @movement, html: { class: "form-horizontal"}, validate: :movement_validators do |f| %>
+  <%= f.hidden_field :is_return %>
+  <%= f.hidden_field :return_id %>
   <div class="form-group">
     <label class="control-label">Shipping Date</label>
     <%= f.text_field :shipping_date, class: 'form-control' %>

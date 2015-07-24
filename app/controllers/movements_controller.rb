@@ -1,6 +1,6 @@
 class MovementsController < ApplicationController
   before_action :logged_in_user
-  before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :admin_user, only: [:return,:new, :create, :edit, :update, :destroy]
   before_action :set_movement, only: [:show, :edit, :update, :destroy, :movement_boxes, :add_scans, :remove_box]
   helper_method :sort_column
   # GET /movements
@@ -25,6 +25,16 @@ class MovementsController < ApplicationController
 
   def movement_boxes
     @boxes = @movement.boxes
+  end
+
+  def return
+    @sent_movement = Movement.find(params[:id])
+    @movement = Movement.new
+    @movement.is_return = true
+    @movement.origin = @sent_movement.destination
+    @movement.destination = @sent_movement.origin
+    @movement.sent_movement = @sent_movement
+    render :new
   end
 
   def add_scans
@@ -54,8 +64,13 @@ class MovementsController < ApplicationController
 
     respond_to do |format|
       if @movement.save
-        format.html { redirect_to @movement, notice: 'Movement was successfully created.' }
-        format.json { render :show, status: :created, location: @movement }
+        if @movement.is_return
+          format.html { redirect_to movement_boxes_movement_url(@movement)}
+          format.json { render :movement_boxes, status: :created, location: @movement }
+        else
+          format.html { redirect_to @movement, notice: 'Movement was successfully created.' }
+          format.json { render :show, status: :created, location: @movement }
+        end
       else
         format.html { render :new }
         format.json { render json: @movement.errors, status: :unprocessable_entity }
@@ -103,7 +118,7 @@ class MovementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movement_params
-      params.require(:movement).permit(:shipping_date, :arrival_date, :origin, :destination, :delivery_method)
+      params.require(:movement).permit(:is_return, :return_id, :shipping_date, :arrival_date, :origin, :destination, :delivery_method)
     end
 
     def logged_in_user

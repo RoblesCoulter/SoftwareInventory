@@ -19,7 +19,6 @@
 	<strong>Delivery Method:</strong>
 	<%= @movement.delivery_method %>
 </div>
-
 <% if current_user.admin? %>
 	<%= link_to 'Edit', edit_movement_path(@movement) %> |
 <% end %>
