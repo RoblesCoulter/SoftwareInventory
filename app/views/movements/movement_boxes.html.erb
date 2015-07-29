@@ -3,7 +3,7 @@
 <% end %>
 <h1 class="text-center">Movement from  <%= @movement.origin %> to <%= @movement.destination %> via <%= @movement.delivery_method %></h1>
 <div class="center-div movement-info" data-id="<%= @movement.id %>">
-	<h3 class="text-center info-title">Scan boxes to add to this Box</h3>
+	<h3 class="text-center info-title">Scan boxes to add to this Movement</h3>
 	<ul class="list-group main-list">
 	<% if @boxes.any? %>
 		<% @boxes.each do |box| %>

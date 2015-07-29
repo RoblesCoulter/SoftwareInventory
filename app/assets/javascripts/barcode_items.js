@@ -95,7 +95,10 @@ $(function(){
 				var notFoundItems = data.notfound;
 				var movedFromBoxItems = data.movedfrombox;
 				var oldboxesid = data.oldboxesid;
+				console.log(notInBoxItems);
+
 				notInBoxItems.forEach(function(v){
+					
 					$(".main-list").append("<li class='list-group-item list-group-item-success' data-barcode='"+v.barcode+"'><h4 class='list-group-item-heading'>" + v.name + " ("+ v.barcode + ")</h4><p class='list-group-item-text'>Succesfully added to Box #"+box_number+"</p></li>");
 				});
 				movedFromBoxItems.forEach(function(v){

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721150159) do
+ActiveRecord::Schema.define(version: 20150728180651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,12 @@ ActiveRecord::Schema.define(version: 20150721150159) do
 
   add_index "items_software_serials", ["item_id"], name: "index_items_software_serials_on_item_id", using: :btree
   add_index "items_software_serials", ["software_serial_id"], name: "index_items_software_serials_on_software_serial_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "movements", force: :cascade do |t|
     t.date     "shipping_date"
