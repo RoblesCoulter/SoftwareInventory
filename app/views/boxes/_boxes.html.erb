@@ -6,6 +6,7 @@
       <tr>
         <th><%= sortable "barcode" %></th>
         <th><%= sortable "box_number", "Box #" %></th>
+        <th><%= sortable "location_id", "Location" %></th>
         <th><%= sortable "weight" %></th>
         <th><%= sortable "height" %></th>
         <th><%= sortable "width" %></th>
@@ -21,6 +22,9 @@
         <tr>
           <td><%= box.barcode %></td>
           <td><%= box.box_number %></td>
+          <td><% unless box.location.nil?%>
+            <%= box.location.name_with_country %>
+            <% end %></td>
           <td><%= box.weight %></td>
           <td><%= box.height %></td>
           <td><%= box.width %></td>

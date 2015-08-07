@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       post 'remove_box' 
     end
   end
-  resources :software_serials, :softwares, :categories, :products, :items, :users
+  resources :software_serials, :softwares, :categories, :products, :items, :users, :locations
   resources :password_resets, only: [:new, :create, :edit, :update]
   # get 'boxes/add_item/:id', to: 'boxes#add_item', as: 'add_item'
 end

@@ -9,6 +9,10 @@
       <%= f.text_field :box_number, class: 'form-control' %>
     </div>
     <div class="form-group">
+    <label class="control-label">Location</label>
+      <%= collection_select(:box, :location_id, Location.all, :id, :name, { prompt: "Please select a Location" }, { class: 'form-control'}) %>
+    </div>
+    <div class="form-group">
       <label class="control-label">Weight (lb)</label>
       <%= f.text_field :weight, class: 'form-control' %>
     </div>

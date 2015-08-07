@@ -8,56 +8,57 @@
 				Box #<%= @item.box.box_number %> (<%= @item.box.barcode %>)
 			<% end %></h4>
 
-	        <% unless @item.product.name.nil? %>
+	        <% unless @item.product.nil? %>
 		        <p>
 					<strong>Product:</strong>
-					<%= @item.product.name %>
+					<%= @item.product.name_with_brand %>
+				</p>
+			<% end %>
+			<% unless @item.location.nil?  %>
+				<p>
+					<strong>Location:</strong>
+					<%= @item.location.name_with_country %>
 				</p>
 			<% end %>
 
-			<% unless @item.serial_number.nil? || @item.serial_number.empty? %>
+
+			<% unless @item.serial_number.nil? %>
 				<p>
 					<strong>Serial Number:</strong>
 					<%= @item.serial_number%>
 				</p>
 			<% end %>
 
-			<% unless @item.model_number.nil? || @item.model_number.empty? %>
+			<% unless @item.model_number.nil? %>
 				<p>
 					<strong>Model Number:</strong>
 					<%= @item.model_number %>
 				</p>
 			<% end %>
 
-			<% unless @item.price.nil? || @item.price.empty? %>
+			<% unless @item.price.nil? %>
 				<p>
 					<strong>Price:</strong>
 					<%= @item.price %>
 				</p>
 			<% end %>
 
-			<% unless @item.location.nil? || @item.location.empty? %>
-				<p>
-					<strong>Location:</strong>
-					<%= @item.location %>
-				</p>
-			<% end %>
 
-			<% unless @item.condition.nil? || @item.condition.empty? %>
+			<% unless @item.condition.nil?  %>
 				<p>
 					<strong>Condition:</strong>
 					<%= @item.condition %>
 				</p>
 			<% end %>
 
-			<% unless @item.firmware.nil? || @item.firmware.empty? %>
+			<% unless @item.firmware.nil?%>
 				<p>
 					<strong>Firmware:</strong>
 					<%= @item.firmware%>
 				</p>
 			<% end %>
 
-			<% unless @item.responsable.nil? || @item.responsable.empty? %>
+			<% unless @item.responsable.nil? %>
 				<p>
 					<strong>Responsable:</strong>
 					<%= @item.responsable %>

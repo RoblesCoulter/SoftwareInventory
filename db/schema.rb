@@ -11,26 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728180651) do
+ActiveRecord::Schema.define(version: 20150803174959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "boxes", force: :cascade do |t|
-    t.string   "barcode",    limit: 255
+    t.string   "barcode",     limit: 255
     t.float    "weight"
     t.float    "height"
     t.float    "width"
     t.float    "depth"
     t.integer  "box_number"
-    t.string   "photo",      limit: 255
-    t.string   "condition",  limit: 255
+    t.string   "photo",       limit: 255
+    t.string   "condition",   limit: 255
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "location_id"
   end
 
   add_index "boxes", ["barcode"], name: "index_boxes_on_barcode", unique: true, using: :btree
+  add_index "boxes", ["location_id"], name: "index_boxes_on_location_id", using: :btree
 
   create_table "boxes_movements", id: false, force: :cascade do |t|
     t.integer "box_id"
@@ -54,17 +56,18 @@ ActiveRecord::Schema.define(version: 20150728180651) do
     t.string   "serial_number", limit: 255
     t.string   "model_number",  limit: 255
     t.float    "price"
-    t.string   "location",      limit: 255
     t.string   "condition",     limit: 255
     t.string   "firmware",      limit: 255
     t.string   "photo",         limit: 255
     t.integer  "responsable"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "location_id"
   end
 
   add_index "items", ["barcode"], name: "index_items_on_barcode", unique: true, using: :btree
   add_index "items", ["box_id"], name: "index_items_on_box_id", using: :btree
+  add_index "items", ["location_id"], name: "index_items_on_location_id", using: :btree
   add_index "items", ["product_id"], name: "index_items_on_product_id", using: :btree
 
   create_table "items_software_serials", id: false, force: :cascade do |t|
@@ -76,22 +79,26 @@ ActiveRecord::Schema.define(version: 20150728180651) do
   add_index "items_software_serials", ["software_serial_id"], name: "index_items_software_serials_on_software_serial_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
-    t.string   "text"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "country"
   end
 
   create_table "movements", force: :cascade do |t|
     t.date     "shipping_date"
     t.date     "arrival_date"
-    t.string   "origin",          limit: 255
-    t.string   "destination",     limit: 255
     t.string   "delivery_method", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_return",                   default: false
     t.integer  "return_id"
+    t.integer  "origin_id"
+    t.integer  "destination_id"
   end
+
+  add_index "movements", ["destination_id"], name: "index_movements_on_destination_id", using: :btree
+  add_index "movements", ["origin_id"], name: "index_movements_on_origin_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.integer  "category_id"
@@ -137,4 +144,6 @@ ActiveRecord::Schema.define(version: 20150728180651) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "boxes", "locations"
+  add_foreign_key "items", "locations"
 end

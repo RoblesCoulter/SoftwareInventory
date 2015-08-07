@@ -4,9 +4,15 @@ class Box < ActiveRecord::Base
 	validates :barcode, :box_number , presence: true
 	validates :weight, :height, :width, :depth, numericality: { allow_blank: true}
 	validates :box_number, numericality: { only_integer: true }
-	validates_uniqueness_of :box_number, :barcode
+	validates_uniqueness_of :box_number, case_sensitive: false
+	validates_uniqueness_of :barcode, case_sensitive: false
+	belongs_to :location
 
 	def self.search(search)
 		search ? where("UPPER(barcode) LIKE UPPER(?)", "%#{search}%") : all
+	end
+
+	def box_number_with_barcode
+		"##{box_number} (#{barcode})"
 	end
 end

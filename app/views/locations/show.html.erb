@@ -1,0 +1,14 @@
+<div class="center-div">
+<div>
+	<strong>Name:</strong>
+	<%= @location.name %>
+</div>
+<div>
+	<strong>Country:</strong>
+	<%= @location.country %>
+</div>
+<% if current_user.admin? %>
+	<%= link_to 'Edit', edit_location_path(@location) %> |
+<% end %>
+<%= link_to 'Back', locations_path %>
+</div>

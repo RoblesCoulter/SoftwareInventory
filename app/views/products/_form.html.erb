@@ -11,6 +11,6 @@
     <label class="control-label">Category</label>
     <%= collection_select(:product, :category_id, Category.all, :id, :name, { prompt: "Please select a Category" }, { class: 'form-control'}) %>
   </div>
-  <%= f.submit class: "btn btn-success" %>
+  <%= f.submit class: "btn btn-success fullwidthbutton" %>
   <%= link_to "Back", products_path, class: "btn btn-warning fullwidthbutton" %>
 <% end %>

@@ -11,6 +11,8 @@ class ItemsController < ApplicationController
       @items = Item.includes(:box).search(params[:search]).order("boxes.box_number" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
     elsif sc.eql? "product_id"
       @items = Item.includes(:product).search(params[:search]).order("products.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])  
+    elsif sc.eql? "location_id"
+        @items = Item.includes(:location).search(params[:search]).order("locations.country" + " " + sort_direction).paginate(per_page: 10, page: params[:page])
     else
       @items = Item.search(params[:search]).order(sc + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
     end
@@ -149,7 +151,7 @@ class ItemsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:barcode, :box_id, :product_id, :serial_number, :model_number, :price, :location, :condition, :firmware, :photo, :responsable)
+      params.require(:item).permit(:barcode,:location_id ,:box_id, :product_id, :serial_number, :model_number, :price, :condition, :firmware, :photo, :responsable)
     end
 
     def logged_in_user

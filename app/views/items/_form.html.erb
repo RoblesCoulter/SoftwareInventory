@@ -5,40 +5,39 @@
   </div>
   <div class="form-group">
     <label class="control-label">Product</label>
-    <%= collection_select(:item, :product_id, Product.all, :id, :name, { prompt: "Please select a Product"},{ class: 'form-control'} ) %>
+    <%= collection_select(:item, :product_id, Product.order(name: :asc), :id, :name_with_brand, { prompt: "Please select a Product"},{ class: 'form-control'} ) %>
   </div>
   <div class="form-group">
-    <label class="control-label">Box (optional)</label>
-    <%= collection_select(:item, :box_id, Box.all, :id, :box_number, { prompt: "Please select a Box" }, { class: 'form-control'}) %>
-
+    <label class="control-label">Box</label>
+    <%= collection_select(:item, :box_id, Box.order(box_number: :asc), :id, :box_number_with_barcode, { prompt: "Please select a Box" }, { class: 'form-control'}) %>
   </div>
   <div class="form-group">
-    <label class="control-label">Serial Number (optional)</label>
+    <label class="control-label">Location</label>
+    <%= collection_select(:item, :location_id, Location.order(country: :asc), :id, :name_with_country, { prompt: "Please select a Location" }, { class: 'form-control'}) %>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Serial Number</label>
     <%= f.text_field :serial_number, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <label class="control-label">Model Number (optional)</label>
+    <label class="control-label">Model Number</label>
     <%= f.text_field :model_number, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <label class="control-label">Price $ (optional) </label>
+    <label class="control-label">Price $ </label>
     <%= f.text_field :price, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <label class="control-label">Location (optional)</label>
-    <%= f.text_field :location, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <label class="control-label">Condition (optional)</label>
+    <label class="control-label">Condition</label>
     <%= f.text_field :condition, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <label class="control-label">Firmware (optional)</label>
+    <label class="control-label">Firmware</label>
     <%= f.text_field :firmware, class: 'form-control' %>
   </div>
   
   <div class="form-group">
-    <label class="control-label">Picture (optional)</label><br>
+    <label class="control-label">Picture</label><br>
     <label><%= image_for @item %></label>
 
     <% if current_user.admin? and @item.photo %>

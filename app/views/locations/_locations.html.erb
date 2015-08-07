@@ -1,0 +1,27 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort]%>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sortable "name" %></th>
+        <th><%= sortable "country"%></th>
+        <th>Options</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @locations.each do |location| %>
+        <tr>
+          <td><%= location.name %></td>
+          <td><%= location.country %></td>
+          <td><% if current_user.admin? %>
+            <%= link_to 'Edit', edit_location_path(location) %>
+            | <%= link_to 'Delete', location, method: :delete %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,5 +1,17 @@
-<h1 class="text-center">Softwares</h1>
-<%= render 'softwares' %>
+<h1 class="text-center">Software</h1>
+<%= form_tag softwares_path, method: 'get', class: "form-inline form-main-search", id: "ajax_search" do %>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search], class: "form-control" %>
+      <%= submit_tag "Name Search", :name => nil, class: "btn btn-primary" %>
+    </div>
+ 
+  <div id="ajax_objects" ><%= render 'softwares' %></div>
+<% end %>
+
+<br>
+
 <% if current_user.admin? %>
   <%= link_to 'Add Software', new_software_path, class: "btn btn-success" %>
 <% end %>
+
+

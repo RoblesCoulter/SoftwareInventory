@@ -6,7 +6,14 @@ class MovementsController < ApplicationController
   # GET /movements
   # GET /movements.json
   def index
-    @movements = Movement.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+    sc = sort_column
+    if sc.eql? "origin_id"
+      @movements = Movement.includes(:location).search(params[:search]).order("locations.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+    elsif sc.eql? "destination_id"
+      @movements = Movement.includes(:location).search(params[:search]).order("locations.name"+ " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+    else
+     @movements = Movement.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+    end
   end
 
   # GET /movements/1
@@ -118,7 +125,7 @@ class MovementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movement_params
-      params.require(:movement).permit(:is_return, :return_id, :shipping_date, :arrival_date, :origin, :destination, :delivery_method)
+      params.require(:movement).permit(:is_return,:origin_id, :destination_id, :return_id, :shipping_date, :arrival_date, :delivery_method)
     end
 
     def logged_in_user
