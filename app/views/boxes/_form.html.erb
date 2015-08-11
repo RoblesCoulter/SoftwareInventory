@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
     <label class="control-label">Location</label>
-      <%= collection_select(:box, :location_id, Location.all, :id, :name, { prompt: "Please select a Location" }, { class: 'form-control'}) %>
+      <%= collection_select(:box, :location_id, Location.order(country: :asc), :id, :name_with_country, { prompt: "Please select a Location" }, { class: 'form-control'}) %>
     </div>
     <div class="form-group">
       <label class="control-label">Weight (lb)</label>

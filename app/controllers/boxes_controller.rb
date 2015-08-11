@@ -9,7 +9,7 @@ class BoxesController < ApplicationController
   def index
     sc = sort_column
     if sc.eql? "location_id"
-      @boxes = Box.includes(:location).search(params[:search]).order("locations.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+      @boxes = Box.includes(:location).search(params[:search]).order("locations.country" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
     else
       @boxes = Box.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
     end
