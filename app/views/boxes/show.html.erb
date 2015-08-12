@@ -21,9 +21,10 @@
 	        <% end %>
         </div>
 	</div>
-        
+    <%= link_to "Go to Items", box_items_box_path(@box), class: "btn btn-info fullwidthbutton" %> 
+
 	<% if current_user.admin? %>
-		<%= link_to 'Edit', edit_box_path(@box) , class: "btn btn-warning" %> |
+		<%= link_to 'Edit', edit_box_path(@box) , class: "btn btn-warning fullwidthbutton" %> 
 	<% end %>
-	<%= link_to 'Back', boxes_path %>
+	<%= link_to 'Back', boxes_path, class: "btn btn-default fullwidthbutton" %>
 </div>
