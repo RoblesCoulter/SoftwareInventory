@@ -2,19 +2,22 @@
 <div class="center-div">
 	<div class="thumbnail">
 		<%= box_image_for @box %>
+		</br>
         <div class="caption-full">
 	        <% unless @box.height.nil? && @box.width.nil? && @box.depth.nil? %>
 	        	<h4 class="pull-right"><%= @box.height %> x <%= @box.width %> x <%= @box.depth %></h4>
 	        <% end %>	
-	        
+	        <% unless @box.location.nil? %>
+	        	<p><b>Location:</b> <%= @box.location.name_with_country %></p>
+	        <% end %>
 	        <% unless @box.weight.nil? %>
-	        	<p>Weight: <%= @box.weight %></p>
+	        	<p><b>Weight:</b> <%= @box.weight %> lbs</p>
 	        <% end %>
 	        <% unless @box.condition.nil? || @box.condition.empty? %>
-	        	<p>Condition: <%= @box.condition %></p>
+	        	<p><b>Condition:</b> <%= @box.condition %></p>
 	        <% end %>
 	        <% unless @box.notes.nil? || @box.notes.empty? %>
-	        	<p><%= @box.notes %></p>
+	        	<p><b>Additional Notes:</b> <%= @box.notes %></p>
 	        <% end %>
         </div>
 	</div>

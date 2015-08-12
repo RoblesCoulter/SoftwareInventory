@@ -1,11 +1,12 @@
 <div class="center-div">
 <div>
 	<strong>Destination:</strong>
-	<%= @movement.destination %>
+	<%= @movement.destination.present? ? @movement.destination.name_with_country : "" %>
 </div>
 <div>
 	<strong>Origin:</strong>
-	<%= @movement.origin %>
+
+	<%= @movement.origin.present? ? @movement.origin.name_with_country : "" %>
 </div>
 <div>
 	<strong>Shipping Date:</strong>

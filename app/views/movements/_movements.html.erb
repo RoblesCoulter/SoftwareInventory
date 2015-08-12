@@ -6,8 +6,8 @@
       <tr>
         <th><%= sortable "shipping_date" %></th>
         <th><%= sortable "arrival_date" %></th>
-        <th><%= sortable "origin" %></th>
-        <th><%= sortable "destination" %></th>
+        <th><%= sortable "destination_id", "Destination" %></th>
+        <th><%= sortable "origin_id", "Origin" %></th>
         <th><%= sortable "delivery_method" %></th>
         <th>Options</th>
       </tr>
@@ -22,8 +22,8 @@
           <td><% unless movement.arrival_date.nil? %>
             <%= movement.arrival_date.strftime("%B %e, %Y") %>
           <% end %></td>
-          <td><%= movement.origin %></td>
-          <td><%= movement.destination %></td>
+          <td><%= movement.destination.present? ? movement.destination.name_with_country : "" %></td>
+          <td><%= movement.origin.present? ? movement.origin.name_with_country : "" %></td>
           <td><%= movement.delivery_method %></td>
           <td><%= link_to 'Show', movement %>
           <% if current_user.admin? %>

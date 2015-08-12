@@ -8,9 +8,9 @@ class MovementsController < ApplicationController
   def index
     sc = sort_column
     if sc.eql? "origin_id"
-      @movements = Movement.includes(:location).search(params[:search]).order("locations.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+      @movements = Movement.includes(:origin).search(params[:search]).order("locations.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
     elsif sc.eql? "destination_id"
-      @movements = Movement.includes(:location).search(params[:search]).order("locations.name"+ " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+      @movements = Movement.includes(:destination).search(params[:search]).order("locations.name"+ " "+ sort_direction).paginate(per_page: 10, page: params[:page])
     else
      @movements = Movement.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
     end

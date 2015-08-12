@@ -11,11 +11,11 @@
   </div>
   <div class="form-group">
     <label class="control-label">Destination</label>
-    <%= f.text_field :destination, class: 'form-control' %>
+    <%= collection_select(:movement, :destination_id, Location.order(country: :asc), :id, :name_with_country, { prompt: "Please select a Destination" }, { class: 'form-control'}) %>
   </div>
   <div class="form-group">
     <label class="control-label">Origin</label>
-    <%= f.text_field :origin, class: 'form-control' %>
+    <%= collection_select(:movement, :origin_id, Location.order(country: :asc), :id, :name_with_country, { prompt: "Please select an Origin" }, { class: 'form-control'}) %>
   </div>
   <div class="form-group">
     <label class="control-label">Delivery Method</label>
