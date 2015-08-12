@@ -171,7 +171,7 @@ class BoxesController < ApplicationController
     end
 
     def sort_column
-       Box.column_names.include?(params[:sort]) ? params[:sort] : "barcode"
+       Box.column_names.include?(params[:sort]) ? params[:sort] : "box_number"
     end
 
     def sort_direction
