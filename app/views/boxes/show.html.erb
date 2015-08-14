@@ -13,8 +13,8 @@
 	        <% unless @box.weight.nil? %>
 	        	<p><b>Weight:</b> <%= @box.weight %> lbs</p>
 	        <% end %>
-	        <% unless @box.condition.nil? || @box.condition.empty? %>
-	        	<p><b>Condition:</b> <%= @box.condition %></p>
+	        <% unless @box.condition.nil? %>
+	        	<p><b>Condition:</b> <%= @box.condition.name %></p>
 	        <% end %>
 	        <% unless @box.notes.nil? || @box.notes.empty? %>
 	        	<p><b>Additional Notes:</b> <%= @box.notes %></p>

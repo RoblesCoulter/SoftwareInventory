@@ -10,6 +10,8 @@ class BoxesController < ApplicationController
     sc = sort_column
     if sc.eql? "location_id"
       @boxes = Box.includes(:location).search(params[:search]).order("locations.country" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+    elsif sc.eql? "condition_id"
+      @boxes = Box.includes(:condition).search(params[:search]).order("conditions.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
     else
       @boxes = Box.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
     end
@@ -179,7 +181,7 @@ class BoxesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def box_params
-      params.require(:box).permit(:barcode,:location_id, :weight, :height, :width, :depth, :box_number, :photo, :condition, :notes)
+      params.require(:box).permit(:barcode,:location_id, :weight, :height, :width, :depth, :box_number, :photo, :condition_id, :notes)
     end
 
     def logged_in_user

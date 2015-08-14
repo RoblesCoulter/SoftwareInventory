@@ -11,7 +11,7 @@
         <th><%= sortable "serial_number" %></th>
         <th><%= sortable "model_number" %></th>
         <th><%= sortable "price" %></th>
-        <th><%= sortable "condition" %></th>
+        <th><%= sortable "condition_id", "Condition" %></th>
         <th><%= sortable "firmware" %></th>
         <th><%= sortable "created_at", "Creation date" %></th>
         <th><%= sortable "updated_at", "Last updated"%></th>
@@ -33,7 +33,9 @@
           <td><%= item.serial_number %></td>
           <td><%= item.model_number %></td>
           <td><%= number_to_currency(item.price) %></td>
-          <td><%= item.condition %></td>
+          <td><% unless item.condition.nil? %>
+            <%= item.condition.name %>
+            <% end %></td>
           <td><%= item.firmware %></td>
           <td><%= local_time_ago(item.created_at) %></td>
           <td><%= local_time_ago(item.updated_at) %></td>

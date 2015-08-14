@@ -11,27 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812215356) do
+ActiveRecord::Schema.define(version: 20150814160538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "boxes", force: :cascade do |t|
-    t.string   "barcode",     limit: 255
+    t.string   "barcode",      limit: 255
     t.float    "weight"
     t.float    "height"
     t.float    "width"
     t.float    "depth"
     t.integer  "box_number"
-    t.string   "photo",       limit: 255
-    t.string   "condition",   limit: 255
+    t.string   "photo",        limit: 255
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "location_id"
+    t.integer  "condition_id"
   end
 
   add_index "boxes", ["barcode"], name: "index_boxes_on_barcode", unique: true, using: :btree
+  add_index "boxes", ["condition_id"], name: "index_boxes_on_condition_id", using: :btree
   add_index "boxes", ["location_id"], name: "index_boxes_on_location_id", using: :btree
 
   create_table "boxes_movements", id: false, force: :cascade do |t|
@@ -49,6 +50,12 @@ ActiveRecord::Schema.define(version: 20150812215356) do
     t.datetime "updated_at"
   end
 
+  create_table "conditions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "items", force: :cascade do |t|
     t.string   "barcode",       limit: 255
     t.integer  "box_id"
@@ -56,7 +63,6 @@ ActiveRecord::Schema.define(version: 20150812215356) do
     t.string   "serial_number", limit: 255
     t.string   "model_number",  limit: 255
     t.float    "price"
-    t.string   "condition",     limit: 255
     t.string   "firmware",      limit: 255
     t.string   "photo",         limit: 255
     t.integer  "responsable"
@@ -64,10 +70,12 @@ ActiveRecord::Schema.define(version: 20150812215356) do
     t.datetime "updated_at"
     t.integer  "location_id"
     t.text     "notes"
+    t.integer  "condition_id"
   end
 
   add_index "items", ["barcode"], name: "index_items_on_barcode", unique: true, using: :btree
   add_index "items", ["box_id"], name: "index_items_on_box_id", using: :btree
+  add_index "items", ["condition_id"], name: "index_items_on_condition_id", using: :btree
   add_index "items", ["location_id"], name: "index_items_on_location_id", using: :btree
   add_index "items", ["product_id"], name: "index_items_on_product_id", using: :btree
 
@@ -145,6 +153,8 @@ ActiveRecord::Schema.define(version: 20150812215356) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "boxes", "conditions"
   add_foreign_key "boxes", "locations"
+  add_foreign_key "items", "conditions"
   add_foreign_key "items", "locations"
 end

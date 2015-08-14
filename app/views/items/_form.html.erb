@@ -44,7 +44,7 @@
   </div>
   <div class="form-group">
     <label class="control-label">Condition</label>
-    <%= f.text_field :condition, class: 'form-control' %>
+    <%= collection_select(:item, :condition_id, Condition.order(name: :asc), :id, :name, { prompt: "Please select the Condition" }, { class: 'form-control'}) %>
   </div>
   <div class="form-group">
     <label class="control-label">Additional Notes</label>

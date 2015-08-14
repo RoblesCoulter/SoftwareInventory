@@ -11,7 +11,7 @@
         <th><%= sortable "height" %></th>
         <th><%= sortable "width" %></th>
         <th><%= sortable "depth" %></th>
-        <th><%= sortable "condition" %></th>
+        <th><%= sortable "condition_id", "Condition" %></th>
         <th><%= sortable "created_at", "Creation date" %></th>
         <th><%= sortable "updated_at", "Last updated"%></th>
         <th>Options</th>
@@ -29,7 +29,9 @@
           <td><%= box.height %></td>
           <td><%= box.width %></td>
           <td><%= box.depth %></td>
-          <td><%= box.condition %></td>
+          <td><% unless box.condition.nil?%>
+            <%= box.condition.name %>
+            <% end %></td>
           <td><%= local_time_ago(box.created_at) %></td>
           <td><%= local_time_ago(box.updated_at) %></td>
           <td><%= link_to 'Show', box %> 

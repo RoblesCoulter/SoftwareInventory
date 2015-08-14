@@ -11,6 +11,8 @@ class ItemsController < ApplicationController
       @items = Item.includes(:box).search(params[:search]).order("boxes.box_number" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
     elsif sc.eql? "product_id"
       @items = Item.includes(:product).search(params[:search]).order("products.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])  
+    elsif sc.eql? "condition_id"
+      @items = Item.includes(:condition).search(params[:search]).order("conditions.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])  
     elsif sc.eql? "location_id"
         @items = Item.includes(:location).search(params[:search]).order("locations.country" + " " + sort_direction).paginate(per_page: 10, page: params[:page])
     else
@@ -46,7 +48,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
+        format.html { redirect_to items_url, notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
         if @item.photo != nil
@@ -98,7 +100,7 @@ class ItemsController < ApplicationController
           @item.save
         end
 
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+        format.html { redirect_to items_url, notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }
@@ -151,7 +153,7 @@ class ItemsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:barcode,:location_id ,:box_id, :product_id, :serial_number, :model_number, :price, :condition, :firmware, :photo, :responsable)
+      params.require(:item).permit(:barcode,:location_id ,:box_id, :product_id, :serial_number, :model_number, :price, :condition_id, :firmware, :photo, :responsable)
     end
 
     def logged_in_user

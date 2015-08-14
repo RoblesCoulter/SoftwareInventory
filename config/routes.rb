@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :conditions
   root 'welcome#index'
   # get 'user/new'
   # get 'signup' => 'users#new'
