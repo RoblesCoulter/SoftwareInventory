@@ -75,7 +75,7 @@ class MovementsController < ApplicationController
           format.html { redirect_to movement_boxes_movement_url(@movement)}
           format.json { render :movement_boxes, status: :created, location: @movement }
         else
-          format.html { redirect_to @movement, notice: 'Movement was successfully created.' }
+          format.html { redirect_to movements_url, notice: 'Movement was successfully created.' }
           format.json { render :show, status: :created, location: @movement }
         end
       else
@@ -90,7 +90,7 @@ class MovementsController < ApplicationController
   def update
     respond_to do |format|
       if @movement.update(movement_params)
-        format.html { redirect_to @movement, notice: 'Movement was successfully updated.' }
+        format.html { redirect_to movements_url, notice: 'Movement was successfully updated.' }
         format.json { render :show, status: :ok, location: @movement }
       else
         format.html { render :edit }
