@@ -1,9 +1,11 @@
-<p id="notice"><%= notice %></p>
+<div class="center-div">
+<div>
+	<strong>Name:</strong>
+	<%= @condition.name %>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @condition.name %>
-</p>
-
-<%= link_to 'Edit', edit_condition_path(@condition) %> |
+<% if current_user.admin? %>
+	<%= link_to 'Edit', edit_condition_path(@condition) %> |
+<% end %>
 <%= link_to 'Back', conditions_path %>
+</div>

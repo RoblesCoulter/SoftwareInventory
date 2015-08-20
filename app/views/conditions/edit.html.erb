@@ -1,6 +1,6 @@
-<h1>Editing Condition</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @condition %> |
-<%= link_to 'Back', conditions_path %>
+<div class="center-div">
+	<%= link_to 'Back', conditions_path, class: "btn btn-warning" %>
+	<h1 class="text-center">Editing Condition</h1>
+	<%= render 'form' %>
+	<%= yield(:condition_validators) %>
+</div>

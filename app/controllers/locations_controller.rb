@@ -79,6 +79,4 @@ class LocationsController < ApplicationController
     def admin_user
       redirect_to(locations_url) unless current_user.admin?
     end
-
-
 end

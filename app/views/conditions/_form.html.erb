@@ -1,21 +1,11 @@
-<%= form_for(@condition) do |f| %>
-  <% if @condition.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@condition.errors.count, "error") %> prohibited this condition from being saved:</h2>
-
-      <ul>
-      <% @condition.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+<%= form_for @condition, html: { class: "form-horizontal"}, validate: :condition_validators do |f| %>
+  
+  <div class="form-group">
+    <label class="control-label">Condition name</label>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  
+  <%= f.submit class: "btn btn-success fullwidthbutton" %>
+  <%= link_to 'Back', conditions_path, class: "btn btn-warning fullwidthbutton" %>
+  
 <% end %>

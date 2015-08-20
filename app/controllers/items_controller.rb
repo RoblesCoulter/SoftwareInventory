@@ -42,7 +42,6 @@ class ItemsController < ApplicationController
     if @item.valid? && @item.photo?
       client = kaltura_setup
       entry_id = kaltura_upload(item_params[:barcode], item_params[:photo], client)
-
       @item.photo = entry_id
     end
 
