@@ -44,6 +44,7 @@
                     <li><%= link_to "Conditions", conditions_path, class: "", method: :get %></li>
                   </ul>
               </li>
+              <li><%= link_to "Reports", '/reports/' , class: "", method: :get %></li>
               <% if current_user.admin? %>
                 <li><%= link_to "Users", users_path, class: "", method: :get %></li>
               <% end %>
