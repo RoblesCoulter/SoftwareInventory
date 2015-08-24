@@ -64,6 +64,13 @@
 					<%= @item.responsable %>
 				</p>
 			<% end %>
+
+			<% if @item.notes.present? %>
+				<p>
+					<strong>Additional notes:</strong>
+					<%= @item.notes %>
+				</p>
+			<% end %>
         </div>
     </div>
 

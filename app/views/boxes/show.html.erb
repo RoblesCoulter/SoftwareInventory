@@ -16,8 +16,8 @@
 	        <% unless @box.condition.nil? %>
 	        	<p><b>Condition:</b> <%= @box.condition.name %></p>
 	        <% end %>
-	        <% unless @box.notes.nil? || @box.notes.empty? %>
-	        	<p><b>Additional Notes:</b> <%= @box.notes %></p>
+	        <% unless @box.description.nil? %>
+	        	<p><b>Description:</b> <%= @box.description %></p>
 	        <% end %>
         </div>
 	</div>

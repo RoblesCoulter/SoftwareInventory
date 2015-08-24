@@ -181,7 +181,7 @@ class BoxesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def box_params
-      params.require(:box).permit(:barcode,:location_id, :weight, :height, :width, :depth, :box_number, :photo, :condition_id, :notes)
+      params.require(:box).permit(:barcode,:location_id, :weight, :height, :width, :depth, :box_number, :photo, :condition_id, :description)
     end
 
     def logged_in_user
