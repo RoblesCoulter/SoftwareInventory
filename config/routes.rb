@@ -30,4 +30,8 @@ Rails.application.routes.draw do
   resources :software_serials, :softwares, :categories, :products, :items, :users, :locations
   resources :password_resets, only: [:new, :create, :edit, :update]
   # get 'boxes/add_item/:id', to: 'boxes#add_item', as: 'add_item'
+
+  get 'reports', to: 'reports#index', as: 'reports_index'
+  get 'reports/boxes_per_movement', to: 'reports#boxes_per_movement_index', as: 'boxes_per_movement_index'
+  get 'reports/boxes_per_movement/:id', to: 'reports#boxes_per_movement', as: 'boxes_per_movement'
 end
