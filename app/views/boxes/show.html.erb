@@ -19,6 +19,7 @@
 	        <% unless @box.description.nil? %>
 	        	<p><b>Description:</b> <%= @box.description %></p>
 	        <% end %>
+	        <p><b>Creation date:</b> <%= local_time(@box.created_at) %></p>
         </div>
 	</div>
     <%= link_to "Go to Items", box_items_box_path(@box), class: "btn btn-info fullwidthbutton" %> 

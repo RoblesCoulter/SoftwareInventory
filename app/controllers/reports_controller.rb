@@ -5,7 +5,6 @@ class ReportsController < ApplicationController
 
 
 	def index
-		
 	end
 
 	def boxes_per_movement_index
@@ -21,6 +20,10 @@ class ReportsController < ApplicationController
 
 	def boxes_per_movement
 		@boxes = @movement.boxes
+	end
+
+	def boxes_per_movement_pdf
+		
 	end
 
 	private

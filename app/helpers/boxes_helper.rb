@@ -11,7 +11,7 @@ module BoxesHelper
 		if box.photo != nil
 			entry_id = box.photo
 			kaltura_url = "https://cdnapisec.kaltura.com/p/#{get_partner_id}/thumbnail/entry_id/#{entry_id}/quality/100"
-			link_to( image_tag(kaltura_url, alt: box.barcode, class: "box_photo img-responsive"), "https://cdnapisec.kaltura.com/p/#{get_partner_id}/thumbnail/entry_id/#{entry_id}/quality/100", target: "_blank" )
+			link_to( image_tag(kaltura_url, alt: box.barcode, class: "box_photo img-responsive"), "https://cdnapisec.kaltura.com/p/#{get_partner_id}/thumbnail/entry_id/#{entry_id}/quality/100/width/1000", target: "_blank" )
 		end
 	end
 
