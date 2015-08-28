@@ -1,0 +1,42 @@
+<h2 class="text-center">Boxes in movement from  <%= @movement.origin.name %> to <%= @movement.destination.name %>
+  <% if @movement.delivery_method.present? %>
+    via <%= @movement.delivery_method %>
+  <% end %>
+  <% unless @movement.shipping_date.nil? %>
+    shipped on <%= @movement.shipping_date.strftime("%B %e, %Y") %>
+  <% end%>
+</h2>
+
+<div class="center-div movement-info">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><%= "Box Number" %></th>
+          <th><%= "Weight" %></th>
+          <th><%= "Height" %></th>
+          <th><%= "Width" %></th>
+          <th><%= "Depth" %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @boxes.sort_by{|e| e[:box_number]}.each do |box| %>
+          <tr>
+            <td><%= box.box_number %></td>
+            <td><%= box.weight %></td>
+            <td><%= box.height %></td>
+            <td><%= box.width %></td>
+            <td><%= box.depth %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Total number of boxes: <b><%= @boxes.count %></b></p>
+
+  <%= link_to boxes_per_movement_index_path, class: "btn btn-warning fullwidthbutton" do %>
+    <span class="fa fa-mail-reply"></span> Back 
+  <% end %>
+</div>

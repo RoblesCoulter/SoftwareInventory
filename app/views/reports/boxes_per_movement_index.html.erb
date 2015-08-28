@@ -1,0 +1,11 @@
+<h1 class="text-center">Boxes per Movement Report</h1>
+<%= form_tag movements_path, method: 'get', class: "form-inline form-main-search", id: "ajax_search" do %>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search], class: "form-control" %>
+      <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+    </div>
+ 
+  <div id="ajax_objects" ><%= render 'movements' %></div>
+<% end %>
+
+<br>
