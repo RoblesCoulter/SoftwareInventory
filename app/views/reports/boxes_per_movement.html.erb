@@ -17,6 +17,8 @@
           <th><%= "Height" %></th>
           <th><%= "Width" %></th>
           <th><%= "Depth" %></th>
+          <th><%= "Description" %></th>
+          <th><%= "Photo" %></th>
         </tr>
       </thead>
 
@@ -28,6 +30,8 @@
             <td><%= box.height %></td>
             <td><%= box.width %></td>
             <td><%= box.depth %></td>
+            <td></td>
+            <td><%= box_thumbnail_for box %></td>
           </tr>
         <% end %>
       </tbody>
