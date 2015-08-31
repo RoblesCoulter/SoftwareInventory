@@ -19,7 +19,7 @@ $(function(){
   	});
 
   	$(".barcode-input").focus();
-	$('#movement_shipping_date, #movement_arrival_date').datepicker({ dateFormat: 'yy-mm-dd', altFormat: "dd/mm/yy" });
+	$('#movement_shipping_date, #movement_arrival_date, #advanced_search_date').datepicker({ dateFormat: 'yy-mm-dd', altFormat: "dd/mm/yy" });
 
 	$(".barcode-input").keypress(function( event ) {
 		if(event.which == 13){
@@ -27,6 +27,6 @@ $(function(){
 	  		$(this).closest(".form-group").next().find(".form-control").focus();
 	  	
 		}
-
 	});
+
 });

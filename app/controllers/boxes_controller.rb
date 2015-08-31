@@ -8,13 +8,14 @@ class BoxesController < ApplicationController
   # GET /boxes.json
   def index
     sc = sort_column
+    @q = Box.ransack(params[:q])
+    @sort = sc + " "
     if sc.eql? "location_id"
-      @boxes = Box.includes(:location).search(params[:search]).order("locations.country" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+      @sort = "locations.country "
     elsif sc.eql? "condition_id"
-      @boxes = Box.includes(:condition).search(params[:search]).order("conditions.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
-    else
-      @boxes = Box.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+      @sort = "conditions.name "
     end
+    @boxes = @q.result.includes(:condition, :location).order(@sort + sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /boxes/1

@@ -5,7 +5,8 @@ class LocationsController < ApplicationController
   helper_method :sort_column
 
   def index
-  	@locations = Location.search(params[:search]).order(sort_column + " " + sort_direction).paginate(per_page: 10, page: params[:page])
+    @q = Location.ransack(params[:q])
+  	@locations = @q.result.order(sort_column + " " + sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   def show

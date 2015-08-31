@@ -7,13 +7,12 @@ class MovementsController < ApplicationController
   # GET /movements.json
   def index
     sc = sort_column
-    if sc.eql? "origin_id"
-      @movements = Movement.includes(:origin).search(params[:search]).order("locations.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
-    elsif sc.eql? "destination_id"
-      @movements = Movement.includes(:destination).search(params[:search]).order("locations.name"+ " "+ sort_direction).paginate(per_page: 10, page: params[:page])
-    else
-     @movements = Movement.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+    @q = Movement.ransack(params[:q])
+    @sort = sc + " "
+    if ["origin_id", "destination_id"].include? sc
+      @sort = "locations.country "
     end
+    @movements = @q.result.includes(:destination, :origin).order(@sort + sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /movements/1

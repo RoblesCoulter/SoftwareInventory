@@ -7,7 +7,8 @@ class ConditionsController < ApplicationController
   # GET /conditions
   # GET /conditions.json
   def index
-    @conditions = Condition.search(params[:search]).order(sort_column + " " + sort_direction).paginate(per_page: 10, page: params[:page])
+    @q = Condition.ransack(params[:q])
+    @conditions = @q.result.order(sort_column + " " + sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /conditions/1

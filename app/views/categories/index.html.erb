@@ -1,15 +1,12 @@
 <h1 class="text-center">Categories</h1>
-<%= form_tag categories_path, method: 'get', class: "form-inline form-main-search", id: "ajax_search" do %>
-    <div class="form-group">
-      <%= text_field_tag :search, params[:search], class: "form-control" %>
-      <%= submit_tag "Name Search", :name => nil, class: "btn btn-primary" %>
-    </div>
- 
-  <div id="ajax_objects" ><%= render 'categories' %></div>
+<%= search_form_for @q, url: categories_path, html: { method: :get, class: "form-inline form-main-search", id: "ajax_search"} do |f| %>
+	<div class="form-group">
+		<%= f.search_field :name_or_description_cont, class: "form-control" %>
+		<%= f.submit "Search", :name => nil, class: "incread-width btn btn-primary"%>
+	</div>
+  	<div id="ajax_objects" ><%= render 'categories' %></div>
 <% end %>
-
 <br>
-
 <% if current_user.admin? %>
   <%= link_to 'Add Category', new_category_path, class: "btn btn-success"%>
 <% end %>

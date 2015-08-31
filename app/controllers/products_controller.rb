@@ -7,11 +7,12 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     sc = sort_column
+    @q = Product.ransack(params[:q])
+    @sort = sc 
     if sc.eql? "category_id"
-      @products = Product.includes(:category).search(params[:search]).order("categories.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
-    else
-      @products = Product.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
-    end   
+      @sort = "categories.name"
+    end  
+    @products = @q.result.includes(:category).order(@sort +" " + sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /products/1

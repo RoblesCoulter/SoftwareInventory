@@ -7,11 +7,12 @@ class SoftwareSerialsController < ApplicationController
   # GET /software_serials.json
   def index
     sc = sort_column
+    @q = SoftwareSerial.ransack(params[:q])
+    @sort = sc + " "
     if sc.eql? "software_id"
-      @software_serials = SoftwareSerial.includes(:software).search(params[:search]).order("softwares.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
-    else
-      @software_serials = SoftwareSerial.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+      @sort = "softwares.name "
     end
+      @software_serials = @q.result.includes(:software).order(@sort + sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /software_serials/1

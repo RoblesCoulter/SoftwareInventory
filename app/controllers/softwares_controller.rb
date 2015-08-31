@@ -6,7 +6,8 @@ class SoftwaresController < ApplicationController
   # GET /softwares
   # GET /softwares.json
   def index
-    @softwares = Software.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+    @q = Software.ransack(params[:q])
+    @softwares = @q.result.order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /softwares/1

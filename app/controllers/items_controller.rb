@@ -7,17 +7,18 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     sc = sort_column
+    @q = Item.ransack(params[:q])
+    @sort = sc + " "
     if sc.eql? "box_id"
-      @items = Item.includes(:box).search(params[:search]).order("boxes.box_number" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+      @sort = "boxes.box_number "
     elsif sc.eql? "product_id"
-      @items = Item.includes(:product).search(params[:search]).order("products.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])  
+      @sort = "products.name "
     elsif sc.eql? "condition_id"
-      @items = Item.includes(:condition).search(params[:search]).order("conditions.name" + " "+ sort_direction).paginate(per_page: 10, page: params[:page])  
+      @sort = "conditions.name "
     elsif sc.eql? "location_id"
-        @items = Item.includes(:location).search(params[:search]).order("locations.country" + " " + sort_direction).paginate(per_page: 10, page: params[:page])
-    else
-      @items = Item.search(params[:search]).order(sc + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+      @sort = "locations.country "
     end
+    @items = @q.result.includes(:box,:product,:condition,:location).order(@sort + sort_direction).paginate(per_page: 10, page: params[:page])
   end
 
   # GET /items/1

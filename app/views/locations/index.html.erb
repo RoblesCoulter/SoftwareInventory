@@ -1,13 +1,11 @@
 <h1 class="text-center">Locations</h1>
-<%= form_tag locations_path, method: 'get', class: "form-inline form-main-search", id: "ajax_search" do %>
-    <div class="form-group">
-      <%= text_field_tag :search, params[:search], class: "form-control" %>
-      <%= submit_tag "Name Search", :name => nil, class: "btn btn-primary" %>
-    </div>
- 
-  <div id="ajax_objects" ><%= render 'locations' %></div>
+<%= search_form_for @q, url: locations_path, html: { method: :get, class: "form-inline form-main-search", id: "ajax_search"} do |f| %>
+	<div class="form-group">
+		<%= f.search_field :name_or_country_cont, class: "form-control" %>
+		<%= f.submit "Search", :name => nil, class: "btn btn-primary"%>
+	</div>
+	<div id="ajax_objects" ><%= render 'locations' %></div>
 <% end %>
-
 <br>
 <% if current_user.admin? %>
   <%= link_to 'New Location', new_location_path, class: "btn btn-success" %>
