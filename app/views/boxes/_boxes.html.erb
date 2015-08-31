@@ -6,6 +6,7 @@
       <tr>
         <th><%= sortable "barcode" %></th>
         <th><%= sortable "box_number", "Box Number" %></th>
+        <th>Thumbnail</th>
         <th><%= sortable "location_id", "Location" %></th>
         <th><%= sortable "description" %></th>
         <th><%= sortable "weight" %></th>
@@ -13,7 +14,6 @@
         <th><%= sortable "width" %></th>
         <th><%= sortable "depth" %></th>
         <th><%= sortable "condition_id", "Condition" %></th>
-        <th><%= sortable "created_at", "Creation date" %></th>
         <th><%= sortable "updated_at", "Last updated"%></th>
         <th>Options</th>
       </tr>
@@ -23,6 +23,7 @@
         <tr>
           <td><%= box.barcode %></td>
           <td><%= box.box_number %></td>
+          <td><%= box_thumbnail_for box %></td>
           <td><% unless box.location.nil?%>
             <%= box.location.name_with_country %>
             <% end %></td>
@@ -34,7 +35,6 @@
           <td><% unless box.condition.nil?%>
             <%= box.condition.name %>
             <% end %></td>
-          <td><%= local_time_ago(box.created_at) %></td>
           <td><%= local_time_ago(box.updated_at) %></td>
           <td><%= link_to 'Show', box %> 
           <% if current_user.admin? %>

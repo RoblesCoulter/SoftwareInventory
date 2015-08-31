@@ -8,7 +8,4 @@ class Item < ActiveRecord::Base
 	validates :barcode, :product_id, presence: true
 	belongs_to :condition
 
-	def self.search(search)
-		search ? where("UPPER(barcode) LIKE UPPER(?)", "%#{search}%") : all
-	end
 end

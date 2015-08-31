@@ -58,6 +58,10 @@ gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations"
 
 gem 'rest-client'
 
+gem 'axlsx'
+
+gem 'prawn'
+
 group :production do
 	# See https://github.com/sstephenson/execjs#readme for more supported runtimes
 	gem 'therubyracer',  platforms: :ruby

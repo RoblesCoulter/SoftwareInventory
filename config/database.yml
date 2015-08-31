@@ -27,7 +27,7 @@ production:
   database: SoftwareInventoryDB
   username: root
   password: <%= ENV['SOFTWAREINVENTORY_DATABASE_PASSWORD'] %>
-  host: softwareinventorydb.c9z5b4hc0nsc.us-west-2.rds.amazonaws.com
+  host: softwareinventorydb2.crlgxkipsnox.us-west-2.rds.amazonaws.com
   port: 3306
   pool: 5
   timeout: 5000
