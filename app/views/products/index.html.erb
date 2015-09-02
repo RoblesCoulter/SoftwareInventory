@@ -4,10 +4,11 @@
 		<%= f.search_field :name_or_brand_or_category_name_cont, class: "form-control" %>
 		<%= f.submit "Search", :name => nil, class: "btn btn-primary"%>
 	</div>
+	<% if current_user.admin? %>
+	  <%= link_to 'Add Product', new_product_path, class: "btn btn-success top-index-btn" %>
+	<% end %>
   <div id="ajax_objects" ><%= render 'products' %></div>
 <% end %>
-
-<br>
 <% if current_user.admin? %>
   <%= link_to 'Add Product', new_product_path, class: "btn btn-success" %>
 <% end %>

@@ -4,10 +4,12 @@
 		<%= f.search_field :origin_name_or_origin_country_or_destination_name_or_destination_country_or_delivery_method_cont, class: "form-control" %>
 		<%= f.submit "Search", :name => nil, class: "btn btn-primary"%>
 	</div>
+	<% if current_user.admin? %>
+  <%= link_to 'New Movement', new_movement_path, class: "top-index-btn btn btn-success" %>
+<% end %>
   <div id="ajax_objects" ><%= render 'movements' %></div>
 <% end %>
 
-<br>
 <% if current_user.admin? %>
   <%= link_to 'New Movement', new_movement_path, class: "btn btn-success" %>
 <% end %>

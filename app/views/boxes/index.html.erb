@@ -5,9 +5,11 @@
 		<%= f.search_field :barcode_or_description_or_location_name_or_location_country_or_condition_name_cont, class: "form-control" %>
 		<%= f.submit "Search", :name => nil, class: "btn btn-primary" %>
 	</div>
+	<% if current_user.admin? %>
+	  <%= link_to "Add Box", new_box_path , class: "btn btn-success top-index-btn" %>
+	<% end %>
 	<div id="ajax_objects" ><%= render 'boxes' %></div>
 <% end %>
-<br>
 <% if current_user.admin? %>
   <%= link_to "Add Box", new_box_path , class: "btn btn-success" %>
 <% end %>

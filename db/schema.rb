@@ -149,10 +149,8 @@ ActiveRecord::Schema.define(version: 20150821195535) do
     t.boolean  "admin",           default: false
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
-    t.datetime "deleted_at"
   end
 
-  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "boxes", "conditions"

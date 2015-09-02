@@ -4,9 +4,11 @@
 		<%= f.search_field :name_cont, class: "form-control" %>
 		<%= f.submit "Search", :name => nil, class: "incread-width btn btn-primary"%>
 	</div>
+	<% if current_user.admin? %>
+	  <%= link_to 'New Condition', new_condition_path, class: "btn btn-success top-index-btn" %>
+	<% end %>
   	<div id="ajax_objects" ><%= render 'conditions' %></div>
 <% end %>
-<br>
 <% if current_user.admin? %>
   <%= link_to 'New Condition', new_condition_path, class: "btn btn-success" %>
 <% end %>
