@@ -12,7 +12,13 @@ class SoftwareSerialsController < ApplicationController
     if sc.eql? "software_id"
       @sort = "softwares.name "
     end
-      @software_serials = @q.result.includes(:software).order(@sort + sort_direction).paginate(per_page: 10, page: params[:page])
+    if params[:page]
+      cookies[:software_serials_page] = {
+        value: params[:page],
+        expires: 1.day.from_now
+      }  
+    end
+    @software_serials = @q.result.includes(:software).order(@sort + sort_direction).page(cookies[:software_serials_page]).per_page(10)
   end
 
   # GET /software_serials/1
@@ -84,7 +90,7 @@ class SoftwareSerialsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def software_serial_params
-      params.require(:software_serial).permit(:serial_number, :software_id , :software, :operative_system, :price, :software_availability)
+      params.require(:software_serial).permit(:serial_number, :software_id , :software, :operative_system, :price, :item_id)
     end
 
     def logged_in_user

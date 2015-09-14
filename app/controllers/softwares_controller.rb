@@ -7,7 +7,13 @@ class SoftwaresController < ApplicationController
   # GET /softwares.json
   def index
     @q = Software.ransack(params[:q])
-    @softwares = @q.result.order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+    if params[:page]
+      cookies[:softwares_page] = {
+        value: params[:page],
+        expires: 1.day.from_now
+      }  
+    end
+    @softwares = @q.result.order(sort_column + " "+ sort_direction).page(cookies[:softwares_page]).per_page(10)
   end
 
   # GET /softwares/1

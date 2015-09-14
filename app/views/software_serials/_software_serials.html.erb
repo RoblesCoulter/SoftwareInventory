@@ -4,10 +4,10 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th><%= sortable "software_id" %></th>
+        <th><%= sortable "software_id", "Software" %></th>
+        <th><%= sortable "item_id", "Item" %></th>
         <th><%= sortable "serial_number"%></th>
         <th><%= sortable "operative_system" %></th>
-        <th><%= sortable "software_availability" %></th>
         <th><%= sortable "price" %></th>
         <th><%= sortable "created_at", "Creation date" %></th>
         <th><%= sortable "updated_at", "Last updated"%></th>
@@ -21,9 +21,11 @@
           <td><% unless software_serial.software.nil? %>
             <%= software_serial.software.name %>
           <% end%></td>
+          <td><% unless software_serial.item.nil? %>
+            <%= software_serial.item.product.name_with_brand %> (<%= software_serial.item.barcode %>)
+          <% end %></td>
           <td><%= software_serial.serial_number %></td>
           <td><%= software_serial.operative_system %></td>
-          <td><%= software_serial.software_availability %></td>
           <td><%= number_to_currency(software_serial.price) %></td>
 
           <td><%= local_time_ago(software_serial.created_at) %></td>

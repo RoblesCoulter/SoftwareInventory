@@ -9,4 +9,9 @@ class Product < ActiveRecord::Base
 	def name_with_brand
 		brand.present? ? "#{name} - #{brand}" : "#{name}"	
 	end
+
+	def category_name
+		@category_name = self.category.name
+		@category_name.present? ? "#{@category_name}" : ""
+	end
 end

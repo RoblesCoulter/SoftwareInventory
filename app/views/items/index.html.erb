@@ -1,11 +1,12 @@
 <h1 class="text-center">Items</h1>
-<%= search_form_for @q, url: items_path, html: { method: :get, class: "form-inline form-main-search", id: "ajax_search"} do |f| %>
+
+<%= search_form_for @q, url: items_path(page: 1), html: { method: :get, class: "form-inline form-main-search", id: "ajax_search"} do |f| %>
 	<div class="form-group">
-		<%= f.search_field :barcode_or_product_name_or_product_brand_or_location_name_or_location_country_or_condition_name_cont, class: "form-control" %>
+		<%= f.search_field :barcode_or_product_name_or_product_brand_or_product_category_name_or_location_name_or_location_country_or_condition_name_cont, class: "form-control" %>
 		<%= f.submit "Search", :name => nil, class: "incread-width btn btn-primary"%>
 	</div>
 	<% if current_user.admin? %>
-	  <%= link_to 'Add Item', new_item_path, class: "top-index-btn btn btn-success" %>
+		<%= link_to 'Add Item', new_item_path, class: "top-index-btn btn btn-success" %>
 	<% end %>
   	<div id="ajax_objects" ><%= render 'items' %></div>
 <% end %>

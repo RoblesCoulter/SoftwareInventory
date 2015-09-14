@@ -6,7 +6,13 @@ class UsersController < ApplicationController
 
   def index
     # @users = User.all
-    @users = User.search(params[:search]).order(sort_column + " "+ sort_direction).paginate(per_page: 10, page: params[:page])
+    if params[:page]
+      cookies[:users_page] = {
+        value: params[:page],
+        expires: 1.day.from_now
+      }  
+    end
+    @users = User.search(params[:search]).order(sort_column + " "+ sort_direction).page(cookies[:users_page]).per_page(10)
   end
 
   def show

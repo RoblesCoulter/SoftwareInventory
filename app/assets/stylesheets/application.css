@@ -79,4 +79,8 @@ th .desc {
   margin-top: 10px;
 }
 
+.pagination .disabled {
+  display: none;
+}
+
 

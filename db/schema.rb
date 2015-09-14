@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150821195535) do
+ActiveRecord::Schema.define(version: 20150909163138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,11 +124,12 @@ ActiveRecord::Schema.define(version: 20150821195535) do
     t.integer  "software_id"
     t.string   "operative_system"
     t.float    "price"
-    t.integer  "software_availability"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "item_id"
   end
 
+  add_index "software_serials", ["item_id"], name: "index_software_serials_on_item_id", using: :btree
   add_index "software_serials", ["serial_number"], name: "index_software_serials_on_serial_number", unique: true, using: :btree
   add_index "software_serials", ["software_id"], name: "index_software_serials_on_software_id", using: :btree
 
@@ -157,4 +158,5 @@ ActiveRecord::Schema.define(version: 20150821195535) do
   add_foreign_key "boxes", "locations"
   add_foreign_key "items", "conditions"
   add_foreign_key "items", "locations"
+  add_foreign_key "software_serials", "items"
 end

@@ -1,3 +1,4 @@
+
 <%= hidden_field_tag :direction, params[:direction] %>
 <%= hidden_field_tag :sort, params[:sort]%>
 <div class="table-responsive">
@@ -7,11 +8,10 @@
         <th><%= sortable "barcode" %></th>
         <th><%= sortable "product_id", "Product" %></th>
         <th><%= sortable "box_id", "Box"%></th>
+        <th><%= sortable "category_id", "Category" %></th>
         <th><%= sortable "location_id", "Location" %></th>
         <th><%= sortable "serial_number" %></th>
         <th><%= sortable "model_number" %></th>
-        <th><%= sortable "price" %></th>
-        <th><%= sortable "condition_id", "Condition" %></th>
         <th><%= sortable "firmware" %></th>
         <th><%= sortable "created_at", "Creation date" %></th>
         <th><%= sortable "updated_at", "Last updated"%></th>
@@ -27,15 +27,14 @@
           <td><% unless item.box.nil? %>
             <%= item.box.box_number %>
           <% end %></td>
+          <td><% unless item.product.category.nil? %>
+            <%= item.product.category.name %>
+          <% end %></td>
           <td><% unless item.location.nil? %>
             <%= item.location.name_with_country %>
             <% end %></td>
           <td><%= item.serial_number %></td>
           <td><%= item.model_number %></td>
-          <td><%= number_to_currency(item.price) %></td>
-          <td><% unless item.condition.nil? %>
-            <%= item.condition.name %>
-            <% end %></td>
           <td><%= item.firmware %></td>
           <td><%= local_time_ago(item.created_at) %></td>
           <td><%= local_time_ago(item.updated_at) %></td>

@@ -12,7 +12,13 @@ class MovementsController < ApplicationController
     if ["origin_id", "destination_id"].include? sc
       @sort = "locations.country "
     end
-    @movements = @q.result.includes(:destination, :origin).order(@sort + sort_direction).paginate(per_page: 10, page: params[:page])
+    if params[:page]
+      cookies[:movements_page] = {
+        value: params[:page],
+        expires: 1.day.from_now
+      }
+    end
+    @movements = @q.result.includes(:destination, :origin).order(@sort + sort_direction).page(cookies[:movements_page]).per_page(10)
   end
 
   # GET /movements/1

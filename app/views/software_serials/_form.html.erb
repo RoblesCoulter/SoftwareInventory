@@ -1,7 +1,11 @@
 <%= form_for @software_serial, html: { class: "form-horizontal"}, validate: :software_serial_validators do |f| %>
   <div class="form-group">
     <label class="control-label">Software</label>
-    <%= collection_select(:software_serial, :software_id, Software.all, :id, :name, { prompt: "Please select a Software"},{ class: 'form-control'} ) %>
+    <%= collection_select(:software_serial, :software_id, Software.order(name: :asc), :id, :name, { prompt: "Please select a Software"},{ class: 'form-control'} ) %>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Product Item</label>
+    <%= collection_select(:software_serial, :item_id, Item.includes(:product).order("products.name"), :id, :name_with_product, { prompt: "Please select an Item"},{ class: 'form-control'} ) %>
   </div>
   <div class="form-group">
     <label class="control-label">Serial Number</label>
@@ -10,10 +14,6 @@
   <div class="form-group">
     <label class="control-label">Operative System</label>
     <%= f.text_field :operative_system, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <label class="control-label">Software Availability</label>
-    <%= f.text_field :software_availability, class: 'form-control' %>
   </div>
   <div class="form-group">
     <label class="control-label">Price $ (Optional)</label>

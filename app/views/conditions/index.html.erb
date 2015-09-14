@@ -1,5 +1,5 @@
 <h1 class="text-center">Conditions</h1>
-<%= search_form_for @q, url: conditions_path, html: { method: :get, class: "form-inline form-main-search", id: "ajax_search"} do |f| %>
+<%= search_form_for @q, url: conditions_path(page: 1), html: { method: :get, class: "form-inline form-main-search", id: "ajax_search"} do |f| %>
 	<div class="form-group">
 		<%= f.search_field :name_cont, class: "form-control" %>
 		<%= f.submit "Search", :name => nil, class: "incread-width btn btn-primary"%>

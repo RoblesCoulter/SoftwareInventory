@@ -3,9 +3,15 @@
 	<%= @software_serial.serial_number %>
 </p>
 <p>
-	<strong>Name:</strong>
 	<% unless @software_serial.software.nil? %>    
+	<strong>Name:</strong>
 		<%= @software_serial.software.name %>
+    <% end%>
+</p>
+<p>
+	<% unless @software_serial.item.nil? %>    
+		<strong>Product:</strong>
+		<%= @software_serial.item.name_with_product %>
     <% end%>
 </p>
 <p>
@@ -16,10 +22,7 @@
 	<strong>Price:</strong>
 	<%= @software_serial.price %>
 </p>
-<p>
-	<strong>Software Availability:</strong>
-	<%= @software_serial.software_availability %>
-</p>
+
 
 <% if current_user.admin? %>
 	<%= link_to 'Edit', edit_software_serial_path(@software_serial) %> |

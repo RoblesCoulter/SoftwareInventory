@@ -36,7 +36,7 @@
             <%= box.condition.name %>
             <% end %></td>
           <td><%= local_time_ago(box.updated_at) %></td>
-          <td><%= link_to 'Show', box %> 
+          <td><%= link_to 'Show', box_path(box) %> 
           <% if current_user.admin? %>
             | <%= link_to 'Items', box_items_box_path(box) %>
             | <%= link_to 'Edit', edit_box_path(box) %> |

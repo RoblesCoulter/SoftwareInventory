@@ -6,7 +6,13 @@ class LocationsController < ApplicationController
 
   def index
     @q = Location.ransack(params[:q])
-  	@locations = @q.result.order(sort_column + " " + sort_direction).paginate(per_page: 10, page: params[:page])
+    if params[:page]
+      cookies[:locations_page] = {
+        value: params[:page],
+        expires: 1.day.from_now
+      }  
+    end
+  	@locations = @q.result.order(sort_column + " " + sort_direction).page(cookies[:locations_page]).per_page(10)
   end
 
   def show

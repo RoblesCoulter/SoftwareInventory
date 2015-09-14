@@ -12,7 +12,13 @@ class ProductsController < ApplicationController
     if sc.eql? "category_id"
       @sort = "categories.name"
     end  
-    @products = @q.result.includes(:category).order(@sort +" " + sort_direction).paginate(per_page: 10, page: params[:page])
+    if params[:page]
+      cookies[:products_page] = {
+        value: params[:page],
+        expires: 1.day.from_now
+      }  
+    end
+    @products = @q.result.includes(:category).order(@sort +" " + sort_direction).page(cookies[:products_page]).per_page(10)
   end
 
   # GET /products/1

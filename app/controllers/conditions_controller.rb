@@ -8,7 +8,13 @@ class ConditionsController < ApplicationController
   # GET /conditions.json
   def index
     @q = Condition.ransack(params[:q])
-    @conditions = @q.result.order(sort_column + " " + sort_direction).paginate(per_page: 10, page: params[:page])
+    if params[:page]
+      cookies[:conditions_page] = {
+        value: params[:page],
+        expires: 1.day.from_now
+      }  
+    end
+    @conditions = @q.result.order(sort_column + " " + sort_direction).page(cookies[:conditions_page]).per_page(10)
   end
 
   # GET /conditions/1

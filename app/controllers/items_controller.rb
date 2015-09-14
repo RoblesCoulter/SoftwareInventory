@@ -8,17 +8,26 @@ class ItemsController < ApplicationController
   def index
     sc = sort_column
     @q = Item.ransack(params[:q])
-    @sort = sc + " "
+    @sort = sc
     if sc.eql? "box_id"
-      @sort = "boxes.box_number "
+      @sort = "boxes.box_number"
     elsif sc.eql? "product_id"
-      @sort = "products.name "
+      @sort = "products.name"
     elsif sc.eql? "condition_id"
-      @sort = "conditions.name "
+      @sort = "conditions.name"
     elsif sc.eql? "location_id"
-      @sort = "locations.country "
+      @sort = "locations.country"
+    elsif sc.eql? "category_id"
+      @sort = "categories.name"  
     end
-    @items = @q.result.includes(:box,:product,:condition,:location).order(@sort + sort_direction).paginate(per_page: 10, page: params[:page])
+    if params[:page]
+      cookies[:items_page] = {
+        value: params[:page],
+        expires: 1.day.from_now
+      }  
+    end
+    @items = @q.result.includes(:box, :condition, :location, {:product => [:category]}).order(@sort + " " + sort_direction).page(cookies[:items_page]).per_page(10)
+
   end
 
   # GET /items/1
@@ -145,7 +154,11 @@ class ItemsController < ApplicationController
     end
 
     def sort_column
-      Item.column_names.include?(params[:sort]) ? params[:sort] : "barcode" 
+      if params[:sort].eql? "category_id"
+        "category_id"
+      else
+        Item.column_names.include?(params[:sort]) ? params[:sort] : "barcode" 
+      end
     end
 
     def sort_direction
@@ -153,7 +166,7 @@ class ItemsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:barcode,:location_id ,:box_id, :product_id, :serial_number, :model_number, :price, :condition_id, :firmware, :photo, :responsable, :notes)
+      params.require(:item).permit(:barcode,:location_id ,:box_id, :product_id, :category_id, :serial_number, :model_number, :price, :condition_id, :firmware, :photo, :responsable, :notes)
     end
 
     def logged_in_user
