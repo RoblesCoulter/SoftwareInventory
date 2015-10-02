@@ -2,12 +2,19 @@
 	<%= javascript_include_tag "barcode_items" %>
 <% end %>
 <h1 class="text-center">Box #<%= @box.box_number %> (<%= @box.barcode %>)</h1>
+<h3 class="text-center info-title">Add items  by scanning them or selecting them in the dropdown below</h3>
 <div class="center-div box-info" data-box-number="<%= @box.box_number %>" data-id="<%= @box.id %>">
-	<h3 class="text-center info-title">Scan items to add to this Box</h3>
+	<%= collection_select(:box, :item_ids, Item.includes(:product).where.not(box_id: @box.id).order("products.name asc"), :id, :name_with_product ,{ prompt: "Please select a Location" }, { class: 'form-control'}) %>
 	<ul class="list-group main-list">
 	<% if @items.any? %>
 		<% @items.each do |item| %>
-			<a href="<%= url_for(item) %>"><li class="list-group-item list-group-item-info" data-barcode="<%= item.barcode %>"><%= item.product.name %> (<%= item.barcode %>)<button type="button" class="close remove-item-box" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></li></a>
+			<a href="<%= url_for(item) %>">
+				<li class="list-group-item list-group-item-info" data-barcode="<%= item.barcode %>"><%= item.product.name %> (<%= item.barcode %>)
+					<button type="button" class="close remove-item-box" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</li>
+			</a>
 		<% end %>	
 	<% end %>
 	</ul>
@@ -21,9 +28,9 @@
 	<ul class="list-group scanned-items">
 		
 	</ul>
-	<button class="hidden loading btn fullwidthbutton btn-info"><span class="fa fa-spinner fa-spin"></span> Loading...</button>
-	<a class="hidden add-scan-btn btn btn-primary fullwidthbutton"><span class="fa fa-plus"></span> Add Scanned Items</a>
-	<%= link_to boxes_path, class: "btn btn-warning fullwidthbutton" do %>
-		<span class="fa fa-mail-reply"></span> Back 
-	<% end %>
+		<button class="hidden loading btn fullwidthbutton btn-info"><span class="fa fa-spinner fa-spin"></span> Loading...</button>
+		<a class="hidden add-scan-btn btn btn-primary fullwidthbutton"><span class="fa fa-plus"></span> Add Scanned Items</a>
+		<%= link_to boxes_path, class: "btn btn-warning fullwidthbutton" do %>
+			<span class="fa fa-mail-reply"></span> Back 
+		<% end %>
 </div>
