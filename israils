@@ -1,0 +1,39 @@
+[1mdiff --git a/app/views/boxes/box_items.erb b/app/views/boxes/box_items.erb[m
+[1mindex 6d8d74f..f7547fb 100644[m
+[1m--- a/app/views/boxes/box_items.erb[m
+[1m+++ b/app/views/boxes/box_items.erb[m
+[36m@@ -2,12 +2,19 @@[m
+ 	<%= javascript_include_tag "barcode_items" %>[m
+ <% end %>[m
+ <h1 class="text-center">Box #<%= @box.box_number %> (<%= @box.barcode %>)</h1>[m
+[32m+[m[32m<h3 class="text-center info-title">Add items  by scanning them or selecting them in the dropdown below</h3>[m
+ <div class="center-div box-info" data-box-number="<%= @box.box_number %>" data-id="<%= @box.id %>">[m
+[31m-	<h3 class="text-center info-title">Scan items to add to this Box</h3>[m
+[32m+[m	[32m<%= collection_select(:box, :item_ids, Item.includes(:product).where.not(box_id: @box.id).order("products.name asc"), :id, :name_with_product ,{ prompt: "Please select a Location" }, { class: 'form-control'}) %>[m
+ 	<ul class="list-group main-list">[m
+ 	<% if @items.any? %>[m
+ 		<% @items.each do |item| %>[m
+[31m-			<a href="<%= url_for(item) %>"><li class="list-group-item list-group-item-info" data-barcode="<%= item.barcode %>"><%= item.product.name %> (<%= item.barcode %>)<button type="button" class="close remove-item-box" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></li></a>[m
+[32m+[m			[32m<a href="<%= url_for(item) %>">[m
+[32m+[m				[32m<li class="list-group-item list-group-item-info" data-barcode="<%= item.barcode %>"><%= item.product.name %> (<%= item.barcode %>)[m
+[32m+[m					[32m<button type="button" class="close remove-item-box" data-dismiss="alert" aria-label="Close">[m
+[32m+[m						[32m<span aria-hidden="true">×</span>[m
+[32m+[m					[32m</button>[m
+[32m+[m				[32m</li>[m
+[32m+[m			[32m</a>[m
+ 		<% end %>	[m
+ 	<% end %>[m
+ 	</ul>[m
+[1mdiff --git a/app/views/movements/_movements.html.erb b/app/views/movements/_movements.html.erb[m
+[1mindex ccc35e8..13bf02e 100644[m
+[1m--- a/app/views/movements/_movements.html.erb[m
+[1m+++ b/app/views/movements/_movements.html.erb[m
+[36m@@ -39,4 +39,5 @@[m
+       <% end %>[m
+     </tbody>[m
+   </table>[m
+[31m-</div>[m
+\ No newline at end of file[m
+[32m+[m[32m</div>[m
+[32m+[m[32m<%= will_paginate @movements, renderer: BootstrapPagination::Rails %>[m
+\ No newline at end of file[m

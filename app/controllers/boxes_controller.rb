@@ -48,7 +48,8 @@ class BoxesController < ApplicationController
 		@scans = params.require(:scanned_items)
 		@itemsRetreived = Item.joins(:product).where(barcode: @scans).order(:barcode)
 		@itemsNotInBoxes = @itemsRetreived.select(:id, :barcode, :name).where(box_id: nil)
-		@itemsInBoxes = @itemsRetreived.select(:id, :box_id, :box_number, :barcode, :name).joins(:box).where.not(box_id: nil)
+		@itemsNotInBoxes = @itemsNotInBoxes.map
+		@itemsInBoxes = @itemsRetreived.select(:id, :box_id, :box_number, :barcode, :name).joins(:box).where.not(box_id: nil).map
 		@oldItemsBoxes = {}
 		@itemsInBoxes.each do |item|
 			@oldItemsBoxes[item.id] = item.box.box_number
