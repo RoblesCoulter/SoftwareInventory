@@ -83,4 +83,18 @@ th .desc {
   display: none;
 }
 
+a.addedItem {
+  color: #3C763D
+}
 
+a.addedItem:hover {
+  color: #3C763D;
+}
+
+a.movedItem {
+  color: #8A6D3B;
+}
+
+a.movedItem:hover {
+  color: #8A6D3B;
+}
