@@ -1,4 +1,6 @@
 class Product < ActiveRecord::Base
+	has_paper_trail
+
 	has_many :items, dependent: :destroy
 	belongs_to :category
 	validates :name, presence: true

@@ -62,6 +62,8 @@ gem 'axlsx'
 
 gem 'prawn'
 
+gem 'paper_trail', '~> 4.0.0'
+
 group :production do
 	# See https://github.com/sstephenson/execjs#readme for more supported runtimes
 	gem 'therubyracer',  platforms: :ruby
