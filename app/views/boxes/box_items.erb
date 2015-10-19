@@ -5,7 +5,7 @@
 <h3 class="text-center info-title">Add items  by scanning them or selecting them in the dropdown below</h3>
 <div class="center-div box-info" data-box-number="<%= @box.box_number %>" data-id="<%= @box.id %>">
 	<%= collection_select(:box, :item_ids, Item.includes(:product).where.not(box_id: @box.id).order("products.name asc"), :id, :name_with_product ,{ prompt: "Please select a Location" }, { class: 'form-control'}) %>
-	<ul class="list-group main-list">
+	<ul class="list-group main-list top-index-btn">
 	<% if @items.any? %>
 		<% @items.each do |item| %>
 			<a href="<%= url_for(item) %>">

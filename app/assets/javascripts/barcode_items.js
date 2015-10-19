@@ -1,6 +1,5 @@
 
 $(function(){
-	console.log("Calling Barcode JS");
 	var omaig = new Set();
 	$(".main-list li").each(function(){ 
 		omaig.add($(this).data("barcode"));
@@ -54,10 +53,8 @@ $(function(){
 			}
 	});
 
-	$(".remove-item-box").on("click", function(){
+	$(".main-list").on("click", ".remove-item-box", function(){
 		var barcode = $(this).closest("li").data("barcode");
-		var text = $(this).closest("li").text();
-		console.log(barcode)
 		var box_id = $(".box-info").data("id");
 		if(barcode){
 			$.ajax({
@@ -67,7 +64,7 @@ $(function(){
 				dataType: "json",
 				contentType: "application/json"
 			}).done(function(data){
-
+				omaig.delete(barcode);
 			});
 		}
 	});
@@ -95,15 +92,12 @@ $(function(){
 				var notFoundItems = data.notfound;
 				var movedFromBoxItems = data.movedfrombox;
 				var oldboxesid = data.oldboxesid;
-				console.log(notInBoxItems);
 
 				notInBoxItems.forEach(function(v){
-					
-					$(".main-list").append("<li class='list-group-item list-group-item-success' data-barcode='"+v.barcode+"'><h4 class='list-group-item-heading'>" + v.name + " ("+ v.barcode + ")</h4><p class='list-group-item-text'>Succesfully added to Box #"+box_number+"</p></li>");
+					$(".main-list").append("<li class='list-group-item list-group-item-success' data-barcode='"+v.barcode+"'><button type='button' class='close remove-item-box' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><a class='addedItem' href='/items/"+v.id+"'><h4 class='list-group-item-heading'>" + v.name + " ("+ v.barcode + ")</h4></a><p class='list-group-item-text'>Succesfully added to Box #"+box_number+"</p></li>");
 				});
 				movedFromBoxItems.forEach(function(v){
-					console.log(v);
-					$(".main-list").append("<li class='list-group-item list-group-item-warning' data-barcode='"+v.barcode+"'><h4 class='list-group-item-heading'>"+ v.name +" ("+ v.barcode + ")</h4><p class='list-group-item-text'>Moved from Box #"+oldboxesid[v.id]+" to Box #"+ box_number +"</p></li>");
+					$(".main-list").append("<li class='list-group-item list-group-item-warning' data-barcode='"+v.barcode+"'><button type='button' class='close remove-item-box' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><a class='movedItem' href='/items/"+v.id+"'><h4 class='list-group-item-heading'>"+ v.name +" ("+ v.barcode + ")</h4></a><p class='list-group-item-text'>Moved from Box #"+oldboxesid[v.id]+" to Box #"+ box_number +"</p></li>");
 				});
 				omaig = new Set();
 				$(".main-list li").each(function(){ 
