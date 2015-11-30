@@ -6,9 +6,9 @@
  via <%= @movement.delivery_method %>
 <% end %>
 </h1>
-
-<div class="center-div movement-info" data-id="<%= @movement.id %>">
-	<h3 class="text-center info-title">Scan boxes to add to this Movement</h3>
+<h3 class="text-center info-title">Add boxes by scanning them or selecting them in the dropdown below</h3>
+<div class="center-div movement-info" data-origin="<%= @movement.origin %>" data-destination="<%= @movement.destination %>" data-id="<%= @movement.id %>">
+	<%= collection_select(:movement, :box_ids, Box.all.order("box_number") - Movement.find(@movement.id).boxes, :barcode, :box_number_with_barcode, { :include_blank => "Select a Box" }, { class: "form-control box-dropdown top-index-btn"}) %>
 	<ul class="list-group main-list">
 	<% if @boxes.any? %>
 		<% @boxes.each do |box| %>

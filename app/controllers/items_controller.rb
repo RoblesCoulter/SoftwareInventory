@@ -147,6 +147,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def item_dropdown
+    @box_id = params.require(:box_id)
+    @items = Item.includes(:product).where("box_id != ? OR box_id IS NULL", @box_id).order("products.name asc").map { |i| [i.barcode, i.product.name, i.product.brand ]}
+    respond_to do |format|
+      format.json { render json: [{ items: @items }]}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item

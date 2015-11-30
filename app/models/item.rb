@@ -7,7 +7,6 @@ class Item < ActiveRecord::Base
 	validates :price, numericality: { allow_blank: true }
 	validates :barcode, :product_id, presence: true
 	belongs_to :condition
-	
 	def name_with_product
 		@product_name = self.product.name_with_brand
 		"#{@product_name} (#{barcode})"

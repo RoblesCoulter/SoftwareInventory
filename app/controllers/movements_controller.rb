@@ -36,7 +36,7 @@ class MovementsController < ApplicationController
   end
 
   def movement_boxes
-    @boxes = @movement.boxes
+    @boxes = @movement.boxes.order(:box_number)
   end
 
   def return
@@ -111,6 +111,14 @@ class MovementsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to movements_url, notice: 'Movement was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def box_dropdown
+    @movement_id = params.require(:movement_id)
+    @boxes = (Box.all.order("box_number") - Movement.find(@movement.id).boxes)
+    respond_to do |format|
+      format.json { render json: [{ boxes: @boxes }]}
     end
   end
 

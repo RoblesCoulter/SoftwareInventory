@@ -6,6 +6,8 @@
       <tr>
         <th><%= sortable "name" %></th>
         <th><%= sortable "country"%></th>
+        <th><%= sortable "responsible" %></th>
+        <th><%= sortable "email" %></th>
         <th><%= sortable "created_at", "Creation date" %></th>
         <th><%= sortable "updated_at", "Last updated"%></th>
         <th>Options</th>
@@ -17,6 +19,8 @@
         <tr>
           <td><%= location.name %></td>
           <td><%= location.country %></td>
+          <td><%= location.responsible%></td>
+          <td><%= location.email %></td>
           <td><%= local_time_ago(location.created_at) %></td>
           <td><%= local_time_ago(location.updated_at) %></td>
           <td><% if current_user.admin? %>

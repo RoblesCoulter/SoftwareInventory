@@ -7,6 +7,14 @@
 	<strong>Country:</strong>
 	<%= @location.country %>
 </div>
+<div>
+	<strong>Responsible:</strong>
+	<%= @location.responsible %>
+</div>
+<div>
+	<strong>Email:</strong>
+	<%= @location.email %>
+</div>
 <% if current_user.admin? %>
 	<%= link_to 'Edit', edit_location_path(@location) %> |
 <% end %>

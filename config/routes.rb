@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   end
 
   get 'items/:id/remove_photo', to: 'items#remove_photo', as: 'remove_photo_item'
+  get 'items/item_dropdown', to: 'items#item_dropdown', as: 'item_dropdown'
   get 'boxes/:id/remove_photo', to: 'boxes#remove_photo', as: 'remove_photo_box'
+
 
   resources :movements do
     member do
