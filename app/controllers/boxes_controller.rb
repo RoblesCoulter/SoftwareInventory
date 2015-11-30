@@ -109,7 +109,9 @@ class BoxesController < ApplicationController
 
 			#delete old entry
 			if @box.photo
-				delete_entry(@box.photo, client)
+				if Rails.env.production?
+					delete_entry(@box.photo, client)
+				end
 			end
 
 			#upload new entry
@@ -149,9 +151,12 @@ class BoxesController < ApplicationController
 	# DELETE /boxes/1.json
 	def destroy
 		@page = params[:page]
+
 		if @box.photo
-			client = kaltura_setup
-			delete_entry(@box.photo, client)
+			if Rails.env.production?
+				client = kaltura_setup
+				delete_entry(@box.photo, client)
+			end
 		end
 
 		@box.destroy
@@ -163,8 +168,11 @@ class BoxesController < ApplicationController
 
 	def remove_photo
 		if @box.photo
-			client = kaltura_setup
-			delete_entry(@box.photo, client)
+			if Rails.env.production?
+				client = kaltura_setup
+				delete_entry(@box.photo, client)
+			end
+
 			@box.photo = nil
 			@box.save
 		end
@@ -190,7 +198,7 @@ class BoxesController < ApplicationController
 		end
 		# Never trust parameters from the scary internet, only allow the white list through.
 		def box_params
-			params.require(:box).permit(:barcode,:location_id, :weight, :height, :width, :depth, :box_number, :photo, :condition_id, :description)
+			params.require(:box).permit(:barcode,:location_id, :weight, :height, :width, :depth, :box_number, :photo, {:condition_ids => []}, :description)
 		end
 
 		def logged_in_user

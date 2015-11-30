@@ -101,6 +101,10 @@ GEM
       mini_portile (~> 0.6.0)
     nokogiri (1.6.6.2-x86-mingw32)
       mini_portile (~> 0.6.0)
+    paper_trail (4.0.0)
+      activerecord (>= 3.0, < 6.0)
+      activesupport (>= 3.0, < 6.0)
+      request_store (~> 1.1)
     pdf-core (0.6.0)
     pg (0.18.2)
     pg (0.18.2-x86-mingw32)
@@ -151,6 +155,7 @@ GEM
     rdoc (4.2.0)
       json (~> 1.4)
     ref (1.0.5)
+    request_store (1.2.0)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -228,6 +233,7 @@ DEPENDENCIES
   jquery-ui-rails
   local_time
   mysql2
+  paper_trail (~> 4.0.0)
   pg
   prawn
   rails (= 4.2.1)

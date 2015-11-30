@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	has_paper_trail
+	
 	attr_accessor :remember_token, :reset_token
 
 	before_save { self.email = email.downcase }

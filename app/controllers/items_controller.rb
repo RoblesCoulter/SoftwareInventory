@@ -80,7 +80,7 @@ class ItemsController < ApplicationController
       client = kaltura_setup
 
       #delete old entry
-      if @item.photo
+      if @item.photo and Rails.env.production?
         delete_entry(@item.photo, client)
       end
 
@@ -121,7 +121,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    if @item.photo
+    if @item.photo and Rails.env.production?
       client = kaltura_setup
       delete_entry(@item.photo, client)
     end
@@ -135,8 +135,11 @@ class ItemsController < ApplicationController
 
   def remove_photo
     if @item.photo
-      client = kaltura_setup
-      delete_entry(@item.photo, client)
+      if Rails.env.production?
+        client = kaltura_setup
+        delete_entry(@item.photo, client)
+      end
+      
       @item.photo = nil
       @item.save
     end
