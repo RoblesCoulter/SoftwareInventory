@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019180403) do
+ActiveRecord::Schema.define(version: 20151103212251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,11 @@ ActiveRecord::Schema.define(version: 20151019180403) do
   add_index "boxes", ["condition_id"], name: "index_boxes_on_condition_id", using: :btree
   add_index "boxes", ["location_id"], name: "index_boxes_on_location_id", using: :btree
 
+  create_table "boxes_conditions", id: false, force: :cascade do |t|
+    t.integer "box_id",       null: false
+    t.integer "condition_id", null: false
+  end
+
   create_table "boxes_movements", id: false, force: :cascade do |t|
     t.integer "box_id"
     t.integer "movement_id"
@@ -54,6 +59,11 @@ ActiveRecord::Schema.define(version: 20151019180403) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "conditions_items", id: false, force: :cascade do |t|
+    t.integer "condition_id", null: false
+    t.integer "item_id",      null: false
   end
 
   create_table "items", force: :cascade do |t|
