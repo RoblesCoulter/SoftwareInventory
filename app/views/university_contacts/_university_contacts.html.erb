@@ -1,0 +1,37 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort]%>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sortable "name" %></th>
+        <th><%= sortable "email" %></th>
+        <th><%= sortable "skype" %></th>
+        <th><%= sortable "role" %></th>
+        <th><%= sortable "created_at", "Creation date" %></th>
+        <th><%= sortable "updated_at", "Last updated"%></th>
+        <th>Options</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @university_contacts.each do |contact| %>
+        <tr>
+          <td><%= contact.name %></td>
+          <td><%= contact.email %></td>
+          <td><%= contact.skype %></td>
+          <td><%= contact.role %></td>
+          <td><%= local_time_ago(contact.created_at) %></td>
+          <td><%= local_time_ago(contact.updated_at) %></td>
+          <td><%= link_to 'Show', contact %> |
+          <% if current_user.admin? %>
+            <%= link_to 'Edit', edit_university_contact_path(contact) %> |
+            <%= link_to 'Delete', contact, method: :delete %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @university_contacts, renderer: BootstrapPagination::Rails %>

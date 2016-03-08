@@ -1,0 +1,17 @@
+<h1 class="text-center">Embed Code Universities</h1>
+
+<%= search_form_for @q, url: embed_code_universities_path(page: 1), html: { method: :get, class: "form-inline form-main-search", id: "ajax_search"} do |f| %>
+	<div class="form-group">
+		<%= f.search_field :acronym_or_name_or_comments_cont, class: "form-control" %>
+		<%= f.submit "Search", :name => nil, class: "incread-width btn btn-primary"%>
+	</div>
+	<% if current_user.admin? %>
+		<%= link_to 'Add University', new_embed_code_university_path, class: "top-index-btn btn btn-success" %>
+		<%= link_to 'University Contacts', university_contacts_path, class: "top-index-btn btn btn-success" %>
+	<% end %>
+  	<div id="ajax_objects" ><%= render 'embed_code_universities' %></div>
+<% end %>
+<% if current_user.admin? %>
+  <%= link_to 'Add University', new_embed_code_university_path, class: "btn btn-success" %>
+  <%= link_to 'University Contacts', university_contacts_path, class: "top-index-btn btn btn-success" %>
+<% end %>

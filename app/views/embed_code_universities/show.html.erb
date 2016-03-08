@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Acronym:</strong>
+  <%= @embed_code_university.acronym %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @embed_code_university.name %>
+</p>
+
+<p>
+  <strong>Code status:</strong>
+  <%= @embed_code_university.comments %>
+</p>
+
+</p>
+
+<p>
+  <strong>Test user:</strong>
+  <%= @embed_code_university.test_user %>
+</p>
+
+<p>
+  <strong>Test password:</strong>
+  <%= @embed_code_university.test_password %>
+</p>
+
+<p>
+  <strong>Test site:</strong>
+  <%= @embed_code_university.test_site %>
+</p>
+
+<%= link_to 'Edit', edit_embed_code_university_path(@embed_code_university) %> |
+<%= link_to 'Back', embed_code_universities_path %>

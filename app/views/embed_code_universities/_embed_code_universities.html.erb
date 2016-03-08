@@ -1,0 +1,42 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort]%>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sortable "acronym" %></th>
+        <th><%= sortable "name" %></th>
+        
+        <th><%= sortable "test_site" %></th>
+        <th><%= sortable "test_user" %></th>
+        <th><%= sortable "test_password" %></th>
+        <th><%= sortable "comments" %></th>
+        <th><%= sortable "created_at", "Creation date" %></th>
+        <th><%= sortable "updated_at", "Last updated"%></th>
+        <th>Options</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @embed_code_universities.each do |university| %>
+        <tr>
+          <td><%= university.acronym %></td>
+          <td><%= university.name %></td>
+          <td><%= university.test_site %></td>
+          <td><%= university.test_user %></td>
+          <td><%= university.test_password %></td>
+          <td><%= university.comments %></td>
+          <td><%= local_time_ago(university.created_at) %></td>
+          <td><%= local_time_ago(university.updated_at) %></td>
+          <td><%= link_to 'Show', university %> |
+          <% if current_user.admin? %>
+            <%= link_to 'Edit', edit_embed_code_university_path(university) %> |
+            <%= link_to 'Delete', university, method: :delete %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @embed_code_universities, renderer: BootstrapPagination::Rails %>

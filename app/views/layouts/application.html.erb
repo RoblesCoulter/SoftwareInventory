@@ -35,7 +35,7 @@
               <li><%= link_to "Products", products_path , class: "", method: :get %></li>
               <li><%= link_to "Software Serials", software_serials_path , :class => "", method: :get %></li>
               <li><%= link_to "Softwares", softwares_path , class: "", method: :get %></li>
-              
+
               <li class="dropdown">
                   <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Additional Configurations <span class="caret"></span></a>
                   <ul class="dropdown-menu">
@@ -52,14 +52,14 @@
                   <li><%= link_to "Boxes per movement", boxes_per_movement_index_path, class: "", method: :get %></li>
                 </ul>
               </li>
-
+              <li><%= link_to "Embed Universities", embed_code_universities_path , class: "", method: :get  %></li>
               <% if current_user.admin? %>
                 <li><%= link_to "Users", users_path, class: "", method: :get %></li>
               <% end %>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              
+
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   Account <b class="caret"></b>
@@ -90,7 +90,7 @@
 
     <!-- Content -->
     <div class="container">
-      
+
       <% flash.each do |message_type, message| %>
       <div class="alert alert-info alert-dismissible fade in" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>

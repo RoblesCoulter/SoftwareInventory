@@ -1,0 +1,25 @@
+LOG:  database system was shut down at 2016-02-16 15:43:41 CST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  role "postgres" does not exist
+FATAL:  database "roblescoulter" does not exist
+FATAL:  database "roblescoulter" does not exist
+FATAL:  database "SoftwareInventory" does not exist
+FATAL:  role "postgres" does not exist
+FATAL:  role "postgres" does not exist
+FATAL:  database "SoftwareInventoryDB" does not exist
+FATAL:  role "postgres" does not exist
+FATAL:  role "postgres" does not exist
+FATAL:  role "postgres" does not exist
+FATAL:  role "postgres" does not exist
+FATAL:  database "/du" does not exist
+FATAL:  role "postgres" does not exist
+FATAL:  role "postgres" does not exist
+FATAL:  database "roblescoulter" does not exist
+FATAL:  database "roblescoulter" does not exist
+FATAL:  database "roblescoulter" does not exist
+LOG:  autovacuum launcher shutting down
+LOG:  received smart shutdown request
+LOG:  shutting down
+LOG:  database system is shut down

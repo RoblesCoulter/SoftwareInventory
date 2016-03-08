@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20151109160903) do
+ActiveRecord::Schema.define(version: 20160308160342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,11 +34,6 @@ ActiveRecord::Schema.define(version: 20151109160903) do
   add_index "boxes", ["barcode"], name: "index_boxes_on_barcode", unique: true, using: :btree
   add_index "boxes", ["condition_id"], name: "index_boxes_on_condition_id", using: :btree
   add_index "boxes", ["location_id"], name: "index_boxes_on_location_id", using: :btree
-
-  create_table "boxes_conditions", id: false, force: :cascade do |t|
-    t.integer "box_id",       null: false
-    t.integer "condition_id", null: false
-  end
 
   create_table "boxes_movements", id: false, force: :cascade do |t|
     t.integer "box_id"
@@ -65,6 +59,17 @@ ActiveRecord::Schema.define(version: 20151109160903) do
   create_table "conditions_items", id: false, force: :cascade do |t|
     t.integer "condition_id", null: false
     t.integer "item_id",      null: false
+  end
+
+  create_table "embed_code_universities", force: :cascade do |t|
+    t.string   "acronym"
+    t.string   "name"
+    t.string   "test_user"
+    t.string   "test_password"
+    t.string   "test_site"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.text     "comments"
   end
 
   create_table "items", force: :cascade do |t|
@@ -151,6 +156,23 @@ ActiveRecord::Schema.define(version: 20151109160903) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "universities_contacts", id: false, force: :cascade do |t|
+    t.integer "university_contact_id"
+    t.integer "embed_code_university_id"
+  end
+
+  add_index "universities_contacts", ["embed_code_university_id"], name: "index_universities_contacts_on_embed_code_university_id", using: :btree
+  add_index "universities_contacts", ["university_contact_id"], name: "index_universities_contacts_on_university_contact_id", using: :btree
+
+  create_table "university_contacts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "skype"
+    t.string   "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

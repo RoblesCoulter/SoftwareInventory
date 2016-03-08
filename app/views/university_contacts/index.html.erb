@@ -1,0 +1,15 @@
+<h1 class="text-center">University Contacts</h1>
+
+<%= search_form_for @q, url: university_contacts_path(page: 1), html: { method: :get, class: "form-inline form-main-search", id: "ajax_search"} do |f| %>
+  <div class="form-group">
+    <%= f.search_field :name_or_email_or_skype_or_role_cont, class: "form-control" %>
+    <%= f.submit "Search", :name => nil, class: "incread-width btn btn-primary"%>
+  </div>
+  <% if current_user.admin? %>
+    <%= link_to 'Add Contact', new_university_contact_path, class: "top-index-btn btn btn-success" %>
+  <% end %>
+    <div id="ajax_objects" ><%= render 'university_contacts' %></div>
+<% end %>
+<% if current_user.admin? %>
+  <%= link_to 'Add Contact', new_university_contact_path, class: "btn btn-success" %>
+<% end %>

@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  resources :conditions
   root 'welcome#index'
-  # get 'user/new'
-  # get 'signup' => 'users#new'
   get 'password_resets/new'
   get 'password_resets/edit'
   get 'login' => 'sessions#new'
@@ -26,10 +23,10 @@ Rails.application.routes.draw do
       get 'movement_boxes'
       get 'return'
       post 'add_scans'
-      post 'remove_box' 
+      post 'remove_box'
     end
   end
-  resources :software_serials, :softwares, :categories, :products, :items, :users, :locations
+  resources :software_serials, :softwares, :categories, :products, :items, :users, :locations, :conditions, :university_contacts, :embed_code_universities
   resources :password_resets, only: [:new, :create, :edit, :update]
   # get 'boxes/add_item/:id', to: 'boxes#add_item', as: 'add_item'
 
