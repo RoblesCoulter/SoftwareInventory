@@ -73,6 +73,14 @@ class EmbedCodeUniversitiesController < ApplicationController
 		end
 	end
 
+	def university_contacts
+		@id = params.require(:university_id)
+		@contacts = EmbedCodeUniversity.find(@id).university_contacts
+		respond_to do |format|
+			format.json { render json: @contacts }
+		end
+	end
+
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_embed_code_university

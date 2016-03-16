@@ -21,6 +21,11 @@
   width: auto;
 }
 
+.table-hover>tbody>tr:hover>td.hover-me, .table-hover>tbody>tr:hover>th {
+  background-color: #F15D22;
+  color:#eeeeee;
+}
+
 .laureatelogo {
   padding: 5px 15px 5px 15px;
 }
@@ -99,3 +104,98 @@ a.movedItem {
 a.movedItem:hover {
   color: #8A6D3B;
 }
+
+/********** LOADING ANIMATION ********/
+  .content-loader {
+  max-width: 60px;
+  position: relative;
+  /*Remove when loader becomes a module*/
+  height: 450px;
+  padding-top: 220px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+@media only screen and (max-width: 40em) {
+  .content-loader {
+    padding-top: 100px;
+  }
+}
+.content-loader:after {
+  position: absolute;
+  display: block;
+  content: '';
+  clear: both;
+}
+.content-loader .dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  float: left;
+  margin-right: 6px;
+  margin-top: 2px;
+  border-radius: 50%;
+  opacity: 0;
+  background-color: #666666;
+  -webkit-transform-origin: center center;
+      -ms-transform-origin: center center;
+          transform-origin: center center;
+  -webkit-animation-name: pulse;
+          animation-name: pulse;
+  -webkit-animation-duration: 1.2s;
+          animation-duration: 1.2s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+.content-loader .dot:nth-child(2) {
+  width: 14px;
+  height: 14px;
+  margin-top: 0;
+  -webkit-animation-delay: .12s;
+          animation-delay: .12s;
+}
+.content-loader .dot:nth-child(3) {
+  -webkit-animation-delay: .24s;
+          animation-delay: .24s;
+}
+.content-loader .dot.orange {
+  background-color: #F35908;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    opacity: .15;
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  24% {
+    opacity: 1;
+    -webkit-transform: scale(1.2, 0.2);
+            transform: scale(1.2, 0.2);
+  }
+  48% {
+    opacity: .15;
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: .15;
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  24% {
+    opacity: 1;
+    -webkit-transform: scale(1.2, 0.2);
+            transform: scale(1.2, 0.2);
+  }
+  48% {
+    opacity: .15;
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+}
+
+/******** END LOADING ANIMATION *********/

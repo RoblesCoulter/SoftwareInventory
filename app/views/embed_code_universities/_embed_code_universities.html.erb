@@ -1,42 +1,73 @@
 <%= hidden_field_tag :direction, params[:direction] %>
 <%= hidden_field_tag :sort, params[:sort]%>
 <div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th><%= sortable "acronym" %></th>
-        <th><%= sortable "name" %></th>
-        
-        <th><%= sortable "test_site" %></th>
-        <th><%= sortable "test_user" %></th>
-        <th><%= sortable "test_password" %></th>
-        <th><%= sortable "comments" %></th>
-        <th><%= sortable "created_at", "Creation date" %></th>
-        <th><%= sortable "updated_at", "Last updated"%></th>
-        <th>Options</th>
-      </tr>
-    </thead>
+  <table class="table table-striped table-hover">
+	<thead>
+	  <tr>
+		<th><%= sortable "acronym" %></th>
+		<th><%= sortable "name" %></th> 
+		<th><%= sortable "test_site" %></th>
+		<th><%= sortable "test_user" %></th>
+		<th><%= sortable "test_password" %></th>
+		<th><%= sortable "comments" %></th>
+		<th><%= sortable "created_at", "Creation date" %></th>
+		<th><%= sortable "updated_at", "Last updated"%></th>
+		<th>Options</th>
+	  </tr>
+	</thead>
 
-    <tbody>
-      <% @embed_code_universities.each do |university| %>
-        <tr>
-          <td><%= university.acronym %></td>
-          <td><%= university.name %></td>
-          <td><%= university.test_site %></td>
-          <td><%= university.test_user %></td>
-          <td><%= university.test_password %></td>
-          <td><%= university.comments %></td>
-          <td><%= local_time_ago(university.created_at) %></td>
-          <td><%= local_time_ago(university.updated_at) %></td>
-          <td><%= link_to 'Show', university %> |
-          <% if current_user.admin? %>
-            <%= link_to 'Edit', edit_embed_code_university_path(university) %> |
-            <%= link_to 'Delete', university, method: :delete %>
-          <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
+	<tbody>
+	  <% @embed_code_universities.each do |university| %>
+		<tr data-toggle="modal"  data-acronym="<%= university.acronym %>" data-target="#contacts-modal" data-id="<%= university.id %>">
+		  <td class="hover-me"><%= university.acronym %></td>
+		  <td class="hover-me"><%= university.name %></td>
+		  <td class="hover-me"><%= university.test_site %></td>
+		  <td class="hover-me"><%= university.test_user %></td>
+		  <td class="hover-me"><%= university.test_password %></td>
+		  <td class="hover-me"><%= university.comments %></td>
+		  <td class="hover-me"><%= local_time_ago(university.created_at) %></td>
+		  <td class="hover-me"><%= local_time_ago(university.updated_at) %></td>
+		  <td><%= link_to 'Show', university %> |
+		  <% if current_user.admin? %>
+			<%= link_to 'Edit', edit_embed_code_university_path(university) %> |
+			<%= link_to 'Delete', university, method: :delete %>
+		  <% end %>
+		  </td>
+		</tr>
+	  <% end %>
+	</tbody>
   </table>
 </div>
 <%= will_paginate @embed_code_universities, renderer: BootstrapPagination::Rails %>
+<div class="modal fade" id="contacts-modal" tabindex="-1" role="dialog" aria-labelledby="gridUniversityContactModal">
+  <div class="modal-dialog">
+	
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+			<div class="content-loader loader--wide">
+			  <span class="dot"></span>
+			  <span class="dot"></span>
+			  <span class="dot"></span>
+			</div>
+			<h3 class=" loading-hidden">University Contacts</h3>
+		</div>
+		<div class="modal-body">
+			<h5>University contacts for: <span class="modal-acronym"></span></h5>
+			<table class="table table-striped" id="tblGrid" >
+				<thead id="tblHead">
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Skype</th>
+						<th class="text-right">Role</th>
+					</tr>
+				</thead>
+				<tbody class="populate-university-contacts">
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+  </div>
+</div>
