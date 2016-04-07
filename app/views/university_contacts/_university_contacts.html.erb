@@ -1,7 +1,7 @@
 <%= hidden_field_tag :direction, params[:direction] %>
 <%= hidden_field_tag :sort, params[:sort]%>
 <div class="table-responsive">
-  <table class="table table-striped">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th><%= sortable "name" %></th>
@@ -16,13 +16,13 @@
 
     <tbody>
       <% @university_contacts.each do |contact| %>
-        <tr>
-          <td><%= contact.name %></td>
-          <td><%= contact.email %></td>
-          <td><%= contact.skype %></td>
-          <td><%= contact.role %></td>
-          <td><%= local_time_ago(contact.created_at) %></td>
-          <td><%= local_time_ago(contact.updated_at) %></td>
+        <tr data-toggle="modal"  data-acronym="<%= contact.name %>" data-target="#universities-modal" data-id="<%= contact.id %>">
+          <td class="hover-me" ><%= contact.name %></td>
+          <td class="hover-me" ><%= contact.email %></td>
+          <td class="hover-me" ><%= contact.skype %></td>
+          <td class="hover-me" ><%= contact.role %></td>
+          <td class="hover-me" ><%= local_time_ago(contact.created_at) %></td>
+          <td class="hover-me" ><%= local_time_ago(contact.updated_at) %></td>
           <td><%= link_to 'Show', contact %> |
           <% if current_user.admin? %>
             <%= link_to 'Edit', edit_university_contact_path(contact) %> |
@@ -35,3 +35,39 @@
   </table>
 </div>
 <%= will_paginate @university_contacts, renderer: BootstrapPagination::Rails %>
+<div class="modal fade" id="universities-modal" tabindex="-1" role="dialog" aria-labelledby="gridContactUniversityModal">
+  <div class="modal-dialog">
+  
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+      <h3>Contact Universities</h3>
+      <div class="content-loader loader--wide">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      
+    </div>
+    <div class="modal-body hidden">
+      <h4>Universities for: <span class="modal-name"></span></h4>
+      <div class="table-responsive">
+      <table class="table table-striped" id="tblGrid" >
+        <thead id="tblHead">
+          <tr>
+            <th>Acronym</th>
+            <th>Name</th>
+            <th class="text-right">Comments</th>
+          </tr>
+        </thead>
+        <tbody class="contact-universities-list">
+          
+        </tbody>
+      </table>
+      </div>
+        <%= link_to 'Create New University', new_embed_code_university_path, class: "btn btn-success new-university-btn" %>
+        <%= link_to 'Add Existing University', new_embed_code_university_path, class: "btn btn-success" %>
+    </div>
+  </div>
+  </div>
+</div>

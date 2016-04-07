@@ -7,9 +7,11 @@
   </div>
   <% if current_user.admin? %>
     <%= link_to 'Add Contact', new_university_contact_path, class: "top-index-btn btn btn-success" %>
+    <%= link_to 'Embed Code Universities', embed_code_universities_path, class: "top-index-btn btn btn-success" %>
   <% end %>
     <div id="ajax_objects" ><%= render 'university_contacts' %></div>
 <% end %>
 <% if current_user.admin? %>
   <%= link_to 'Add Contact', new_university_contact_path, class: "btn btn-success" %>
+  <%= link_to 'Embed Code Universities', embed_code_universities_path, class: "top-index-btn btn btn-success" %>
 <% end %>

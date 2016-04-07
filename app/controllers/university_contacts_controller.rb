@@ -26,6 +26,14 @@ class UniversityContactsController < ApplicationController
   # GET /university_contacts/new
   def new
     @university_contact = UniversityContact.new
+    if params[:university_id]
+      university_id = params.require(:university_id)
+    end
+    #if university_id
+     # @university_contact.university_id = university_id
+      #@university_contact.embed_code_universities << EmbedCodeUniversity.find(university_id)
+    #end
+    
   end
 
   # GET /university_contacts/1/edit
@@ -36,7 +44,11 @@ class UniversityContactsController < ApplicationController
   # POST /university_contacts.json
   def create
     @university_contact = UniversityContact.new(university_contact_params)
-
+    
+    if params[:university_id]
+      university = params.require(:university_id)
+      @university_contact.embed_code_universities << EmbedCodeUniversity.find(university)
+    end
     respond_to do |format|
       if @university_contact.save
         format.html { redirect_to university_contacts_url, notice: 'University contact was successfully created.' }
@@ -72,6 +84,15 @@ class UniversityContactsController < ApplicationController
     end
   end
 
+  def embed_code_universities
+    @id = params.require(:contact_id)
+    @universities = UniversityContact.find(@id).embed_code_universities
+    respond_to do |format|
+      format.json { render json: @universities }
+    end
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_university_contact
@@ -88,7 +109,7 @@ class UniversityContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def university_contact_params
-      params.require(:university_contact).permit(:name, :email, :skype, :role)
+      params.require(:university_contact).permit(:name, :email, :skype, :role, :university_id)
     end
 
     def logged_in_user

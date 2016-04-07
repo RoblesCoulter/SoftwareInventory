@@ -1,6 +1,10 @@
 <div class="center-div">
 	<%= link_to 'Back', university_contacts_path, class: "btn btn-warning" %>
 	<h1 class="text-center">New Contact</h1>
-	<%= render 'form' %>
+	<% if params[:university_id] %>
+		<%= render 'form', university_id: params[:university_id] %>   	
+  	<% else %>
+  		<%= render 'form' %> 
+  	<% end %>
 	<%= yield(:university_contact_validators) %>
 </div>

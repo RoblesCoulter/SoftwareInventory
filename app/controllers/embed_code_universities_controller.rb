@@ -27,6 +27,9 @@ class EmbedCodeUniversitiesController < ApplicationController
 	# GET /embed_code_universities/new
 	def new
 		@embed_code_university = EmbedCodeUniversity.new
+		if params[:contact_id]
+			contact_id = params.require(:contact_id)
+		end
 	end
 
 	# GET /embed_code_universities/1/edit
@@ -37,6 +40,11 @@ class EmbedCodeUniversitiesController < ApplicationController
 	# POST /embed_code_universities.json
 	def create
 		@embed_code_university = EmbedCodeUniversity.new(embed_code_university_params)
+
+		if params[:contact_id]
+			contact = params.require(:contact_id)
+			@embed_code_university.university_contacts << UniversityContact.find(contact)
+		end
 
 		respond_to do |format|
 			if @embed_code_university.save

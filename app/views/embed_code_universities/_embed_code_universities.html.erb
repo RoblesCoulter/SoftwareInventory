@@ -45,15 +45,17 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+			<h3>University Contacts</h3>
 			<div class="content-loader loader--wide">
 			  <span class="dot"></span>
 			  <span class="dot"></span>
 			  <span class="dot"></span>
 			</div>
-			<h3 class=" loading-hidden">University Contacts</h3>
+			
 		</div>
-		<div class="modal-body">
-			<h5>University contacts for: <span class="modal-acronym"></span></h5>
+		<div class="modal-body hidden">
+			<h4>University contacts for: <span class="modal-acronym"></span></h4>
+			<div class="table-responsive">
 			<table class="table table-striped" id="tblGrid" >
 				<thead id="tblHead">
 					<tr>
@@ -63,10 +65,13 @@
 						<th class="text-right">Role</th>
 					</tr>
 				</thead>
-				<tbody class="populate-university-contacts">
+				<tbody class="university-contacts-list">
 					
 				</tbody>
 			</table>
+			</div>
+  			<%= link_to 'Create New Contact', new_university_contact_path, class: "btn btn-success new-contact-btn" %>
+  			<%= link_to 'Add Existing Contact', new_embed_code_university_path, class: "btn btn-success" %>
 		</div>
 	</div>
   </div>
