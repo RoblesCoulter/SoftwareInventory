@@ -93,6 +93,14 @@ class UniversityContactsController < ApplicationController
     
   end
 
+  def contact_dropdown
+    @university_id = params.require(:university_id)
+    @contacts = (UniversityContact.all.order("name") - EmbedCodeUniversity.find(@university_id).university_contacts).map { |e| [ e.id, e.name, e.email ]  }
+    respond_to do |format|
+      format.json { render json: [{ contacts: @contacts }]}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_university_contact

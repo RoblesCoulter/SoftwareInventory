@@ -26,7 +26,7 @@
     <%= f.text_area :comments, class: 'form-control' %>
 
   </div>
-  <% if contact_id %>
+  <% if defined? contact_id and contact_id %>
     <%= hidden_field_tag 'contact_id', params[:contact_id] %>
   <% end %>
   <%= f.submit class: "btn btn-success fullwidthbutton" %>

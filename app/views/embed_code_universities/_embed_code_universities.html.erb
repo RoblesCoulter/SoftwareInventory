@@ -39,40 +39,64 @@
   </table>
 </div>
 <%= will_paginate @embed_code_universities, renderer: BootstrapPagination::Rails %>
-<div class="modal fade" id="contacts-modal" tabindex="-1" role="dialog" aria-labelledby="gridUniversityContactModal">
-  <div class="modal-dialog">
-	
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-			<h3>University Contacts</h3>
-			<div class="content-loader loader--wide">
-			  <span class="dot"></span>
-			  <span class="dot"></span>
-			  <span class="dot"></span>
+<div class="modal fade" id="contacts-modal" tabindex="-1" >
+ 	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+				<h3>University Contacts</h3>
+				<div class="content-loader loader--wide">
+				  <span class="dot"></span>
+				  <span class="dot"></span>
+				  <span class="dot"></span>
+				</div>
 			</div>
-			
-		</div>
-		<div class="modal-body hidden">
-			<h4>University contacts for: <span class="modal-acronym"></span></h4>
-			<div class="table-responsive">
-			<table class="table table-striped" id="tblGrid" >
-				<thead id="tblHead">
-					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Skype</th>
-						<th class="text-right">Role</th>
-					</tr>
-				</thead>
-				<tbody class="university-contacts-list">
-					
-				</tbody>
-			</table>
+			<div class="modal-body hidden">
+				<h4>University contacts for: <span class="modal-acronym"></span></h4>
+				<div class="table-responsive">
+					<table class="table table-striped" id="tblGrid" >
+						<thead id="tblHead">
+							<tr>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Skype</th>
+								<th class="text-right">Role</th>
+							</tr>
+						</thead>
+						<tbody class="university-contacts-list">
+							
+						</tbody>
+					</table>
+				</div>
 			</div>
-  			<%= link_to 'Create New Contact', new_university_contact_path, class: "btn btn-success new-contact-btn" %>
-  			<%= link_to 'Add Existing Contact', new_embed_code_university_path, class: "btn btn-success" %>
+			<div class="modal-footer hidden">
+  				<%= link_to 'Create New Contact', new_university_contact_path, class: "btn btn-success new-contact-btn" %>
+  				<a class="btn btn-success add-contact-btn">Add Existing Contact</a>
+  				<button type="button" data-dismiss="modal" class="btn" >Close</button>
+			</div>
 		</div>
 	</div>
-  </div>
 </div>
+
+<div class="modal fade" id="add-contacts-modal" tabindex="-1" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+					<h3>University Contacts</h3>
+					<div class="content-loader loader--wide">
+					  <span class="dot"></span>
+					  <span class="dot"></span>
+					  <span class="dot"></span>
+					</div>
+			</div>
+			<div class="modal-body hidden">
+				<select class="form-control contact-dropdown"></select>
+			</div>
+			<div class="modal-footer hidden">
+				
+			</div>
+		</div>
+	</div>
+</div>
+

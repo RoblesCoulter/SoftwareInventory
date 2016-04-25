@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get 'items/:id/remove_photo', to: 'items#remove_photo', as: 'remove_photo_item'
   get 'items/item_dropdown', to: 'items#item_dropdown', as: 'item_dropdown'
+  get 'movements/box_dropdown', to: "movements#box_dropdown", as: "box_dropdown"
+  get "university_contacts/contact_dropdown", to: "university_contacts#contact_dropdown", as: "contact_dropdown"
   get 'boxes/:id/remove_photo', to: 'boxes#remove_photo', as: 'remove_photo_box'
   get 'university_contacts/:contact_id/embed_code_universities', to: 'university_contacts#embed_code_universities'
   get 'embed_code_universities/:university_id/university_contacts', to: 'embed_code_universities#university_contacts'

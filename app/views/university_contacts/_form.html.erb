@@ -17,7 +17,7 @@
     <label class="control-label">Role</label><br>
     <%= f.text_field :role, class: 'form-control' %>
   </div>
-  <% if university_id %>
+  <% if defined? university_id and university_id %>
     <%= hidden_field_tag 'university_id', params[:university_id] %>
   <% end %>
   <%= f.submit class: "btn btn-success fullwidthbutton" %>
