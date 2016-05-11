@@ -44,7 +44,7 @@ $(function(){
 							type: "GET",
 							url: url,
 							dataType: "json",
-							contentType: "application/json" 
+							contentType: "application/json"
 						};
 			$.ajax(ajaxCall).done(function(data){
 					var contacts = data;
@@ -62,10 +62,9 @@ $(function(){
 					$("#contacts-modal .modal-body").removeClass("hidden");
 					$("#contacts-modal .modal-footer").removeClass("hidden");
 					$("#contacts-modal .content-loader").addClass("hidden");
-					$("#add-contacts-modal").data("id", id);	
-			});	
-		} 
-		console.log(id);
+					$("#add-contacts-modal").data("id", id);
+			});
+		}
 	});
 
 	$("#universities-modal").on("show.bs.modal", function(event) {
@@ -82,7 +81,7 @@ $(function(){
 							type: "GET",
 							url: url,
 							dataType: "json",
-							contentType: "application/json" 
+							contentType: "application/json"
 						};
 			$.ajax(ajaxCall).done(function(data){
 					var universities = data;
@@ -95,28 +94,29 @@ $(function(){
 						} else {
 							universityNode+= "<td class='text-right'></td>"
 						}
-						
+
 						universityNode += "</tr>";
 						$(universityList).append(universityNode);
 						universityNode = "<tr>";
 					});
 					$("a.new-university-btn").attr("href", "/embed_code_universities/new/"+id);
-					$(".modal-body").removeClass("hidden");
-					$(".content-loader").addClass("hidden");
-			});	
-		} 
+					$("#universities-modal .modal-body").removeClass("hidden");
+					$("#universities-modal .modal-footer").removeClass("hidden");
+					$("#universities-modal .content-loader").addClass("hidden");
+					$("#add-universities-modal").data("id", id);
+			});
+		}
 	});
 
-	$(".add-contact-btn").on("click", function(event){	
+	$(".add-contact-btn").on("click", function(event){
 		$("#contacts-modal").modal('hide');
 		$("#add-contacts-modal").modal('show');
 		var universityId = $("#add-contacts-modal").data("id");
-		var contactList = getContactList(universityId);
-		
+		getContactList(universityId);
+		$("")
 	});
 
 	function getContactList(universityId){
-		console.log(universityId);
 		var ajaxParams = {
 			type: "GET",
 			url: "/university_contacts/contact_dropdown",
@@ -127,7 +127,7 @@ $(function(){
 		$.ajax(ajaxParams).done(function(data){
 			var contacts = data[0].contacts;
 			console.log(contacts);
-			var $dropdown = $(".contact-dropdown");
+			var $dropdown = $("#add-contacts-modal .contact-dropdown");
 			$($dropdown).html("").append($('<option>', {
 				value: "",
 				text: "Select a contact"
@@ -140,5 +140,4 @@ $(function(){
 			});
 		});
 	}
-
 });

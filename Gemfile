@@ -54,7 +54,7 @@ gem 'bcrypt'
 
 gem 'will_paginate-bootstrap'
 
-gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations", branch: "4-2-stable"
+gem 'client_side_validations'
 
 gem 'rest-client'
 
