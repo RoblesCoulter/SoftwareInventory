@@ -15,7 +15,7 @@ class EmbedCodeUniversitiesController < ApplicationController
 				value: params[:page],
 				expires: 1.day.from_now
 			}
-		end  
+		end
 		@embed_code_universities = @q.result.order(@sort + sort_direction).page(cookies[:embed_code_universities_page]).per_page(10)
 	end
 
@@ -89,6 +89,25 @@ class EmbedCodeUniversitiesController < ApplicationController
 		end
 	end
 
+	def university_dropdown
+		@contact_id = params.require(:contact_id)
+		@universities = (EmbedCodeUniversity.all.order("name") - UniversityContact.find(@contact_id).embed_code_universities).map { |e| [ e.id, e.acronym, e.name]}
+	end
+
+	def add_contact
+		@university_id = params.require(:university_id)
+		@contact_id = params.require(:contact_id)
+		@university = EmbedCodeUniversity.find(@university_id)
+		@university.university_contacts << UniversityContact.find(@contact_id)
+		respond_to do |format|
+			if @university.save
+				format.json { render json: @university }
+			else
+				format.json { render json: @university.errors, status: :unprocessable_entity }
+			end
+		end
+	end
+
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_embed_code_university
@@ -105,7 +124,7 @@ class EmbedCodeUniversitiesController < ApplicationController
 
 		# Never trust parameters from the scary internet, only allow the white list through.
 		def embed_code_university_params
-			params.require(:embed_code_university).permit(:acronym, :name, :comments, :test_user, :test_password, :test_site)
+			params.require(:embed_code_university).permit(:contact_id, :university_id, :acronym, :name, :comments, :test_user, :test_password, :test_site)
 		end
 
 		def logged_in_user

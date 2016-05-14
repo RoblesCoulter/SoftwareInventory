@@ -33,7 +33,7 @@ class UniversityContactsController < ApplicationController
      # @university_contact.university_id = university_id
       #@university_contact.embed_code_universities << EmbedCodeUniversity.find(university_id)
     #end
-    
+
   end
 
   # GET /university_contacts/1/edit
@@ -44,7 +44,7 @@ class UniversityContactsController < ApplicationController
   # POST /university_contacts.json
   def create
     @university_contact = UniversityContact.new(university_contact_params)
-    
+
     if params[:university_id]
       university = params.require(:university_id)
       @university_contact.embed_code_universities << EmbedCodeUniversity.find(university)
@@ -90,7 +90,7 @@ class UniversityContactsController < ApplicationController
     respond_to do |format|
       format.json { render json: @universities }
     end
-    
+
   end
 
   def contact_dropdown
@@ -100,6 +100,20 @@ class UniversityContactsController < ApplicationController
       format.json { render json: [{ contacts: @contacts }]}
     end
   end
+
+  def add_university
+		@university_id = params.require(:university_id)
+		@contact_id = params.require(:contact_id)
+		@contact = UniversityContact.find(@contact_id)
+		@contact.embed_code_universities << EmbedCodeUniversity.find(@university_id)
+		respond_to do |format|
+			if @contact.save
+				format.json { render json: :show, status: :created, location: @contact }
+			else
+				format.json { render json: @contact.errors, status: :unprocessable_entity }
+			end
+		end
+	end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -113,11 +127,11 @@ class UniversityContactsController < ApplicationController
 
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-    end    
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def university_contact_params
-      params.require(:university_contact).permit(:name, :email, :skype, :role, :university_id)
+      params.require(:university_contact).permit(:name, :email, :skype, :role, :university_id, :contact_id)
     end
 
     def logged_in_user
