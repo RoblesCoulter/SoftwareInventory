@@ -133,10 +133,11 @@ $(function(){
 			var contactId = $dropdown.val();
 			var alertSuccess = "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Added!</strong> has been added.</div>";
 			var url = '/embed_code_universities/add_contact'
+			var data = "{ \"university_id\": \""+ universityId + "\", \"contact_id\": \""+ contactId + "\" }";
 			var ajaxCall = {
 							type: "POST",
 							url: url,
-							data: { "university_id" : universityId , "contact_id" : contactId},
+							data:  data,
 							dataType: "json",
 							contentType: "application/json"
 						};
@@ -146,6 +147,7 @@ $(function(){
 			});
 		}
 	});
+
 
 	function getContactList(universityId){
 		var ajaxParams = {
@@ -157,7 +159,6 @@ $(function(){
 		};
 		$.ajax(ajaxParams).done(function(data){
 			var contacts = data[0].contacts;
-			console.log(contacts);
 			var $dropdown = $("#add-contacts-modal .contact-dropdown");
 			$($dropdown).html("").append($('<option>', {
 				value: "",
