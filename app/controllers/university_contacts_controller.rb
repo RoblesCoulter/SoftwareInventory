@@ -108,7 +108,7 @@ class UniversityContactsController < ApplicationController
 		@contact.embed_code_universities << EmbedCodeUniversity.find(@university_id)
 		respond_to do |format|
 			if @contact.save
-				format.json { render json: :show, status: :created, location: @contact }
+				format.json { render json: @contact }
 			else
 				format.json { render json: @contact.errors, status: :unprocessable_entity }
 			end
