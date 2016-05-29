@@ -21,12 +21,14 @@ $(function(){
 	$(".barcode-input").focus();
 	$('#movement_shipping_date, #movement_arrival_date, #advanced_search_date').datepicker({ dateFormat: 'yy-mm-dd', altFormat: "dd/mm/yy" });
 
-	$(".barcode-input").keypress(function( event ) {
+	$(".barcode-input").keypress(function(event) {
 		if(event.which == 13){
 			event.preventDefault();
 			$(this).closest(".form-group").next().find(".form-control").focus();
 		}
 	});
+
+/************    EMBED CODE UNIVERSITIES FUNCTIONALITIES   *************/
 
 	$("#contacts-modal").on("show.bs.modal", function(event) {
 		$("#contacts-modal .modal-body").addClass("hidden");
@@ -48,15 +50,15 @@ $(function(){
 						};
 			$.ajax(ajaxCall).done(function(data){
 					var contacts = data;
-					var contactNode = "<tr>";
 					$.each(contacts, function(i, contact){
-						contactNode += "<td>" + contact.name + "</td>"
-						contactNode += "<td>" + contact.email + "</td>"
-						contactNode += "<td>" + contact.skype + "</td>"
-						contactNode += "<td class='text-right'>" + contact.role + "</td>"
+						var contactNode = "<tr data-contactId = '"+contact.id+"'>";
+						contactNode += "<td>" + contact.name + "</td>";
+						contactNode += "<td>" + contact.email + "</td>";
+						contactNode += "<td>" + contact.skype + "</td>";
+						contactNode += "<td>" + contact.role + "</td>";
+						contactNode += "<td><a href="" class='removeContact'>Remove</a></td>";
 						contactNode += "</tr>";
 						$(contactList).append(contactNode);
-						contactNode = "<tr>";
 					});
 					$("a.new-contact-btn").attr("href", "/university_contacts/new/"+id);
 					$("#contacts-modal .modal-body").removeClass("hidden");
@@ -67,6 +69,11 @@ $(function(){
 		}
 	});
 
+	$(".removeContact").on("click", function(){
+		var contactId = $(this).parent().data("contactId");
+		console.log(contactId);
+	});
+/************    UNIVERSITIY CONTACTS  FUNCTIONALITIES   *************/
 	$("#universities-modal").on("show.bs.modal", function(event) {
 		var button = $(event.relatedTarget);
 		var id = button.data("id");
@@ -144,9 +151,9 @@ $(function(){
 			$.ajax(ajaxCall).done(function(data){
 					var log = data;
 					console.log(data);
-					if (data.id ==) {
+					//if (data.id ==) {
 
-					}
+					//}
 			});
 		}
 	});
