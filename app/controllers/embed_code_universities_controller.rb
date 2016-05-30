@@ -97,11 +97,12 @@ class EmbedCodeUniversitiesController < ApplicationController
 	def add_contact
 		@university_id = params.require(:university_id)
 		@contact_id = params.require(:contact_id)
+		@contact = UniversityContact.find(@contact_id)
 		@university = EmbedCodeUniversity.find(@university_id)
-		@university.university_contacts << UniversityContact.find(@contact_id)
+		@university.university_contacts << @contact
 		respond_to do |format|
 			if @university.save
-				format.json { render json: @university }
+				format.json { render json: @contact }
 			else
 				format.json { render json: @university.errors, status: :unprocessable_entity }
 			end

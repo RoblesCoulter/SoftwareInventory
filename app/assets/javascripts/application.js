@@ -62,7 +62,8 @@ $(function(){
 					$("#contacts-modal .modal-body").removeClass("hidden");
 					$("#contacts-modal .modal-footer").removeClass("hidden");
 					$("#contacts-modal .content-loader").addClass("hidden");
-					$("#add-contacts-modal").data("id", id);
+					$("#add-contacts-modal").data("universityId", id);
+					$("#add-contacts-modal").data("acronym", acronym);
 			});
 		}
 	});
@@ -94,7 +95,6 @@ $(function(){
 						} else {
 							universityNode+= "<td class='text-right'></td>"
 						}
-
 						universityNode += "</tr>";
 						$(universityList).append(universityNode);
 						universityNode = "<tr>";
@@ -103,7 +103,7 @@ $(function(){
 					$("#universities-modal .modal-body").removeClass("hidden");
 					$("#universities-modal .modal-footer").removeClass("hidden");
 					$("#universities-modal .content-loader").addClass("hidden");
-					$("#add-universities-modal").data("id", id);
+					$("#add-universities-modal").data("contactId", id);
 			});
 		}
 	});
@@ -111,7 +111,7 @@ $(function(){
 	$(".add-contact-btn").on("click", function(event){
 		$("#contacts-modal").modal('hide');
 		$("#add-contacts-modal").modal('show');
-		var universityId = $("#add-contacts-modal").data("id");
+		var universityId = $("#add-contacts-modal").data("universityId");
 		getContactList(universityId);
 		$("#add-contacts-modal .content-loader").addClass("hidden");
 		$("#add-contacts-modal .modal-body").removeClass("hidden");
@@ -128,8 +128,9 @@ $(function(){
 		$dropdown = $("#add-contacts-modal .contact-dropdown");
 		if($dropdown.val() == ""){
 			$("#add-contacts-modal div.modal-body .alert-danger").removeClass("hidden");
+
 		} else {
-			var universityId = $("#add-contacts-modal").data("id");
+			var universityId = $("#add-contacts-modal").data("universityId");
 			var contactId = $dropdown.val();
 			var alertSuccess = "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Added!</strong> has been added.</div>";
 			var url = '/embed_code_universities/add_contact'
@@ -141,12 +142,11 @@ $(function(){
 							dataType: "json",
 							contentType: "application/json"
 						};
-			$.ajax(ajaxCall).done(function(data){
-					var log = data;
-					console.log(data);
-					if (data.id ==) {
-
-					}
+			$.ajax(ajaxCall).done(function(contact){
+					var acronym = $("#add-contacts-modal").data("acronym");
+					var successNode = "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><span class='fa fa-check' role='alert'></span><span class='sr-only'>Success: </span>You have successfully added " + contact.name + " to " + acronym + "</div>";
+					$("#add-contacts-modal div.modal-body").prepend(successNode);
+					$("#add-contacts-modal .contact-dropdown option[value="+ contactId+"]").remove();
 			});
 		}
 	});
