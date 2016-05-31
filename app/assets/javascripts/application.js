@@ -263,7 +263,7 @@ $(function(){
 	});
 
 
-	function getUniversityList(universityId){
+	function getUniversityList(contactId){
 		var ajaxParams = {
 			type: "GET",
 			url: "/embed_code_universities/university_dropdown",

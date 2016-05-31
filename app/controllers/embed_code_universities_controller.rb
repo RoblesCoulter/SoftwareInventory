@@ -143,7 +143,7 @@ class EmbedCodeUniversitiesController < ApplicationController
 
 		# Never trust parameters from the scary internet, only allow the white list through.
 		def embed_code_university_params
-			params.require(:embed_code_university).permit(:acronym, :name, :comments, :test_user, :test_password, :test_site)
+			params.require(:embed_code_university).permit(:acronym, :name, :comments, :test_user, :test_password, :test_site, :embed_code, :status)
 		end
 
 		def logged_in_user
