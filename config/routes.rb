@@ -13,19 +13,24 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'boxes/:id/remove_photo', to: 'boxes#remove_photo', as: 'remove_photo_box'
   get 'items/:id/remove_photo', to: 'items#remove_photo', as: 'remove_photo_item'
+
   get 'items/item_dropdown', to: 'items#item_dropdown', as: 'item_dropdown'
   get 'movements/box_dropdown', to: "movements#box_dropdown", as: "box_dropdown"
   get "university_contacts/contact_dropdown", to: "university_contacts#contact_dropdown", as: "contact_dropdown"
-  get 'boxes/:id/remove_photo', to: 'boxes#remove_photo', as: 'remove_photo_box'
+
   get 'university_contacts/:contact_id/embed_code_universities', to: 'university_contacts#embed_code_universities'
   get 'embed_code_universities/:university_id/university_contacts', to: 'embed_code_universities#university_contacts'
-  get 'university_contacts/new/:university_id', to: 'university_contacts#new'
+
   post 'embed_code_universities/add_contact', to: 'embed_code_universities#add_contact'
   post 'university_contacts/add_university', to: 'university_contacts#add_university'
+
   post 'embed_code_universities/:contact_id/remove_contact', to: 'embed_code_universities#remove_contact'
   post 'university_contacts/:university_id/remove_university', to: 'university_contacts#remove_university'
+
   get 'embed_code_universities/new/:contact_id', to: 'embed_code_universities#new'
+  get 'university_contacts/new/:university_id', to: 'university_contacts#new'
   resources :movements do
     member do
       get 'movement_boxes'
