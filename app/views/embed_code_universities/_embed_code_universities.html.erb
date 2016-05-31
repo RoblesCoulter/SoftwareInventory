@@ -10,8 +10,6 @@
 		<th><%= sortable "test_user" %></th>
 		<th><%= sortable "test_password" %></th>
 		<th><%= sortable "comments" %></th>
-		<th><%= sortable "created_at", "Creation date" %></th>
-		<th><%= sortable "updated_at", "Last updated"%></th>
 		<th>Options</th>
 	  </tr>
 	</thead>
@@ -25,8 +23,6 @@
 		  <td class="hover-me"><%= university.test_user %></td>
 		  <td class="hover-me"><%= university.test_password %></td>
 		  <td class="hover-me"><%= university.comments %></td>
-		  <td class="hover-me"><%= local_time_ago(university.created_at) %></td>
-		  <td class="hover-me"><%= local_time_ago(university.updated_at) %></td>
 		  <td><%= link_to 'Show', university %> |
 		  <% if current_user.admin? %>
 			<%= link_to 'Edit', edit_embed_code_university_path(university) %> |
@@ -39,7 +35,7 @@
   </table>
 </div>
 <%= will_paginate @embed_code_universities, renderer: BootstrapPagination::Rails %>
-<div class="modal fade" id="contacts-modal" tabindex="-1" >
+<div class="modal fade" id="contacts-modal" tabindex="-1" role="dialog" aria-labelledby="gridUniversityContactModal">
  	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -64,7 +60,7 @@
 							</tr>
 						</thead>
 						<tbody class="university-contacts-list">
-
+              
 						</tbody>
 					</table>
 				</div>
@@ -97,7 +93,7 @@
           <span class="sr-only">Error: </span>
           You must select a contact in the dropdown list.
         </div>
-        
+
         <h4>Select the contact you would like to add for <span class="modal-acronym"></span></h4>
 				<select class="form-control contact-dropdown"></select>
 

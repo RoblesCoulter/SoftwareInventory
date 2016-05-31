@@ -8,8 +8,6 @@
         <th><%= sortable "email" %></th>
         <th><%= sortable "skype" %></th>
         <th><%= sortable "role" %></th>
-        <th><%= sortable "created_at", "Creation date" %></th>
-        <th><%= sortable "updated_at", "Last updated"%></th>
         <th>Options</th>
       </tr>
     </thead>
@@ -21,8 +19,6 @@
           <td class="hover-me" ><%= contact.email %></td>
           <td class="hover-me" ><%= contact.skype %></td>
           <td class="hover-me" ><%= contact.role %></td>
-          <td class="hover-me" ><%= local_time_ago(contact.created_at) %></td>
-          <td class="hover-me" ><%= local_time_ago(contact.updated_at) %></td>
           <td><%= link_to 'Show', contact %> |
           <% if current_user.admin? %>
             <%= link_to 'Edit', edit_university_contact_path(contact) %> |
@@ -37,17 +33,15 @@
 <%= will_paginate @university_contacts, renderer: BootstrapPagination::Rails %>
 <div class="modal fade" id="universities-modal" tabindex="-1" role="dialog" aria-labelledby="gridContactUniversityModal">
   <div class="modal-dialog">
-  
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-      <h3>Contact Universities</h3>
-      <div class="content-loader loader--wide">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-      
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3>Contact Universities</h3>
+        <div class="content-loader loader--wide">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
     </div>
     <div class="modal-body hidden">
       <h4>Universities for: <span class="modal-name"></span></h4>
@@ -61,13 +55,47 @@
           </tr>
         </thead>
         <tbody class="contact-universities-list">
-          
+
         </tbody>
       </table>
       </div>
         <%= link_to 'Create New University', new_embed_code_university_path, class: "btn btn-success new-university-btn" %>
-        <%= link_to 'Add Existing University', new_embed_code_university_path, class: "btn btn-success" %>
+        <a class="btn btn-success add-university-btn">Add Existing University</a>
+        <button type="button" data-dismiss="modal" class="btn" >Close</button>
     </div>
   </div>
   </div>
+</div>
+
+
+<div class="modal fade" id="add-universities-modal" tabindex="-1" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+					<h3>Embed Code Universities</h3>
+					<div class="content-loader loader--wide">
+					  <span class="dot"></span>
+					  <span class="dot"></span>
+					  <span class="dot"></span>
+					</div>
+
+			</div>
+			<div class="modal-body hidden">
+        <div class="alert alert-danger hidden">
+          <span class="fa fa-exclamation" role="alert"></span>
+          <span class="sr-only">Error: </span>
+          You must select an university in the dropdown list.
+        </div>
+
+        <h4>Select the university you would like to add for <span class="modal-name"></span></h4>
+				<select class="form-control university-dropdown"></select>
+
+			</div>
+			<div class="modal-footer hidden">
+        <button type="button" class="btn btn-primary add-university">Add</button>
+        <button type="button" class="btn" data-dismiss="modal" >Close</button>
+			</div>
+		</div>
+	</div>
 </div>

@@ -92,6 +92,9 @@ class EmbedCodeUniversitiesController < ApplicationController
 	def university_dropdown
 		@contact_id = params.require(:contact_id)
 		@universities = (EmbedCodeUniversity.all.order("name") - UniversityContact.find(@contact_id).embed_code_universities).map { |e| [ e.id, e.acronym, e.name]}
+		respond_to do |format|
+			format.json { render json: [{ universities: @universities }]}
+		end
 	end
 
 	def add_contact
