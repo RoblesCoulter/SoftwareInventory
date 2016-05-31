@@ -21,12 +21,14 @@ $(function(){
 	$(".barcode-input").focus();
 	$('#movement_shipping_date, #movement_arrival_date, #advanced_search_date').datepicker({ dateFormat: 'yy-mm-dd', altFormat: "dd/mm/yy" });
 
-	$(".barcode-input").keypress(function( event ) {
+	$(".barcode-input").keypress(function(event) {
 		if(event.which == 13){
 			event.preventDefault();
 			$(this).closest(".form-group").next().find(".form-control").focus();
 		}
 	});
+
+/************    EMBED CODE UNIVERSITIES FUNCTIONALITIES   *************/
 
 	$("#contacts-modal").on("show.bs.modal", function(event) {
 		$("#contacts-modal .modal-body").addClass("hidden");
@@ -48,15 +50,15 @@ $(function(){
 						};
 			$.ajax(ajaxCall).done(function(data){
 					var contacts = data;
-					var contactNode = "<tr>";
 					$.each(contacts, function(i, contact){
-						contactNode += "<td>" + contact.name + "</td>"
-						contactNode += "<td>" + contact.email + "</td>"
-						contactNode += "<td>" + contact.skype + "</td>"
-						contactNode += "<td class='text-right'>" + contact.role + "</td>"
+						var contactNode = "<tr data-contactId = '"+contact.id+"'>";
+						contactNode += "<td>" + contact.name + "</td>";
+						contactNode += "<td>" + contact.email + "</td>";
+						contactNode += "<td>" + contact.skype + "</td>";
+						contactNode += "<td>" + contact.role + "</td>";
+						contactNode += "<td><a href='#contacts-modal' class='removeContact'>Remove</a></td>";
 						contactNode += "</tr>";
 						$(contactList).append(contactNode);
-						contactNode = "<tr>";
 					});
 					$("a.new-contact-btn").attr("href", "/university_contacts/new/"+id);
 					$("#contacts-modal .modal-body").removeClass("hidden");
@@ -68,6 +70,27 @@ $(function(){
 		}
 	});
 
+	$(".university-contacts-list").on("click", ".removeContact" , function(){
+		var $this = $(this);
+		var contactId = $this.closest("tr").data("contactid");
+		console.log(contactId);
+		var universityId = $("#add-contacts-modal").data("universityId");
+		if(contactId && universityId){
+			var data = "{ \"university_id\": \""+ universityId + "\" }";
+			var url = '/embed_code_universities/' + contactId + '/remove_contact';
+			var ajaxCall = {
+							type: "POST",
+							url: url,
+							data: data,
+							dataType: "json",
+							contentType: "application/json"
+						};
+			$.ajax(ajaxCall).done(function(data){
+				$this.closest("tr").remove();
+			});
+		}
+	});
+/************    UNIVERSITIY CONTACTS  FUNCTIONALITIES   *************/
 	$("#universities-modal").on("show.bs.modal", function(event) {
 		var button = $(event.relatedTarget);
 		var id = button.data("id");
@@ -147,6 +170,7 @@ $(function(){
 					var successNode = "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><span class='fa fa-check' role='alert'></span><span class='sr-only'>Success: </span>You have successfully added " + contact.name + " to " + acronym + "</div>";
 					$("#add-contacts-modal div.modal-body").prepend(successNode);
 					$("#add-contacts-modal .contact-dropdown option[value="+ contactId+"]").remove();
+
 			});
 		}
 	});

@@ -109,6 +109,21 @@ class EmbedCodeUniversitiesController < ApplicationController
 		end
 	end
 
+	def remove_contact
+		@contact_id = params.require(:contact_id)
+		@university_id = params.require(:university_id)
+		@contact = UniversityContact.find(@contact_id)
+		@university = EmbedCodeUniversity.find(@university_id)
+		@university.university_contacts.destroy(@contact)
+		respond_to do |format|
+			if @university.save
+				format.json { render json: @university}
+			else
+				format.json { render json: @university.errors, status: :unprocessable_entity }
+			end
+		end
+	end
+
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_embed_code_university

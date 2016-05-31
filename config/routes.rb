@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get 'university_contacts/new/:university_id', to: 'university_contacts#new'
   post 'embed_code_universities/add_contact', to: 'embed_code_universities#add_contact'
   post 'university_contacts/add_university', to: 'university_contacts#add_university'
+  post 'embed_code_universities/:contact_id/remove_contact', to: 'embed_code_universities#remove_contact'
+  post 'university_contacts/:university_id/remove_university', to: 'university_contacts#remove_university'
   get 'embed_code_universities/new/:contact_id', to: 'embed_code_universities#new'
   resources :movements do
     member do
