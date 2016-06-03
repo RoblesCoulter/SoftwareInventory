@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531153534) do
+ActiveRecord::Schema.define(version: 20160603160000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,10 +69,42 @@ ActiveRecord::Schema.define(version: 20160531153534) do
     t.string   "test_site"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.text     "comments"
-    t.text     "embed_code"
-    t.string   "status"
   end
+
+  create_table "embed_code_variables", force: :cascade do |t|
+    t.integer  "embed_code_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "name"
+    t.string   "default_value"
+  end
+
+  create_table "embed_codes", force: :cascade do |t|
+    t.integer  "events_university_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.text     "code"
+    t.string   "name"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name"
+    t.string   "short_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events_universities", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "embed_code_university_id"
+    t.string   "status"
+    t.text     "comments"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "events_universities", ["embed_code_university_id"], name: "index_events_universities_on_embed_code_university_id", using: :btree
+  add_index "events_universities", ["event_id"], name: "index_events_universities_on_event_id", using: :btree
 
   create_table "items", force: :cascade do |t|
     t.string   "barcode"

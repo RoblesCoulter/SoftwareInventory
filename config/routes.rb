@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :embed_codes
   resources :events
   root 'welcome#index'
   get 'password_resets/new'

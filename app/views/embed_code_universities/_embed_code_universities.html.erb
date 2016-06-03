@@ -9,7 +9,6 @@
 		<th><%= sortable "test_site" %></th>
 		<th><%= sortable "test_user" %></th>
 		<th><%= sortable "test_password" %></th>
-		<th><%= sortable "comments" %></th>
 		<th>Options</th>
 	  </tr>
 	</thead>
@@ -22,7 +21,6 @@
 		  <td class="hover-me"><%= university.test_site %></td>
 		  <td class="hover-me"><%= university.test_user %></td>
 		  <td class="hover-me"><%= university.test_password %></td>
-		  <td class="hover-me"><%= university.comments %></td>
 		  <td><%= link_to 'Show', university %> |
 		  <% if current_user.admin? %>
 			<%= link_to 'Edit', edit_embed_code_university_path(university) %> |
@@ -60,7 +58,7 @@
 							</tr>
 						</thead>
 						<tbody class="university-contacts-list">
-              
+
 						</tbody>
 					</table>
 				</div>

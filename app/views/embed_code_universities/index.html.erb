@@ -2,7 +2,7 @@
 
 <%= search_form_for @q, url: embed_code_universities_path(page: 1), html: { method: :get, class: "form-inline form-main-search", id: "ajax_search"} do |f| %>
 	<div class="form-group">
-		<%= f.search_field :acronym_or_name_or_comments_cont, class: "form-control" %>
+		<%= f.search_field :acronym_or_name_cont, class: "form-control" %>
 		<%= f.submit "Search", :name => nil, class: "incread-width btn btn-primary"%>
 	</div>
 	<% if current_user.admin? %>
