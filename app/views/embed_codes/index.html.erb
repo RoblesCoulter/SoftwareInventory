@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Embed Codes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @embed_codes.each do |embed_code| %>
+      <tr>
+        <td><%= link_to 'Show', embed_code %></td>
+        <td><%= link_to 'Edit', edit_embed_code_path(embed_code) %></td>
+        <td><%= link_to 'Destroy', embed_code, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Embed code', new_embed_code_path %>
