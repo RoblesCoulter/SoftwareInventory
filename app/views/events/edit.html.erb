@@ -1,6 +1,6 @@
-<h1>Editing Event</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+<div class="center-div">
+	<%= link_to 'Back', events_path, class: "btn btn-warning" %>
+	<h1 class="text-center">Editing Live Event</h1>
+	<%= render 'form' %>
+	<%= yield(:event_validators) %>
+</div>
