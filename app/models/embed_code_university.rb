@@ -3,5 +3,5 @@ class EmbedCodeUniversity < ActiveRecord::Base
 	validates :name, :acronym, presence: true
 	validates_uniqueness_of :acronym, :name, case_sensitive: false
 	has_many :events_universities
-	has_many :events, through: :event_universities
+	has_many :events, through: :events_universities
 end

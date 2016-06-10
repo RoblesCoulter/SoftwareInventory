@@ -39,6 +39,12 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        @universities_ids = EmbedCodeUniversity.all.ids
+        events_universities = []
+        @universities_ids.each do |university_id|
+          events_universities << EventsUniversity.new(:event_id => @event.id, :embed_code_university_id => university_id)
+        end
+        EventsUniversity.import events_universities
         format.html { redirect_to events_url, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -87,7 +93,7 @@ class EventsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name)
+      params.require(:event).permit(:name, :short_url)
     end
 
     def logged_in_user

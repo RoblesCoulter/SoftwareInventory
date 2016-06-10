@@ -12,10 +12,10 @@
 
 	<tbody>
 	  <% @events.each do |event| %>
-		<tr data-toggle="modal"  data-name="<%= event.short_url %>" data-target="#contacts-modal" data-id="<%= university.id %>">
-		  <td class="hover-me"><%= event.name %></td>
-		  <td class="hover-me"><%= event.short_url %></td>
-		  <td><%= link_to 'Show', event %> |
+		<tr data-toggle="modal"  data-name="<%= event.short_url %>" data-target="#contacts-modal" data-id="<%= event.id %>">
+		  <td><%= event.name %></td>
+		  <td><%= event.short_url %></td>
+		  <td><%= link_to 'Universities', event %> |
 		  <% if current_user.admin? %>
 			<%= link_to 'Edit', edit_event_path(event) %> |
 			<%= link_to 'Delete', event, method: :delete %>
