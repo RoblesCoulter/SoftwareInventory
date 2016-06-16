@@ -21,6 +21,15 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    sc = sort_column
+    @sort = sc + " "
+    if params[:page]
+			cookies[:event_universities_page] = {
+				value: params[:page],
+				expires: 1.day.from_now
+			}
+		end
+    @embed_code_universities = @event.embed_code_universities.order(@sort + sort_direction).page(cookies[:event_universities_page])
   end
 
   # GET /events/new
@@ -75,6 +84,16 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def remove_university_from_event
+    @event_university = EventsUniversity.where(embed_code_university_id: params[:university_id], event_id: params[:event_id])
+    @event = Event.find(params[:event_id])
+    @event.events_universities.destroy(@event_university)
+    respond_to do |format|
+      format.html { redirect_to @event, notice: 'University was removed from Event.' }
+      format.json { render json: @event}
     end
   end
 

@@ -7,6 +7,9 @@
 //= require local_time
 
 $(function(){
+
+	$(".dropdown-toggle").dropdown();
+	
 	$("#ajax_objects th a, #ajax_objects .pagination a").click(function(e){
 		$.getScript(this.href);
 		e.preventDefault();

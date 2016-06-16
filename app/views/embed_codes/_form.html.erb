@@ -1,17 +1,8 @@
-<%= form_for(@embed_code) do |f| %>
-  <% if @embed_code.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@embed_code.errors.count, "error") %> prohibited this embed_code from being saved:</h2>
-
-      <ul>
-      <% @embed_code.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
+<%= form_for @embed_code, html: { class: "form-horizontal"}, validate: :embed_code_validators do |f| %>
+  <div class="form-group">
+    <label class="control-label">Name</label>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
+  <%= f.submit class: "btn btn-success fullwidthbutton" %>
+  <%= link_to "Back", embed_codes_path, class: "btn btn-warning fullwidthbutton" %>
 <% end %>

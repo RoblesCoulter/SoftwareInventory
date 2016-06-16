@@ -12,7 +12,7 @@
 
 	<tbody>
 	  <% @events.each do |event| %>
-		<tr data-toggle="modal"  data-name="<%= event.short_url %>" data-target="#contacts-modal" data-id="<%= event.id %>">
+		<tr>
 		  <td><%= event.name %></td>
 		  <td><%= event.short_url %></td>
 		  <td><%= link_to 'Universities', event %> |

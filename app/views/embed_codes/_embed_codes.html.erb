@@ -1,0 +1,27 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort]%>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+	<thead>
+	  <tr>
+		<th><%= sortable "name", "Template" %></th>
+		<th>Options</th>
+	  </tr>
+	</thead>
+
+	<tbody>
+	  <% @embed_codes.each do |embed_code| %>
+		<tr>
+		  <td><%= embed_code.name %></td>
+		  <td><%= link_to 'Show', embed_code %> |
+		  <% if current_user.admin? %>
+			<%= link_to 'Edit', edit_embed_code_path(embed_code) %> |
+			<%= link_to 'Delete', embed_code, method: :delete %>
+		  <% end %>
+		  </td>
+		</tr>
+	  <% end %>
+	</tbody>
+  </table>
+</div>
+<%= will_paginate @embed_codes, renderer: BootstrapPagination::Rails %>

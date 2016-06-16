@@ -1,5 +1,5 @@
 class EmbedCodesController < ApplicationController
-  before_action :set_embed_code, only: [:show, :edit, :update, :destroy]
+  before_action :set_embed_code, only: [ :edit, :update, :destroy]
 
   # GET /embed_codes
   # GET /embed_codes.json
@@ -10,6 +10,14 @@ class EmbedCodesController < ApplicationController
   # GET /embed_codes/1
   # GET /embed_codes/1.json
   def show
+    @event_id = params[:event_id]
+    @university_id = params[:university_id]
+    @events_university = EventsUniversity.where(event_id: @event_id, embed_code_university_id: @university_id).take
+    @embed_code = EmbedCode.where(events_university_id: @events_university.id)
+    if @embed_code.empty?
+      @embed_code = EmbedCode.new(events_university_id: @events_university.id)
+    end
+    @embed_code.save
   end
 
   # GET /embed_codes/new

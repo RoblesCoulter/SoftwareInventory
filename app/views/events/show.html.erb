@@ -1,16 +1,3 @@
-<h1 class="text-center"><%= @event.name %></h1>
+<h1 class="text-center">Universities for <%= @event.name %></h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
-<p>
-  <strong>Short URL:</strong>
-  <%= @event.short_url %>
-</p>
-
-
-
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<div id="ajax_objects" ><%= render 'embed_code_universities/embed_code_universities' %></div>

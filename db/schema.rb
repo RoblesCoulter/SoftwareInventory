@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160603160000) do
+ActiveRecord::Schema.define(version: 20160615221550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20160603160000) do
     t.text     "comments"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.text     "embed_code"
   end
 
   add_index "events_universities", ["embed_code_university_id"], name: "index_events_universities_on_embed_code_university_id", using: :btree

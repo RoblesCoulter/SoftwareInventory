@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :embed_codes
-  resources :events
   root 'welcome#index'
   get 'password_resets/new'
   get 'password_resets/edit'
@@ -33,6 +31,9 @@ Rails.application.routes.draw do
 
   get 'embed_code_universities/new/:contact_id', to: 'embed_code_universities#new'
   get 'university_contacts/new/:university_id', to: 'university_contacts#new'
+
+  delete 'events/remove_university_from_event', to: 'events#remove_university_from_event', as: 'remove_university_from_event'
+
   resources :movements do
     member do
       get 'movement_boxes'
@@ -41,7 +42,7 @@ Rails.application.routes.draw do
       post 'remove_box'
     end
   end
-  resources :software_serials, :softwares, :categories, :products, :items, :users, :locations, :conditions, :university_contacts, :embed_code_universities
+  resources :embed_codes, :events, :software_serials, :softwares, :categories, :products, :items, :users, :locations, :conditions, :university_contacts, :embed_code_universities
   resources :password_resets, only: [:new, :create, :edit, :update]
   # get 'boxes/add_item/:id', to: 'boxes#add_item', as: 'add_item'
 
