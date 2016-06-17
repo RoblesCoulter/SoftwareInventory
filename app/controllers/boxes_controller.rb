@@ -12,16 +12,14 @@ class BoxesController < ApplicationController
 		@sort = sc + " "
 		if sc.eql? "location_id"
 			@sort = "locations.country "
-		elsif sc.eql? "condition_id"
-			@sort = "conditions.name "
 		end
 		if params[:page]
 			cookies[:boxes_page] = {
 				value: params[:page],
 				expires: 1.day.from_now
 			}
-		end  
-		@boxes = @q.result.includes(:condition, :location).order(@sort + sort_direction).page(cookies[:boxes_page]).per_page(5)
+		end
+		@boxes = @q.result.includes(:location).order(@sort + sort_direction).page(cookies[:boxes_page]).per_page(5)
 	end
 
 	# GET /boxes/1
@@ -215,15 +213,15 @@ class BoxesController < ApplicationController
 
 		def kaltura_setup
 			config_file = YAML.load_file("#{Rails.root}/config/kaltura.yml")
-				
+
 			partner_id = config_file["default"]["partner_id"]
 			service_url = config_file["default"]["service_url"]
 			administrator_secret = config_file["default"]["administrator_secret"]
 			timeout = config_file["default"]["timeout"]
-			
+
 			config = Kaltura::KalturaConfiguration.new(partner_id, service_url)
 			config.timeout = timeout
-			
+
 			client = Kaltura::KalturaClient.new( config )
 			session = client.session_service.start( administrator_secret, '', Kaltura::KalturaSessionType::ADMIN )
 			client.ks = session
@@ -243,7 +241,7 @@ class BoxesController < ApplicationController
 			media_entry.name = entry_name
 			media_entry.media_type = Kaltura::KalturaMediaType::IMAGE
 			video_file = File.open(new_path)
-			
+
 			video_token = client.media_service.upload(video_file)
 			created_entry2 = client.media_service.add_from_uploaded_file(media_entry, video_token)
 

@@ -6,15 +6,15 @@
         <div class="caption-full">
 	        <% unless @box.height.nil? && @box.width.nil? && @box.depth.nil? %>
 	        	<h4 class="pull-right"><%= @box.height %> x <%= @box.width %> x <%= @box.depth %></h4>
-	        <% end %>	
+	        <% end %>
 	        <% unless @box.location.nil? %>
 	        	<p><b>Location:</b> <%= @box.location.name_with_country %></p>
 	        <% end %>
 	        <% unless @box.weight.nil? %>
 	        	<p><b>Weight:</b> <%= @box.weight %> lbs</p>
 	        <% end %>
-	        <% unless @box.condition.nil? %>
-	        	<p><b>Condition:</b> <%= @box.condition.name %></p>
+	        <% unless @box.conditions.empty? %>
+	        	<p><b>Condition:</b> <%= @box.conditions.map{ |e| e.name }.join(", ") %></p>
 	        <% end %>
 	        <% unless @box.description.nil? %>
 	        	<p><b>Description:</b> <%= @box.description %></p>
@@ -22,10 +22,10 @@
 	        <p><b>Creation date:</b> <%= local_time(@box.created_at) %></p>
         </div>
 	</div>
-    <%= link_to "Go to Items", box_items_box_path(@box), class: "btn btn-info fullwidthbutton" %> 
+    <%= link_to "Go to Items", box_items_box_path(@box), class: "btn btn-info fullwidthbutton" %>
 
 	<% if current_user.admin? %>
-		<%= link_to 'Edit', edit_box_path(@box) , class: "btn btn-warning fullwidthbutton" %> 
+		<%= link_to 'Edit', edit_box_path(@box) , class: "btn btn-warning fullwidthbutton" %>
 	<% end %>
 	<%= link_to 'Back', boxes_path, class: "btn btn-default fullwidthbutton" %>
 </div>

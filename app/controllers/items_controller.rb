@@ -13,20 +13,18 @@ class ItemsController < ApplicationController
       @sort = "boxes.box_number"
     elsif sc.eql? "product_id"
       @sort = "products.name"
-    elsif sc.eql? "condition_id"
-      @sort = "conditions.name"
     elsif sc.eql? "location_id"
       @sort = "locations.country"
     elsif sc.eql? "category_id"
-      @sort = "categories.name"  
+      @sort = "categories.name"
     end
     if params[:page]
       cookies[:items_page] = {
         value: params[:page],
         expires: 1.day.from_now
-      }  
+      }
     end
-    @items = @q.result.includes(:box, :condition, :location, {:product => [:category]}).order(@sort + " " + sort_direction).page(cookies[:items_page]).per_page(10)
+    @items = @q.result.includes(:box, :location, {:product => [:category]}).order(@sort + " " + sort_direction).page(cookies[:items_page]).per_page(10)
 
   end
 
@@ -139,7 +137,7 @@ class ItemsController < ApplicationController
         client = kaltura_setup
         delete_entry(@item.photo, client)
       end
-      
+
       @item.photo = nil
       @item.save
     end
@@ -168,7 +166,7 @@ class ItemsController < ApplicationController
       if params[:sort].eql? "category_id"
         "category_id"
       else
-        Item.column_names.include?(params[:sort]) ? params[:sort] : "barcode" 
+        Item.column_names.include?(params[:sort]) ? params[:sort] : "barcode"
       end
     end
 
@@ -177,7 +175,7 @@ class ItemsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:barcode,:location_id ,:box_id, :product_id, :category_id, :serial_number, :model_number, :price, :condition_id, :firmware, :photo, :responsable, :notes)
+      params.require(:item).permit(:barcode,:location_id ,:box_id, :product_id, :category_id, :serial_number, :model_number, :price, {:condition_ids => []}, :firmware, :photo, :responsable, :notes)
     end
 
     def logged_in_user
@@ -194,15 +192,15 @@ class ItemsController < ApplicationController
 
     def kaltura_setup
       config_file = YAML.load_file("#{Rails.root}/config/kaltura.yml")
-        
+
       partner_id = config_file["default"]["partner_id"]
       service_url = config_file["default"]["service_url"]
       administrator_secret = config_file["default"]["administrator_secret"]
       timeout = config_file["default"]["timeout"]
-      
+
       config = Kaltura::KalturaConfiguration.new(partner_id, service_url)
       config.timeout = timeout
-      
+
       client = Kaltura::KalturaClient.new( config )
       session = client.session_service.start( administrator_secret, '', Kaltura::KalturaSessionType::ADMIN )
       client.ks = session
@@ -222,7 +220,7 @@ class ItemsController < ApplicationController
       media_entry.name = entry_name
       media_entry.media_type = Kaltura::KalturaMediaType::IMAGE
       video_file = File.open(new_path)
-      
+
       video_token = client.media_service.upload(video_file)
       created_entry2 = client.media_service.add_from_uploaded_file(media_entry, video_token)
 

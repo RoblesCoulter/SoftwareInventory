@@ -1,9 +1,9 @@
 class Box < ActiveRecord::Base
 	has_paper_trail
-	
+
 	has_and_belongs_to_many :movements
 	has_many :items
-	has_and_belongs_to_many :condition
+	has_and_belongs_to_many :conditions
 	validates :barcode, :box_number , presence: true
 	validates :weight, :height, :width, :depth, numericality: { allow_blank: true}
 	validates :box_number, numericality: { only_integer: true }

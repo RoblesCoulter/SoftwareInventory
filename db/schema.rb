@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615221550) do
+ActiveRecord::Schema.define(version: 20160617163449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,12 +28,18 @@ ActiveRecord::Schema.define(version: 20160615221550) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "location_id"
-    t.integer  "condition_id"
   end
 
   add_index "boxes", ["barcode"], name: "index_boxes_on_barcode", unique: true, using: :btree
-  add_index "boxes", ["condition_id"], name: "index_boxes_on_condition_id", using: :btree
   add_index "boxes", ["location_id"], name: "index_boxes_on_location_id", using: :btree
+
+  create_table "boxes_conditions", id: false, force: :cascade do |t|
+    t.integer "box_id"
+    t.integer "condition_id"
+  end
+
+  add_index "boxes_conditions", ["box_id"], name: "index_boxes_conditions_on_box_id", using: :btree
+  add_index "boxes_conditions", ["condition_id"], name: "index_boxes_conditions_on_condition_id", using: :btree
 
   create_table "boxes_movements", id: false, force: :cascade do |t|
     t.integer "box_id"
@@ -57,9 +63,12 @@ ActiveRecord::Schema.define(version: 20160615221550) do
   end
 
   create_table "conditions_items", id: false, force: :cascade do |t|
-    t.integer "condition_id", null: false
-    t.integer "item_id",      null: false
+    t.integer "condition_id"
+    t.integer "item_id"
   end
+
+  add_index "conditions_items", ["condition_id"], name: "index_conditions_items_on_condition_id", using: :btree
+  add_index "conditions_items", ["item_id"], name: "index_conditions_items_on_item_id", using: :btree
 
   create_table "embed_code_universities", force: :cascade do |t|
     t.string   "acronym"
@@ -235,7 +244,6 @@ ActiveRecord::Schema.define(version: 20160615221550) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
-  add_foreign_key "boxes", "conditions"
   add_foreign_key "boxes", "locations"
   add_foreign_key "items", "conditions"
   add_foreign_key "items", "locations"
