@@ -15,7 +15,7 @@ class EventsController < ApplicationController
 				expires: 1.day.from_now
 			}
 		end
-		@events = @q.result.order(@sort + sort_direction).page(cookies[:events_page]).per_page(10)
+		@events = @q.result.order(@sort + sort_direction).page(cookies[:events_page]).per_page(20)
 	end
 
   # GET /events/1
