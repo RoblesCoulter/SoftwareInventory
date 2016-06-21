@@ -9,7 +9,7 @@
 $(function(){
 
 	$(".dropdown-toggle").dropdown();
-	
+
 	$("#ajax_objects th a, #ajax_objects .pagination a").click(function(e){
 		$.getScript(this.href);
 		e.preventDefault();
@@ -29,6 +29,10 @@ $(function(){
 			event.preventDefault();
 			$(this).closest(".form-group").next().find(".form-control").focus();
 		}
+	});
+
+	$(".add-variable").on("click", function() {
+		$("form")
 	});
 
 /************    EMBED CODE UNIVERSITIES FUNCTIONALITIES   *************/

@@ -42,7 +42,7 @@ Rails.application.routes.draw do
       post 'remove_box'
     end
   end
-  resources :embed_codes, :events, :software_serials, :softwares, :categories, :products, :items, :users, :locations, :conditions, :university_contacts, :embed_code_universities
+  resources :embed_codes, :embed_code_variables, :events, :software_serials, :softwares, :categories, :products, :items, :users, :locations, :conditions, :university_contacts, :embed_code_universities
   resources :password_resets, only: [:new, :create, :edit, :update]
   # get 'boxes/add_item/:id', to: 'boxes#add_item', as: 'add_item'
 

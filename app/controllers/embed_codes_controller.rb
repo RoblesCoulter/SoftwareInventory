@@ -34,6 +34,7 @@ class EmbedCodesController < ApplicationController
   # GET /embed_codes/new
   def new
     @embed_code = EmbedCode.new
+    @embed_code.embed_code_variables.build
   end
 
   # GET /embed_codes/1/edit
@@ -88,7 +89,7 @@ class EmbedCodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def embed_code_params
-      params.require(:embed_code).permit(:name, :code)
+      params.require(:embed_code).permit(:name, :code, embed_code_variables_attributes: [:id, :embed_code_id, :name, :default_value, :_destroy])
     end
 
     def sort_direction
