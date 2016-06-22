@@ -10,9 +10,8 @@
   <h3 class="text-center">Embed Code Variables</h3>
   <%= f.fields_for :embed_code_variables, html: { class: "form-horizontal"}, validate: :embed_code_variable_validators do |ff| %>
     <%= render "embed_code_variable_fields", f: ff %>
-
   <% end %>
-  <a class="btn btn-primary fullwidthbutton add-variable">Add Variable</a>
+  <%= link_to_add_fields "Add Variable", f, :embed_code_variables, "btn btn-primary fullwidthbutton add-variable" %>
   <%= f.submit class: "btn btn-success fullwidthbutton" %>
   <%= link_to "Back", embed_codes_path, class: "btn btn-warning fullwidthbutton" %>
 <% end %>

@@ -30,9 +30,24 @@ $(function(){
 			$(this).closest(".form-group").next().find(".form-control").focus();
 		}
 	});
-
+/**** EMBED CODE VARIABLES *****/
 	$(".add-variable").on("click", function() {
-		$("form")
+		var association = "embed_code_variables";
+		var new_id = new Date().getTime();
+		var regexp = new RegExp("new_" + association, "g");
+		var content = "<div class=' form-group fields'>"
+									+ "<label class='control-label'>Variable Name</label>"
+									+"<input class='form-control' type='text' name='embed_code[embed_code_variables_attributes][new_embed_code_variables][name]' id='embed_code_embed_code_variables_attributes_new_embed_code_variables_name' data-validate='true'>"
+									+ "<label class='control-label'>Default Value</label>"
+									+ "<input class='form-control' type='text' name='embed_code[embed_code_variables_attributes][new_embed_code_variables][default_value]' id='embed_code_embed_code_variables_attributes_new_embed_code_variables_default_value' data-validate='true'>"
+									+ "<input type='hidden' value='false' name='embed_code[embed_code_variables_attributes][new_embed_code_variables][_destroy]' id='embed_code_embed_code_variables_attributes_new_embed_code_variables__destroy' data-validate='true'>"
+		      			+ "<a class='remove_link btn btn-danger' href='javascript:void(0);'>Remove</a></div>";
+		$(".add-variable").before(content.replace(regexp, new_id));
+	});
+
+	$("form.form-horizontal").on("click",".remove_link", function() {
+		$(this).closest(".fields").find("input[type=hidden]").attr("value","true");
+		$(this).closest(".fields").hide();
 	});
 
 /************    EMBED CODE UNIVERSITIES FUNCTIONALITIES   *************/
