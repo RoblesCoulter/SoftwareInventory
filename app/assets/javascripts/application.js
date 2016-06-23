@@ -30,7 +30,60 @@ $(function(){
 			$(this).closest(".form-group").next().find(".form-control").focus();
 		}
 	});
-/**** EMBED CODE VARIABLES *****/
+/*************** EMBED CODE GENERATOR ********************/
+	$(".templates-dropdown").on("change",function () {
+		$(".highlighter").hide();
+		var template_id = $(this).val();
+		if(template_id){
+			$(".embed_"+template_id).show();
+			$(".generate-button").show();
+		} else {
+			$(".generate-button").hide();
+		}
+	});
+
+
+
+	$("#variables-modal").on("show.bs.modal", function(event) {
+		$(".modal-body, .modal-footer").addClass("hidden");
+		$(".content-loader").removeClass("hidden");
+		var template_id = $(".templates-dropdown").val();
+		if (template_id) {
+			var url = '/embed_codes/' + template_id + '/get_variables'
+			var ajaxCall = {
+							type: "GET",
+							url: url,
+							dataType: "json",
+							contentType: "application/json"
+						};
+			$.ajax(ajaxCall).done(function(data) {
+				$.each(data,function(i,e){
+					$(".form-group").append($("<label>",{
+						text: e.name,
+						class: "control-label"
+					}));
+					$(".form-group").append($("<input>",{
+						value: e.default_value,
+						class: "form-control",
+						id: e.id
+					}));
+				});
+				$(".modal-body, .modal-footer").removeClass("hidden");
+				$(".content-loader").addClass("hidden");
+				$(".form-group").attr("data-template-id",template_id);
+			});
+		}
+		$(".generate-code").on("click",function() {
+			var template_id = $(".form-group").data("template-id");
+			if (template_id) {
+				var code = $(".embed_"+ template_id).val();
+			}
+		});
+
+	});
+
+
+/*************** EMBED CODE VARIABLES ********************/
 	$(".add-variable").on("click", function() {
 		var association = "embed_code_variables";
 		var new_id = new Date().getTime();
@@ -49,6 +102,7 @@ $(function(){
 		$(this).closest(".fields").find("input[type=hidden]").attr("value","true");
 		$(this).closest(".fields").hide();
 	});
+
 
 /************    EMBED CODE UNIVERSITIES FUNCTIONALITIES   *************/
 

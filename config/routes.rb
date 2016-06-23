@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   delete 'events/remove_university_from_event', to: 'events#remove_university_from_event', as: 'remove_university_from_event'
 
+  get 'events/generate_code', to: 'events#generate_code', as: 'generate_code'
+  get 'embed_codes/:id/get_variables', to: "embed_codes#get_variables", as: 'get_variables'
   resources :movements do
     member do
       get 'movement_boxes'

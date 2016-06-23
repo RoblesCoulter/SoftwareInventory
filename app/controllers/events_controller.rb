@@ -41,6 +41,18 @@ class EventsController < ApplicationController
   def edit
   end
 
+  def generate_code
+    @university = EmbedCodeUniversity.find(params[:university_id])
+    @event = Event.find(params[:event_id])
+    @events_university = EventsUniversity.where(event_id: @event_id, embed_code_university_id: @university_id).take
+    @embed_codes = EmbedCode.all
+    #@embed_code = EmbedCode.where(events_university_id: @events_university.id)
+    #if @embed_code.empty?
+    #  @embed_code = EmbedCode.new(events_university_id: @events_university.id)
+    #end
+    #@embed_code.save
+  end
+
   # POST /events
   # POST /events.json
   def create

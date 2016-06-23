@@ -1,5 +1,5 @@
 class EmbedCodesController < ApplicationController
-  before_action :set_embed_code, only: [:show, :edit, :update, :destroy]
+  before_action :set_embed_code, only: [:get_variables, :show, :edit, :update, :destroy]
   helper_method :sort_column
   before_action :logged_in_user
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
@@ -41,6 +41,10 @@ class EmbedCodesController < ApplicationController
   def edit
   end
 
+  def get_variables
+    @embed_code_variables = @embed_code.embed_code_variables
+    render json: @embed_code_variables
+  end
   # POST /embed_codes
   # POST /embed_codes.json
   def create
