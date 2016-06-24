@@ -1,0 +1,9 @@
+<div class="form-group fields">
+  <label class="control-label">Variable Name</label>
+  <%= f.text_field :name, class: 'form-control'%>
+
+  <label class="control-label">Default Value</label>
+  <%= f.text_field :default_value, class: 'form-control' %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "Remove", "javascript:void(0);", class: "btn btn-danger remove_link" %>
+</div>

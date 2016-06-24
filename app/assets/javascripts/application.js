@@ -33,6 +33,7 @@ $(function(){
 /*************** EMBED CODE GENERATOR ********************/
 	$(".templates-dropdown").on("change",function () {
 		$(".highlighter").hide();
+		$(".download-code-link").hide();
 		var template_id = $(this).val();
 		if(template_id){
 			$(".embed_"+template_id).show();
@@ -64,7 +65,8 @@ $(function(){
 					}));
 					$(".form-group").append($("<input>",{
 						value: e.default_value,
-						class: "form-control",
+						class: "form-control variable variable-"+e.name,
+						name: e.name,
 						id: e.id
 					}));
 				});
@@ -73,14 +75,35 @@ $(function(){
 				$(".form-group").attr("data-template-id",template_id);
 			});
 		}
-		$(".generate-code").on("click",function() {
+	});
+	$(".generate-code").on("click",function() {
 			var template_id = $(".form-group").data("template-id");
+
 			if (template_id) {
 				var code = $(".embed_"+ template_id).val();
+				var map = {};
+				$(".form-group .variable").each(function(i,e){ map[$(e).attr("name")] = e.value });
+				for(var key in map){
+					var regex = new RegExp("_%%\\s*" + key +"\\s*%%_","g");
+					code = code.replace(regex, map[key]);
+				}
+				var textFile = null;
+				var data = new Blob([code], {type: "text/plain"});
+				textFile = window.URL.createObjectURL(data);
+				$(".embed_"+template_id).val(code);
+				$("button.btn[data-dismiss=modal]").click();
+				$(".download-code-link").attr("href", textFile);
+				$(".download-code-link").show();
+				/*var url = '/events/' + template_id + '/get_variables'
+				var ajaxCall = {
+								type: "GET",
+								url: url,
+								dataType: "json",
+								contentType: "application/json"
+							};
+				$.ajax(ajaxCall).done(function(data) {});*/
 			}
 		});
-
-	});
 
 
 /*************** EMBED CODE VARIABLES ********************/

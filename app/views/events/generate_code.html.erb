@@ -1,0 +1,40 @@
+<h1 class="text-center">Generate code for <%= @university.name %> at <%= @event.name %></h1>
+
+<h3 class="text-center info-title">Select an embed code template</h3>
+<div class="center-div" data-university-id="<%= @university.id %>" data-event-id="<%= @event.id %>">
+  <%= collection_select(:events_university, :embed_code_id, EmbedCode.all, :id, :name ,{ :include_blank => "Select a Template" }, { class: 'form-control templates-dropdown top-index-btn'}) %>
+  <% @embed_codes.each do |embed_code| %>
+    <textarea name="code" data-embed-code-id="<%= embed_code.id %>" class="embed_<%= embed_code.id %> form-control highlighter" style="display:none;" rows="15" disabled>
+      <%= embed_code.code %>
+    </textarea>
+  <% end %>
+  <a class="btn btn-primary fullwidthbutton generate-button" data-toggle="modal" data-target="#variables-modal" style="display:none;"><span class="fa fa-plus"></span> Generate Embed Code</a>
+  <a href="" target="_blank" class="btn fullwidthbutton top-index-btn btn-warning download-code-link" style="display:none;"type="hidden">Download</a>
+</div>
+
+
+<!-- EMBED CODE VARIABLES MODAL -->
+
+<div class="modal fade" id="variables-modal" tabindex="-1" role="dialog" aria-labelledby="gridVariablesModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3>Embed Code Variables</h3>
+        <div class="content-loader loader--wide">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+    </div>
+    <div class="modal-body hidden">
+      <div class="form-group">
+
+      </div>
+          <a class="btn btn-success generate-code">Generate Code</a>
+        <button type="button" data-dismiss="modal" class="btn" >Close</button>
+
+    </div>
+  </div>
+  </div>
+</div>
