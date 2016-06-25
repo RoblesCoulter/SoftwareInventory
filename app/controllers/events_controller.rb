@@ -37,6 +37,18 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
+  def add_code
+    @events_university = EventsUniversity.find(params[:events_university_id])
+    @code = params[:code]
+    @events_university.embed_code = @code
+    respond_to do |format|
+      if @events_university.save
+        format.json { render json: @events_university }
+      else
+        format.json { render json: @events_university.errors, status: :unprocessable_entity }
+      end
+    end
+  end
   # GET /events/1/edit
   def edit
   end
@@ -44,7 +56,7 @@ class EventsController < ApplicationController
   def generate_code
     @university = EmbedCodeUniversity.find(params[:university_id])
     @event = Event.find(params[:event_id])
-    @events_university = EventsUniversity.where(event_id: @event_id, embed_code_university_id: @university_id).take
+    @events_university = EventsUniversity.where(event_id: @event.id, embed_code_university_id: @university.id).take
     @embed_codes = EmbedCode.all
     #@embed_code = EmbedCode.where(events_university_id: @events_university.id)
     #if @embed_code.empty?
@@ -124,7 +136,7 @@ class EventsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :short_url)
+      params.require(:event).permit(:name, :short_url, :embed_code)
     end
 
     def logged_in_user

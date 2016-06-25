@@ -1,15 +1,19 @@
 <h1 class="text-center">Generate code for <%= @university.name %> at <%= @event.name %></h1>
 
 <h3 class="text-center info-title">Select an embed code template</h3>
-<div class="center-div" data-university-id="<%= @university.id %>" data-event-id="<%= @event.id %>">
-  <%= collection_select(:events_university, :embed_code_id, EmbedCode.all, :id, :name ,{ :include_blank => "Select a Template" }, { class: 'form-control templates-dropdown top-index-btn'}) %>
+<div class="center-div" data-university-id="<%= @university.id %>" data-event-id="<%= @event.id %>" data-events-university-id="<%= @events_university.id %>">
+  <div class="alert alert-success alert-dismissible" style="display:none;" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Embed Code for <%= @university.name %> has been successfully created!</strong> Click <a target="_blank" class="download-code-link" href="">Download</a> to download the code.
+  </div>
+  <%= collection_select(:events_university, :id, EmbedCode.all, :id, :name ,{ :include_blank => "Select a Template" }, { class: 'form-control templates-dropdown top-index-btn'}) %>
   <% @embed_codes.each do |embed_code| %>
     <textarea name="code" data-embed-code-id="<%= embed_code.id %>" class="embed_<%= embed_code.id %> form-control highlighter" style="display:none;" rows="15" disabled>
       <%= embed_code.code %>
     </textarea>
   <% end %>
   <a class="btn btn-primary fullwidthbutton generate-button" data-toggle="modal" data-target="#variables-modal" style="display:none;"><span class="fa fa-plus"></span> Generate Embed Code</a>
-  <a href="" target="_blank" class="btn fullwidthbutton top-index-btn btn-warning download-code-link" style="display:none;"type="hidden">Download</a>
+  <a href="" target="_blank" class="btn fullwidthbutton top-index-btn btn-warning download-code-link" style="display:none;"type="hidden"><span class="fa fa-download"></span> Download</a>
 </div>
 
 

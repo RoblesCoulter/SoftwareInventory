@@ -33,6 +33,7 @@ $(function(){
 /*************** EMBED CODE GENERATOR ********************/
 	$(".templates-dropdown").on("change",function () {
 		$(".highlighter").hide();
+		$(".alert-success").hide();
 		$(".download-code-link").hide();
 		var template_id = $(this).val();
 		if(template_id){
@@ -94,14 +95,19 @@ $(function(){
 				$("button.btn[data-dismiss=modal]").click();
 				$(".download-code-link").attr("href", textFile);
 				$(".download-code-link").show();
-				/*var url = '/events/' + template_id + '/get_variables'
+				var data = "{ \"code\": \""+ code + "\" }";
+				var events_university_id = $(".center-div").data("events-university-id");
+				var url = "/events/"+ events_university_id +"/add_code"
 				var ajaxCall = {
-								type: "GET",
+								type: "POST",
 								url: url,
+								data: data,
 								dataType: "json",
 								contentType: "application/json"
 							};
-				$.ajax(ajaxCall).done(function(data) {});*/
+				$.ajax(ajaxCall).done(function(data) {
+					$(".alert-success").show();
+				});
 			}
 		});
 

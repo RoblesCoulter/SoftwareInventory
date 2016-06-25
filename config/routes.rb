@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
   get 'events/generate_code', to: 'events#generate_code', as: 'generate_code'
   get 'embed_codes/:id/get_variables', to: "embed_codes#get_variables", as: 'get_variables'
+  post 'events/:events_university_id/add_code', to: "events#add_code", as: "add_code"
+
   resources :movements do
     member do
       get 'movement_boxes'
