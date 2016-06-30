@@ -6,7 +6,7 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <strong>Embed Code for <%= @university.name %> has been successfully created!</strong> Click <a target="_blank" class="download-code-link" href="">Download</a> to download the code.
   </div>
-  <%= collection_select(:events_university, :id, EmbedCode.all, :id, :name ,{ :include_blank => "Select a Template" }, { class: 'form-control templates-dropdown top-index-btn'}) %>
+  <%= collection_select(:events_university, :id, EmbedCode.all, :id, :name ,{ include_blank: "Select a Template", selected: "" }, { class: 'form-control templates-dropdown top-index-btn'}) %>
   <% @embed_codes.each do |embed_code| %>
     <textarea name="code" data-embed-code-id="<%= embed_code.id %>" class="embed_<%= embed_code.id %> form-control highlighter" style="display:none;" rows="15" disabled>
       <%= embed_code.code %>
