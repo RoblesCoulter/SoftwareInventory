@@ -77,6 +77,7 @@ $(function(){
 			});
 		}
 	});
+
 	$(".generate-code").on("click",function() {
 			var template_id = $(".form-group").data("template-id");
 
@@ -97,7 +98,10 @@ $(function(){
 				$(".download-code-link").show();
 				var data = "{ \"code\": \""+ code + "\" }";
 				var events_university_id = $(".center-div").data("events-university-id");
-				var url = "/events/"+ events_university_id +"/add_code"
+				console.log("CODE");
+				console.log(code);
+				console.log(JSON.stringify(code));
+				/*var url = "/events/"+ events_university_id +"/add_code"
 				var ajaxCall = {
 								type: "POST",
 								url: url,
@@ -107,7 +111,7 @@ $(function(){
 							};
 				$.ajax(ajaxCall).done(function(data) {
 					$(".alert-success").show();
-				});
+				});*/
 			}
 		});
 
