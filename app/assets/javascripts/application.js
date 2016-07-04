@@ -51,6 +51,7 @@ $(function(){
 		$(".content-loader").removeClass("hidden");
 		var template_id = $(".templates-dropdown").val();
 		if (template_id) {
+			$(".form-group").empty();
 			var url = '/embed_codes/' + template_id + '/get_variables'
 			var ajaxCall = {
 							type: "GET",
@@ -82,25 +83,24 @@ $(function(){
 			var template_id = $(".form-group").data("template-id");
 
 			if (template_id) {
-				var code = $(".embed_"+ template_id).val();
+				var code = $(".embed_"+ template_id).text();
 				var map = {};
 				$(".form-group .variable").each(function(i,e){ map[$(e).attr("name")] = e.value });
 				for(var key in map){
+
 					var regex = new RegExp("_%%\\s*" + key +"\\s*%%_","g");
 					code = code.replace(regex, map[key]);
 				}
 				var textFile = null;
 				var data = new Blob([code], {type: "text/plain"});
 				textFile = window.URL.createObjectURL(data);
-				$(".embed_"+template_id).val(code);
+				$(".embed_"+template_id).text(code);
 				$("button.btn[data-dismiss=modal]").click();
 				$(".download-code-link").attr("href", textFile);
 				$(".download-code-link").show();
-				var data = "{ \"code\": \""+ code + "\" }";
+				var data = "{ \"code\": \""+  JSON.stringify(code) + "\" }";
 				var events_university_id = $(".center-div").data("events-university-id");
-				console.log("CODE");
-				console.log(code);
-				console.log(JSON.stringify(code));
+
 				/*var url = "/events/"+ events_university_id +"/add_code"
 				var ajaxCall = {
 								type: "POST",

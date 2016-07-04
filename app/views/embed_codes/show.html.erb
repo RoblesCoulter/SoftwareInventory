@@ -1,3 +1,19 @@
-<p id="notice"><%= notice %></p>
-<%= link_to 'Edit', edit_embed_code_path(@embed_code) %> |
-<%= link_to 'Back', embed_codes_path %>
+<div class="center-div">
+	<%= link_to 'Back', embed_codes_path, class: "btn btn-warning" %>
+	<h1 class="text-center"><%= @embed_code.name %></h1>
+  <label class="control-label">Embed Code</label>
+</div>
+<div class="form-group">
+  <pre><%= @embed_code.code %></pre>
+</div>
+<h3 class="text-center">Embed Code Variables</h3>
+<div class="center-div">
+  <%  @embed_code.embed_code_variables.each do |embed_code_variable|  %>
+  <div class="form-group">
+    <label class="control-label"><%= embed_code_variable.name %> (Default Value)</label>
+    <input type="text" value="<%= embed_code_variable.default_value %>" class="form-control top" disabled>
+  </div>
+  <% end %>
+  <%= link_to 'Edit', edit_embed_code_path(@embed_code), class: "btn btn-primary" %>
+  <%= link_to 'Delete', @embed_code, method: :delete, class: "btn btn-danger" %>
+</div>
