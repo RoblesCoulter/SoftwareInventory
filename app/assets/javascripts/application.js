@@ -98,20 +98,20 @@ $(function(){
 				$("button.btn[data-dismiss=modal]").click();
 				$(".download-code-link").attr("href", textFile);
 				$(".download-code-link").show();
-				var data = "{ \"code\": \""+  JSON.stringify(code) + "\" }";
+				var data = { "embed_code": JSON.stringify(code) };
 				var events_university_id = $(".center-div").data("events-university-id");
-
-				/*var url = "/events/"+ events_university_id +"/add_code"
+				var url = "/events/"+ events_university_id +"/add_code"
 				var ajaxCall = {
 								type: "POST",
 								url: url,
-								data: data,
+								data: JSON.stringify(data),
 								dataType: "json",
 								contentType: "application/json"
 							};
 				$.ajax(ajaxCall).done(function(data) {
 					$(".alert-success").show();
-				});*/
+					console.log(data);
+				});
 			}
 		});
 

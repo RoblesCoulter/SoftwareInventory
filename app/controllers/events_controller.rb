@@ -39,8 +39,9 @@ class EventsController < ApplicationController
 
   def add_code
     @events_university = EventsUniversity.find(params[:events_university_id])
-    @code = params[:code]
-    @events_university.embed_code = @code
+    @code = params[:embed_code]
+    @events_university.code = @code
+    puts @code
     respond_to do |format|
       if @events_university.save
         format.json { render json: @events_university }
