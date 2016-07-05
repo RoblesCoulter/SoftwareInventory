@@ -92,8 +92,10 @@ $(function(){
 					code = code.replace(regex, map[key]);
 				}
 				var textFile = null;
+				/*
 				var data = new Blob([code], {type: "text/plain"});
-				textFile = window.URL.createObjectURL(data);
+				textFile = window.URL.createObjectURL(data);*/
+				textFile = "data:application/octet-stream," + encodeURIComponent(code);
 				$(".embed_"+template_id).text(code);
 				$("button.btn[data-dismiss=modal]").click();
 				$(".download-code-link").attr("href", textFile);

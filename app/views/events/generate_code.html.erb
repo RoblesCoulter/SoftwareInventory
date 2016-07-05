@@ -1,10 +1,10 @@
-<h1 class="text-center">Generate code for <%= @university.name %> at <%= @event.name %></h1>
+<h1 class="text-center">Generate code for <%= @university.acronym %> at <%= @event.name %></h1>
 
 <h3 class="text-center info-title">Select an embed code template</h3>
 <div class="center-div" data-university-id="<%= @university.id %>" data-event-id="<%= @event.id %>" data-events-university-id="<%= @events_university.id %>">
   <div class="alert alert-success alert-dismissible" style="display:none;" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <strong>Embed Code for <%= @university.name %> has been successfully created!</strong> Click <a target="_blank" class="download-code-link" href="">Download</a> to download the code.
+    <strong>Embed Code for <%= @university.name %> has been successfully created!</strong> Click <a target="_blank" download="<%= @event.short_url%> - <%= @university.acronym %>.txt" class="download-code-link" href="">Download</a> to download the code.
   </div>
   <%= collection_select(:events_university, :id, EmbedCode.all, :id, :name ,{ include_blank: "Select a Template", selected: "" }, { class: 'form-control templates-dropdown top-index-btn'}) %>
 
@@ -17,8 +17,8 @@
 <% end %>
 <div class="center-div">
   <a class="btn btn-primary fullwidthbutton generate-button" data-toggle="modal" data-target="#variables-modal" style="display:none;"><span class="fa fa-plus"></span> Generate Embed Code</a>
-  <a href="" target="_blank" class="btn fullwidthbutton top-index-btn btn-warning download-code-link" style="display:none;"type="hidden"><span class="fa fa-download"></span> Download</a>
-  
+  <a href="" target="_blank" download="<%= @event.short_url%> - <%= @university.acronym %>.txt" class="btn fullwidthbutton top-index-btn btn-warning download-code-link" style="display:none;"type="hidden"><span class="fa fa-download"></span> Download</a>
+
 </div>
 
 
