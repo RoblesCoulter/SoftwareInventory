@@ -43,13 +43,12 @@
 				</p>
 			<% end %>
 
-
-			<% unless @item.condition.nil?  %>
+			<% unless @item.conditions.empty? %>
 				<p>
-					<strong>Condition:</strong>
-					<%= @item.condition.name %>
+					<strong>Condition:</strong> <%= @item.conditions.map{ |e| e.name }.join(", ") %>
 				</p>
 			<% end %>
+
 
 			<% unless @item.firmware.nil?%>
 				<p>
