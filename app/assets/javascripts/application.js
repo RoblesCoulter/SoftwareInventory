@@ -45,16 +45,19 @@ $(function(){
 	});
 
 
-	$(".show-code-link").load(function() {
-		alert("show code loaded");
+	$(".show-code-link").on("click",function() {
+
+		var textFile = "data:application/octet-stream," + encodeURIComponent(code);
+		$(".show-code-link").attr("href",textFile);
+		$(".trigger-code").removeClass("show-code-link");
+		$(".trigger-code").trigger("click");
+	});
+
+	$(".highlighter").ready(function() {
 		var code = $("pre.highlighter").text();
 		code = JSON.parse(code);
 		$("pre.highlighter").text(code);
-		var textFile = "data:application/octet-stream," + encodeURIComponent(code);
-		$(".show-code-link").attr("href",textFile);
-		$(".show-code-link").show();
 	});
-
 
 	$("#variables-modal").on("show.bs.modal", function(event) {
 		$(".modal-body, .modal-footer").addClass("hidden");

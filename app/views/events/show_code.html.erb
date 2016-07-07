@@ -5,6 +5,6 @@
   <%= @events_university.code %>
 </pre>
 <div class="center-div">
-  <a href="data:application/octet-stream," target="_blank" download="<%= @event.short_url%> - <%= @university.acronym %>.txt" class="btn fullwidthbutton top-index-btn btn-success show-code-link" type="hidden" style="display:none;"><span class="fa fa-download"></span> Download</a>
+  <a href="" target="_blank" download="<%= @event.short_url%> - <%= @university.acronym %>.txt" class="btn fullwidthbutton top-index-btn btn-success trigger-code show-code-link" type="hidden"><span class="fa fa-download"></span> Download</a>
   <%= link_to 'Back', @event, class: "btn btn-warning fullwidthbutton" %>
 </div>
