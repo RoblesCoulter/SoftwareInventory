@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'items/item_dropdown', to: 'items#item_dropdown', as: 'item_dropdown'
   get 'movements/box_dropdown', to: "movements#box_dropdown", as: "box_dropdown"
   get "university_contacts/contact_dropdown", to: "university_contacts#contact_dropdown", as: "contact_dropdown"
+  get "embed_code_universities/university_dropdown", to: "embed_code_universities#university_dropdown", as: "university_dropdown"
 
   get 'university_contacts/:contact_id/embed_code_universities', to: 'university_contacts#embed_code_universities'
   get 'embed_code_universities/:university_id/university_contacts', to: 'embed_code_universities#university_contacts'
@@ -37,6 +38,8 @@ Rails.application.routes.draw do
   get 'events/generate_code', to: 'events#generate_code', as: 'generate_code'
   get 'embed_codes/:id/get_variables', to: "embed_codes#get_variables", as: 'get_variables'
   post 'events/:events_university_id/add_code', to: "events#add_code", as: "add_code"
+  get 'events/edit_event_university', to: "events#edit_event_university", as: "edit_event_university"
+  patch 'events/update_events_university', to: "events#update_event_university", as: "update_events_university"
 
   resources :movements do
     member do

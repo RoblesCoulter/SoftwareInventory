@@ -90,7 +90,6 @@ class UniversityContactsController < ApplicationController
     respond_to do |format|
       format.json { render json: @universities }
     end
-
   end
 
   def contact_dropdown
@@ -115,6 +114,21 @@ class UniversityContactsController < ApplicationController
 			end
 		end
 	end
+
+  def remove_university
+    @contact_id = params.require(:contact_id)
+		@university_id = params.require(:university_id)
+		@contact = UniversityContact.find(@contact_id)
+		@university = EmbedCodeUniversity.find(@university_id)
+    @contact.embed_code_universities.destroy(@university)
+    respond_to do |format|
+			if @contact.save
+				format.json { render json: @contact}
+			else
+				format.json { render json: @contact.errors, status: :unprocessable_entity }
+			end
+		end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

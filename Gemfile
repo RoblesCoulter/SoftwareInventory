@@ -7,6 +7,9 @@ gem 'rails', '4.2.1'
 group :development do
 	# Use PostgreSQL as the database for Active Record
 	gem 'pg'
+	gem "rails-erd"
+	gem "better_errors"
+	gem "binding_of_caller"
 end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'

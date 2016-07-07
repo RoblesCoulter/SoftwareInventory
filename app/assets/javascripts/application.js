@@ -30,7 +30,7 @@ $(function(){
 			$(this).closest(".form-group").next().find(".form-control").focus();
 		}
 	});
-/*************** EMBED CODE GENERATOR ********************/
+/*************************************************************************** EMBED CODE GENERATOR **********************************************************************/
 	$(".templates-dropdown").on("change",function () {
 		$(".highlighter").hide();
 		$(".alert-success").hide();
@@ -118,7 +118,7 @@ $(function(){
 		});
 
 
-/*************** EMBED CODE VARIABLES ********************/
+/*************************************************************************** EMBED CODE VARIABLES ************************************************************/
 	$(".add-variable").on("click", function() {
 		var association = "embed_code_variables";
 		var new_id = new Date().getTime();
@@ -139,7 +139,7 @@ $(function(){
 	});
 
 
-/************    EMBED CODE UNIVERSITIES FUNCTIONALITIES   *************/
+/**************************************************************    EMBED CODE UNIVERSITIES FUNCTIONALITIES   *****************************************************/
 
 	$("#contacts-modal").on("show.bs.modal", function(event) {
 		$("#contacts-modal .modal-body").addClass("hidden");
@@ -206,6 +206,7 @@ $(function(){
 		$("#add-contacts-modal").modal('show');
 		var universityId = $("#add-contacts-modal").data("universityId");
 		getContactList(universityId);
+		$("#add-contacts-modal .alert-success").remove();
 		$("#add-contacts-modal .content-loader").addClass("hidden");
 		$("#add-contacts-modal .modal-body").removeClass("hidden");
 		$("#add-contacts-modal .modal-footer").removeClass("hidden");
@@ -224,7 +225,6 @@ $(function(){
 		} else {
 			var universityId = $("#add-contacts-modal").data("universityId");
 			var contactId = $dropdown.val();
-			var alertSuccess = "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Added!</strong> has been added.</div>";
 			var url = '/embed_code_universities/add_contact'
 			var data = "{ \"university_id\": \""+ universityId + "\", \"contact_id\": \""+ contactId + "\" }";
 			var ajaxCall = {
@@ -268,7 +268,7 @@ $(function(){
 		});
 	}
 
-/************    UNIVERSITIY CONTACTS  FUNCTIONALITIES   *************/
+/**************************************************************    UNIVERSITIY CONTACTS  FUNCTIONALITIES   *****************************************************/
 	$("#universities-modal").on("show.bs.modal", function(event) {
 		var button = $(event.relatedTarget);
 		var id = button.data("id");
@@ -287,18 +287,15 @@ $(function(){
 						};
 			$.ajax(ajaxCall).done(function(data){
 					var universities = data;
-					var universityNode = "<tr>";
+					var universityNode = "";
 					$.each(universities, function(i, university){
+						universityNode = "<tr data-universityId = '"+ university.id +"'>";
 						universityNode+= "<td>" + university.acronym + "</td>"
 						universityNode+= "<td>" + university.name + "</td>"
-						if (university.comments) {
-							universityNode+= "<td class='text-right'>" + university.comments + "</td>"
-						} else {
-							universityNode+= "<td class='text-right'></td>"
-						}
+						universityNode += "<td><a href='#universities-modal' class='removeUniversity'>Remove</a></td>";
 						universityNode += "</tr>";
 						$(universityList).append(universityNode);
-						universityNode = "<tr>";
+						universityNode = "";
 					});
 					$("a.new-university-btn").attr("href", "/embed_code_universities/new/"+id);
 					$("#universities-modal .modal-body").removeClass("hidden");
@@ -311,8 +308,8 @@ $(function(){
 
 	$(".contact-universities-list").on("click", ".removeUniversity" , function(){
 		var $this = $(this);
-		var contactId = $this.closest("tr").data("universityid");
-		var universityId = $("#add-universities-modal").data("contactId");
+		var universityId = $this.closest("tr").data("universityid");
+		var contactId = $("#add-universities-modal").data("contactId");
 		if(contactId && universityId){
 			var data = "{ \"contact_id\": \""+ contactId + "\" }";
 			var url = '/university_contacts/' + universityId + '/remove_university';
@@ -334,6 +331,7 @@ $(function(){
 		$("#add-universities-modal").modal('show');
 		var contactId = $("#add-universities-modal").data("contactId");
 		getUniversityList(contactId);
+		$("#add-universities-modal .alert-success").remove();
 		$("#add-universities-modal .content-loader").addClass("hidden");
 		$("#add-universities-modal .modal-body").removeClass("hidden");
 		$("#add-universities-modal .modal-footer").removeClass("hidden");
@@ -353,7 +351,6 @@ $(function(){
 		} else {
 			var contactId = $("#add-universities-modal").data("contactId");
 			var universityId = $dropdown.val();
-			var alertSuccess = "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><strong>Added!</strong> has been added.</div>";
 			var url = '/university_contacts/add_university'
 			var data = "{ \"contact_id\": \""+ contactId + "\", \"university_id\": \""+ universityId + "\" }";
 			var ajaxCall = {
@@ -363,7 +360,7 @@ $(function(){
 							dataType: "json",
 							contentType: "application/json"
 						};
-			$.ajax(ajaxCall).done(function(contact){
+			$.ajax(ajaxCall).done(function(university){
 					var contactName = $("#add-universities-modal").data("name");
 					var successNode = "<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><span class='fa fa-check' role='alert'></span><span class='sr-only'>Success: </span>You have successfully added " + university.name + " to " + contactName+ "</div>";
 					$("#add-universities-modal div.modal-body").prepend(successNode);

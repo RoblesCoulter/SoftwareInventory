@@ -54,6 +54,37 @@ class EventsController < ApplicationController
   def edit
   end
 
+  def edit_event_university
+    @university = EmbedCodeUniversity.find(params[:university_id])
+    @event = Event.find(params[:event_id])
+    @events_university = EventsUniversity.includes(:event, :embed_code_university).where(event_id: @event.id, embed_code_university_id: @university.id).take
+  end
+
+  def update_event_university
+    @events_university = EventsUniversity.find(params[:events_university_id])
+    @embed_code_university = @events_university.embed_code_university
+    respond_to do |format|
+      if @events_university.update(params[:events_university].require("events_university").permit(:comments, :status)) && @embed_code_university.update(params[:events_university].require("embed_code_university").permit(:acronym, :name, :test_site, :test_user, :test_password))
+        format.html { redirect_to @events_university.event, notice: 'University was successfully updated.' }
+      else
+        format.html { render :edit_event_university }
+      end
+    end
+#     {"utf8"=>"✓", "_method"=>"patch", "authenticity_token"=>"K8txCOzLW7W73tShIfPFZibJcGWcIsgCslP7jtKiD7KmjILeV2W7vwlHglJcILE
+# d52mr8y2nMMMIY7eGq6OHlg==", "events_university"=>{"embed_code_university"=>{"acronym"=>"FG", "name"=>"FG", "test_site"=>
+# "", "test_user"=>"", "test_password"=>""}, "events_university"=>{"comments"=>"hola", "status"=>"adios"}}, "events_univer
+# sity_id"=>"23", "commit"=>"Update Events university", "controller"=>"events", "action"=>"update_event_university"}
+    # respond_to do |format|
+    #   if @event.update(event_params)
+    #     format.html { redirect_to events_url, notice: 'Event was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @event }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @event.errors, status: :unprocessable_entity }
+    #   end
+    # end
+  end
+
   def generate_code
     @university = EmbedCodeUniversity.find(params[:university_id])
     @event = Event.find(params[:event_id])
@@ -137,7 +168,7 @@ class EventsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :short_url, :embed_code)
+      params.require(:event).permit(:name, :short_url, :embed_code, :acronym, :comments, :status, :test_site, :test_user, :test_password)
     end
 
     def logged_in_user

@@ -22,19 +22,11 @@
 		  <td class="hover-me"><%= university.test_user %></td>
 		  <td class="hover-me"><%= university.test_password %></td>
 		  <td>
-        <% if @event %>
-          <%= link_to 'Embed Code', generate_code_path(event_id: @event.id,university_id: university.id), method: :get %>
-        <% else %>
           <%= link_to 'Show', university %>
-        <% end %>
         |
 		  <% if current_user.admin? %>
-			  <%= link_to 'Edit', edit_embed_code_university_path(university) %> |
-        <% if @event %>
-          <%= link_to 'Remove from Event', remove_university_from_event_path(event_id: @event.id,university_id: university.id), method: :delete %>
-        <% else %>
+			  <%= link_to 'Edit', edit_embed_code_university_path(university) %> |  
           <%= link_to 'Delete', university, method: :delete %>
-        <% end %>
 		  <% end %>
 		  </td>
 		</tr>
