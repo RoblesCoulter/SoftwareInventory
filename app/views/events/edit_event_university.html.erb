@@ -1,0 +1,6 @@
+<div class="center-div">
+	<%= link_to 'Back', @events_university.event, class: "btn btn-warning" %>
+	<h1 class="text-center">Editing Event University</h1>
+	<%= render 'event_university_form' %>
+	<%= yield(:events_university_validators) %>
+</div>

@@ -30,6 +30,7 @@ class EventsController < ApplicationController
 			}
 		end
     @embed_code_universities = @event.embed_code_universities.order(@sort + sort_direction).page(cookies[:event_universities_page])
+    @events_universities = @event.events_universities
   end
 
   # GET /events/new
@@ -95,6 +96,13 @@ class EventsController < ApplicationController
     #  @embed_code = EmbedCode.new(events_university_id: @events_university.id)
     #end
     #@embed_code.save
+  end
+
+  def show_code
+    @university = EmbedCodeUniversity.find(params[:university_id])
+    @event = Event.find(params[:event_id])
+    @events_university = EventsUniversity.where(event_id: @event.id, embed_code_university_id: @university.id).take
+
   end
 
   # POST /events

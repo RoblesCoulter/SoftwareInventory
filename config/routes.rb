@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   delete 'events/remove_university_from_event', to: 'events#remove_university_from_event', as: 'remove_university_from_event'
 
   get 'events/generate_code', to: 'events#generate_code', as: 'generate_code'
+  get 'events/show_code', to: "events#show_code", as: 'show_code'
   get 'embed_codes/:id/get_variables', to: "embed_codes#get_variables", as: 'get_variables'
   post 'events/:events_university_id/add_code', to: "events#add_code", as: "add_code"
   get 'events/edit_event_university', to: "events#edit_event_university", as: "edit_event_university"

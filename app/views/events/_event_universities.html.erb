@@ -1,0 +1,107 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort]%>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+	<thead>
+	  <tr>
+  		<th><%= sortable "acronym" %></th>
+  		<th><%= sortable "name" %></th>
+  		<th><%= sortable "event_comments" %></th>
+  		<th><%= sortable "event_status" %></th>
+  		<th>Options</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <% @embed_code_universities.each do |university| %>
+		<tr data-toggle="modal"  data-acronym="<%= university.acronym %>" data-target="#contacts-modal" data-id="<%= university.id %>">
+		  <td class="hover-me"><%= university.acronym %></td>
+		  <td class="hover-me"><%= university.name %></td>
+		  <td class="hover-me"><%= university.event_comments %></td>
+		  <td class="hover-me"><%= university.event_status %></td>
+		  <td>
+        <% if @events_universities.where(embed_code_university_id: university.id, event_id: @event.id).take.code.blank? %>
+          <%= link_to 'Generate Code', generate_code_path(event_id: @event.id, university_id: university.id), method: :get %>
+        <% else %>
+          <%= link_to "Show Code", show_code_path(event_id: @event.id, university_id: university.id), method: :get %>
+        <% end %> |
+		  <% if current_user.admin? %>
+			  <%= link_to 'Edit', edit_event_university_path(event_id: @event.id, university_id: university.id), method: :get %> |
+          <%= link_to 'Remove from Event', remove_university_from_event_path(event_id: @event.id,university_id: university.id), method: :delete %>
+		  <% end %>
+		  </td>
+		</tr>
+	  <% end %>
+	</tbody>
+  </table>
+</div>
+<%= will_paginate @embed_code_universities, renderer: BootstrapPagination::Rails %>
+<div class="modal fade" id="contacts-modal" tabindex="-1" role="dialog" aria-labelledby="gridUniversityContactModal">
+ 	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+				<h3>University Contacts</h3>
+				<div class="content-loader loader--wide">
+				  <span class="dot"></span>
+				  <span class="dot"></span>
+				  <span class="dot"></span>
+				</div>
+			</div>
+			<div class="modal-body hidden">
+				<h4>University contacts for: <span class="modal-acronym"></span></h4>
+				<div class="table-responsive">
+					<table class="table table-striped" id="tblGrid" >
+						<thead id="tblHead">
+							<tr>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Skype</th>
+								<th class="text-right">Role</th>
+							</tr>
+						</thead>
+						<tbody class="university-contacts-list">
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer hidden">
+  				<%= link_to 'Create New Contact', new_university_contact_path, class: "btn btn-success new-contact-btn" %>
+  				<a class="btn btn-success add-contact-btn">Add Existing Contact</a>
+  				<button type="button" data-dismiss="modal" class="btn" >Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="add-contacts-modal" tabindex="-1" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+					<h3>University Contacts</h3>
+					<div class="content-loader loader--wide">
+					  <span class="dot"></span>
+					  <span class="dot"></span>
+					  <span class="dot"></span>
+					</div>
+
+			</div>
+			<div class="modal-body hidden">
+        <div class="alert alert-danger hidden">
+          <span class="fa fa-exclamation" role="alert"></span>
+          <span class="sr-only">Error: </span>
+          You must select a contact in the dropdown list.
+        </div>
+
+        <h4>Select the contact you would like to add for <span class="modal-acronym"></span></h4>
+				<select class="form-control contact-dropdown"></select>
+
+			</div>
+			<div class="modal-footer hidden">
+        <button type="button" class="btn btn-primary add-contact">Add</button>
+        <button type="button" class="btn" data-dismiss="modal" >Close</button>
+			</div>
+		</div>
+	</div>
+</div>
